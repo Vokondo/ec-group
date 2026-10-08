@@ -1,6 +1,9 @@
 import { ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+// Prefixes root-relative paths ("/images/...") with the deploy base path.
+const withBase = (src: string) => (src.startsWith("/") ? import.meta.env.BASE_URL + src.slice(1) : src);
+
 type PlaceholderVariant = "center" | "compact" | "corner";
 
 // Fills its nearest positioned (and `isolate`d) parent with a photo, or with a placeholder
@@ -22,7 +25,7 @@ export function CoverImage({
     <>
       {src ? (
         <img
-          src={src}
+          src={withBase(src)}
           alt={alt}
           loading="lazy"
           className="absolute inset-0 -z-20 size-full object-cover transition duration-700 group-hover:scale-105"

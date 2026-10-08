@@ -26,4 +26,4 @@ npm run dev
 
 - **Forms:** copy `.env.example` to `.env` and set `VITE_FORM_ENDPOINT`. Without it, submissions are not sent anywhere.
 - **Prices:** an offering only shows "Add to cart" once it has a confirmed `price` and `status: "available"`.
-- **Hosting:** this is a single-page app, so configure the host to serve `index.html` for every path (one rewrite rule on Vercel, Netlify or Cloudflare Pages).
+- **Hosting:** every push to `main` deploys to GitHub Pages via `.github/workflows/deploy.yml`. The site is served from `/<repo-name>/`, and a copy of `index.html` is published as `404.html` so direct links to inner pages work. To deliver form submissions in the deployed site, add a repository variable `VITE_FORM_ENDPOINT` (Settings → Secrets and variables → Actions → Variables).
