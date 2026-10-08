@@ -30,13 +30,13 @@ export default function HoldingPage() {
         </Link>
       </PageHero>
 
-      <section className="light bg-background text-foreground py-20">
-        <Container className="grid gap-12 lg:grid-cols-2">
+      <section className="light bg-background text-foreground py-12 sm:py-20">
+        <Container className="grid gap-8 lg:gap-12 lg:grid-cols-2">
           <div>
             <Eyebrow>Who we are</Eyebrow>
-            <h2 className="mt-3 text-3xl font-medium tracking-tight">Corporate background and objectives</h2>
+            <h2 className="mt-3 text-2xl font-medium tracking-tight sm:text-3xl">Corporate background and objectives</h2>
           </div>
-          <div className="space-y-4 text-muted-foreground">
+          <div className="space-y-3 text-sm text-muted-foreground sm:space-y-4 sm:text-base">
             <p>
               {SITE.holdingName} was established to own, guide and grow a portfolio of businesses across different
               sectors. It provides shared leadership, strategy and resources so that each venture can focus on serving
@@ -51,27 +51,27 @@ export default function HoldingPage() {
         </Container>
       </section>
 
-      <section className="bg-muted/60 py-20">
+      <section className="bg-muted/60 py-12 sm:py-20">
         <Container className="grid gap-4 md:grid-cols-2">
-          <div className="light rounded-3xl bg-background p-8 text-foreground">
+          <div className="light rounded-3xl bg-background p-6 text-foreground sm:p-8">
             <Eyebrow>Vision</Eyebrow>
-            <p className="mt-4 text-xl font-medium">[A diversified group that creates lasting value for its customers, people and communities.]</p>
+            <p className="mt-3 text-lg font-medium sm:mt-4 sm:text-xl">[A diversified group that creates lasting value for its customers, people and communities.]</p>
           </div>
-          <div className="rounded-3xl bg-ink p-8 text-white">
+          <div className="rounded-3xl bg-ink p-6 text-white sm:p-8">
             <Eyebrow>Mission</Eyebrow>
-            <p className="mt-4 text-xl font-medium">[To build and support businesses that deliver quality, widen access and give back.]</p>
+            <p className="mt-3 text-lg font-medium sm:mt-4 sm:text-xl">[To build and support businesses that deliver quality, widen access and give back.]</p>
           </div>
         </Container>
       </section>
 
-      <section className="py-20">
+      <section className="py-12 sm:py-20">
         <Container>
           <SectionHeading
             eyebrow="Business portfolio"
             title="Seven businesses and initiatives"
             intro="Each entity has its own page describing what it is, why it is being established, what it intends to offer and how you can engage today."
           />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 sm:mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {BUSINESSES.map((b) => (
               <BusinessTile key={b.slug} business={b} />
             ))}
@@ -79,11 +79,11 @@ export default function HoldingPage() {
         </Container>
       </section>
 
-      <section className="bg-ink py-20 text-white">
-        <Container className="grid gap-12 lg:grid-cols-2">
+      <section className="bg-ink py-12 sm:py-20 text-white">
+        <Container className="grid gap-8 lg:gap-12 lg:grid-cols-2">
           <div>
             <Eyebrow>Strategic areas of interest</Eyebrow>
-            <h2 className="mt-3 text-3xl font-medium tracking-tight">Where we invest our energy</h2>
+            <h2 className="mt-3 text-2xl font-medium tracking-tight sm:text-3xl">Where we invest our energy</h2>
             <p className="mt-5 text-white/70">
               We welcome conversations with partners, investors and institutions who share these interests.
             </p>

@@ -28,7 +28,7 @@ export function SectionHeading({
     return (
       <div className="mx-auto max-w-2xl text-center">
         {eyebrow && <Eyebrow className="mb-3">{eyebrow}</Eyebrow>}
-        <h2 className="text-3xl font-medium tracking-tight sm:text-4xl">{title}</h2>
+        <h2 className="text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl">{title}</h2>
         {intro && <p className="mt-4 text-muted-foreground">{intro}</p>}
         {actions && <div className="mt-6 flex justify-center gap-3">{actions}</div>}
       </div>
@@ -38,7 +38,7 @@ export function SectionHeading({
     <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
       <div>
         {eyebrow && <Eyebrow className="mb-3">{eyebrow}</Eyebrow>}
-        <h2 className="max-w-lg text-3xl font-medium tracking-tight sm:text-4xl">{title}</h2>
+        <h2 className="max-w-lg text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl">{title}</h2>
       </div>
       {(intro || actions) && (
         <div className="lg:max-w-md lg:justify-self-end">
@@ -67,10 +67,10 @@ export function PageHero({
         aria-hidden
         className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,oklch(1_0_0/0.12),transparent_60%)]"
       />
-      <Container className="relative py-20 sm:py-24">
+      <Container className="relative py-12 sm:py-20 lg:py-24">
         {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
-        <h1 className="max-w-3xl text-4xl font-medium tracking-tight sm:text-5xl">{title}</h1>
-        {intro && <p className="mt-5 max-w-2xl text-white/70">{intro}</p>}
+        <h1 className="max-w-3xl text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">{title}</h1>
+        {intro && <p className="mt-4 max-w-2xl text-sm text-white/70 sm:mt-5 sm:text-base">{intro}</p>}
         {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
       </Container>
     </section>

@@ -26,6 +26,9 @@ const SERVICE_CARDS: { title: string; text: string; to: string; count: number; i
   { title: "Programmes & opportunities", text: "Education programmes, community initiatives and cycling events.", to: "/service-center?kind=programme", count: countOf("programme", "event") },
 ];
 
+// Smaller buttons on phones so a pair fits on one row.
+const compactOnMobile = "h-8 px-3.5 text-[13px] sm:h-9 sm:px-5 sm:text-sm";
+
 // Founder portrait for the spotlight card, e.g. "/images/founder.jpg". Unset shows a placeholder.
 const FOUNDER_IMAGE: string | undefined = undefined;
 
@@ -54,18 +57,18 @@ export default function HomePage() {
           className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_60%_at_70%_10%,oklch(1_0_0/0.22),transparent_65%),radial-gradient(ellipse_60%_50%_at_10%_90%,oklch(1_0_0/0.08),transparent_70%),linear-gradient(to_bottom,oklch(0.25_0_0),oklch(0.1_0_0))]"
         />
         <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-ink to-transparent" />
-        <Container className="pt-32 pb-12">
-          <span className="inline-flex rounded-full bg-white/15 px-3 py-1 text-xs backdrop-blur">
+        <Container className="pt-24 pb-10 sm:pt-32 sm:pb-12">
+          <span className="inline-flex rounded-full bg-white/15 px-3 py-1 text-[11px] backdrop-blur sm:text-xs">
             {SITE.holdingName} · Seven businesses, one vision
           </span>
-          <h1 className="mt-6 max-w-3xl text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="mt-5 max-w-3xl text-4xl leading-[1.05] font-semibold tracking-tight sm:mt-6 sm:text-6xl lg:text-7xl">
             Building a group that grows together
           </h1>
-          <p className="mt-6 max-w-xl text-white/75">
+          <p className="mt-5 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-base">
             Education, food, grooming, finance, beauty, community and wellness: the businesses and initiatives of{" "}
             {SITE.founderName}, gathered in one place.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
             <Link to="/businesses" className={cn(buttonVariants({ size: "lg" }), onDarkPrimary)}>
               Explore the group <ArrowRightIcon />
             </Link>
@@ -74,12 +77,12 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-16 grid gap-6 border-t border-white/15 pt-6 sm:grid-cols-2 lg:max-w-3xl">
+          <div className="mt-10 grid gap-4 border-t border-white/15 pt-5 sm:mt-16 sm:gap-6 sm:pt-6 sm:grid-cols-2 lg:max-w-3xl">
             {[
               { icon: LayersIcon, text: "One destination for every business, product, service and opportunity in the group." },
               { icon: SproutIcon, text: "Early-stage ventures introduced openly: what is available today and what is still coming." },
             ].map(({ icon: Icon, text }) => (
-              <div key={text} className="flex gap-3 text-sm text-white/70">
+              <div key={text} className="flex items-center gap-3 text-xs text-white/70 sm:text-sm">
                 <span className="grid size-9 shrink-0 place-items-center rounded-full border border-white/25">
                   <Icon className="size-4" />
                 </span>
@@ -91,7 +94,7 @@ export default function HomePage() {
       </section>
 
       {/* Portfolio bento */}
-      <section className="py-20 sm:py-28">
+      <section className="py-12 sm:py-20 lg:py-28">
         <Container>
           <SectionHeading
             eyebrow="The portfolio"
@@ -108,18 +111,18 @@ export default function HomePage() {
               </>
             }
           />
-          <div className="mt-12">
+          <div className="mt-8 sm:mt-12">
             <BusinessGrid businesses={BUSINESSES} />
           </div>
         </Container>
       </section>
 
       {/* Vision band */}
-      <section className="light bg-background text-foreground py-16 sm:py-20">
+      <section className="light bg-background text-foreground py-12 sm:py-16 lg:py-20">
         <Container>
           <Eyebrow className="mb-4">Our vision</Eyebrow>
           {/* Placeholder vision statement: replace with the founder's own words */}
-          <p className="max-w-4xl text-xl leading-relaxed font-medium sm:text-2xl">
+          <p className="max-w-4xl text-lg leading-relaxed font-medium sm:text-xl lg:text-2xl">
             To build businesses that last, create real opportunity for the people they serve, and give back to the
             communities that make them possible.
           </p>
@@ -127,7 +130,7 @@ export default function HomePage() {
       </section>
 
       {/* Service Center preview */}
-      <section className="overflow-x-clip py-16 sm:py-28">
+      <section className="overflow-x-clip py-12 sm:py-20 lg:py-28">
         <Container>
           <SectionHeading
             center
@@ -196,15 +199,15 @@ export default function HomePage() {
       </section>
 
       {/* Founder spotlight: full-bleed portrait with floating glass tags, after the reference's "Enjoy Your Travel" banner */}
-      <section className="light bg-background text-foreground py-16 sm:py-28">
+      <section className="light bg-background text-foreground py-12 sm:py-20 lg:py-28">
         <Container>
-          <div className="relative isolate flex min-h-[38rem] flex-col justify-between overflow-hidden rounded-3xl p-4 text-white sm:min-h-[38rem] sm:p-8 lg:min-h-[36rem] lg:p-10">
+          <div className="relative isolate flex min-h-[34rem] flex-col justify-between overflow-hidden rounded-3xl p-4 text-white sm:min-h-[38rem] sm:p-8 lg:min-h-[36rem] lg:p-10">
             {/* Set FOUNDER_IMAGE to a portrait to replace the placeholder */}
             <CoverImage src={FOUNDER_IMAGE} alt={SITE.founderName} overlay="from-black/85 via-black/20 to-black/55" />
 
             <div>
               <Eyebrow>The founder</Eyebrow>
-              <h2 className="mt-2 max-w-md text-4xl leading-[1.05] font-medium tracking-tight sm:mt-3 sm:text-6xl">
+              <h2 className="mt-2 max-w-md text-3xl leading-[1.05] font-medium tracking-tight sm:mt-3 sm:text-5xl lg:text-6xl">
                 Meet {SITE.founderName}
               </h2>
 
@@ -226,17 +229,18 @@ export default function HomePage() {
             </div>
 
             <div className="max-w-xl rounded-2xl border border-white/10 bg-white/[0.08] p-4 shadow-[inset_0_1px_0_0_rgb(255_255_255/0.1)] backdrop-blur-md sm:p-6">
-              <p className="text-sm text-white/80 sm:text-base">
+              <p className="text-[13px] leading-snug text-white/80 sm:text-base sm:leading-normal">
                 An entrepreneur building a portfolio of businesses that spans education, enterprise and community
                 impact. Learn about the journey, the principles behind the group, and the vision that connects all
                 seven ventures.
               </p>
-              <div className="mt-4 flex flex-wrap gap-2 sm:mt-5 sm:gap-3">
-                <Link to="/about" className={cn(buttonVariants({ size: "lg" }), onDarkPrimary)}>
+              <div className="mt-3 flex flex-wrap gap-2 sm:mt-5 sm:gap-3">
+                <Link to="/about" className={cn(buttonVariants({ size: "lg" }), onDarkPrimary, compactOnMobile)}>
                   Read the story <ArrowRightIcon />
                 </Link>
-                <Link to="/holding" className={cn(buttonVariants({ variant: "outline", size: "lg" }), onDarkOutline)}>
-                  The holding company
+                <Link to="/holding" className={cn(buttonVariants({ variant: "outline", size: "lg" }), onDarkOutline, compactOnMobile)}>
+                  <span className="sm:hidden">Holding company</span>
+                  <span className="hidden sm:inline">The holding company</span>
                 </Link>
               </div>
             </div>
@@ -245,10 +249,10 @@ export default function HomePage() {
       </section>
 
       {/* Engage */}
-      <section className="py-20 sm:py-28">
+      <section className="py-12 sm:py-20 lg:py-28">
         <Container>
           <SectionHeading eyebrow="Get involved" title="Ways to engage with the group" />
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
+          <div className="mt-8 sm:mt-12 grid gap-4 md:grid-cols-3">
             {ENGAGE_CARDS.map(({ icon: Icon, title, text, to }) => (
               <Link key={title} to={to} className="group flex flex-col rounded-2xl bg-muted/60 p-6 transition hover:bg-muted">
                 <Icon className="size-6" />

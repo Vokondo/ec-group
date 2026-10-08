@@ -12,7 +12,7 @@ export default function BusinessesPage() {
         title="Our businesses and initiatives"
         intro="Seven entities, each with its own purpose. Most are in development: each page explains what is available now and how to register interest in what is coming."
       />
-      <section className="py-20">
+      <section className="py-12 sm:py-20">
         <Container>
           <BusinessGrid businesses={BUSINESSES} />
         </Container>

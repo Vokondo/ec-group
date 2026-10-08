@@ -21,7 +21,7 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="text-sm font-semibold tracking-wide uppercase">
+        <Link to="/" className="text-xs font-semibold tracking-wide uppercase sm:text-sm">
           {SITE.holdingName}
         </Link>
 

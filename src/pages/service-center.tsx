@@ -40,10 +40,10 @@ export default function ServiceCenterPage() {
         </Container>
       </section>
 
-      <section className="py-16">
+      <section className="py-10 sm:py-16">
         <Container>
           <ServiceCatalog />
-          <p className="mt-12 text-center text-sm text-muted-foreground">
+          <p className="mt-8 sm:mt-12 text-center text-sm text-muted-foreground">
             Can't find what you need?{" "}
             <Link to="/contact" className="font-medium text-foreground underline underline-offset-4">
               Send us an inquiry

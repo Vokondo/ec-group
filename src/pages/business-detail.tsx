@@ -21,11 +21,11 @@ export default function BusinessDetailPage() {
     <>
       <section className="relative isolate overflow-hidden text-white">
         <CoverImage src={business.image} alt={business.name} overlay="from-black/90 via-black/60 to-black/30" variant="corner" />
-        <Container className="relative py-20 sm:py-28">
+        <Container className="relative py-12 sm:py-20 lg:py-28">
           <StatusBadge status={business.status} onDark />
           <p className="mt-6 text-xs font-semibold tracking-[0.2em] text-white/70 uppercase">{business.sector}</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-6xl">{business.name}</h1>
-          <p className="mt-5 max-w-2xl text-lg text-white/80">{business.summary}</p>
+          <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">{business.name}</h1>
+          <p className="mt-4 max-w-2xl text-base text-white/80 sm:mt-5 sm:text-lg">{business.summary}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to={business.cta.to} className={cn(buttonVariants({ size: "lg" }), onDarkPrimary)}>
               {business.cta.label}
@@ -52,12 +52,12 @@ export default function BusinessDetailPage() {
         </div>
       )}
 
-      <section className="light bg-background text-foreground py-20">
-        <Container className="grid gap-12 lg:grid-cols-3">
-          <div className="space-y-12 lg:col-span-2">
+      <section className="light bg-background text-foreground py-12 sm:py-20">
+        <Container className="grid gap-8 lg:gap-12 lg:grid-cols-3">
+          <div className="space-y-8 sm:space-y-12 lg:col-span-2">
             <div>
               <Eyebrow>Why it is being established</Eyebrow>
-              <p className="mt-3 text-2xl font-medium">{business.why}</p>
+              <p className="mt-3 text-xl font-medium sm:text-2xl">{business.why}</p>
             </div>
             <div>
               <Eyebrow>What it intends to offer</Eyebrow>
@@ -76,7 +76,7 @@ export default function BusinessDetailPage() {
             </div>
             <div>
               <Eyebrow>Who it aims to serve</Eyebrow>
-              <p className="mt-3 text-muted-foreground">{business.audience}</p>
+              <p className="mt-3 text-sm text-muted-foreground sm:text-base">{business.audience}</p>
             </div>
           </div>
 
@@ -102,9 +102,9 @@ export default function BusinessDetailPage() {
         </Container>
       </section>
 
-      <section className="border-t py-20">
+      <section className="border-t py-12 sm:py-20">
         <Container>
-          <h2 className="text-2xl font-medium">More from the group</h2>
+          <h2 className="text-xl font-medium sm:text-2xl">More from the group</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {others.map((b) => (
               <BusinessTile key={b.slug} business={b} />

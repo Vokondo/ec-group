@@ -33,7 +33,7 @@ export function Checkout() {
 
   if (state.status === "done") {
     return (
-      <div className="mx-auto max-w-xl rounded-3xl border bg-muted p-10 text-center">
+      <div className="mx-auto max-w-xl rounded-3xl border bg-muted p-6 text-center sm:p-10">
         <CheckCircle2Icon className="mx-auto size-12" />
         <h2 className="mt-4 text-xl font-semibold">Order received, awaiting payment verification</h2>
         <p className="mt-3 text-sm">
@@ -64,7 +64,7 @@ export function Checkout() {
   }
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[3fr_2fr]">
+    <div className="grid gap-8 lg:gap-10 lg:grid-cols-[3fr_2fr]">
       <div>
         <h2 className="text-lg font-semibold">Order summary</h2>
         <ul className="mt-4 divide-y rounded-2xl border">

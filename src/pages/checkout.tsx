@@ -11,7 +11,7 @@ export default function CheckoutPage() {
         title="Your cart"
         intro="Review your items, pay by Mobile Money and send us your transaction ID. We verify each payment manually before confirming your order."
       />
-      <section className="py-16">
+      <section className="py-10 sm:py-16">
         <Container>
           <Checkout />
         </Container>

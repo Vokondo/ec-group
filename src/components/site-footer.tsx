@@ -32,7 +32,7 @@ const COLUMNS = [
 export function SiteFooter() {
   return (
     <footer className="bg-ink text-white/80">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:grid-cols-3 sm:px-6 lg:grid-cols-[1fr_1fr_1fr_1.4fr] lg:px-8">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-12 sm:gap-10 sm:py-16 sm:grid-cols-3 sm:px-6 lg:grid-cols-[1fr_1fr_1fr_1.4fr] lg:px-8">
         {COLUMNS.map((col) => (
           <div key={col.title}>
             <h3 className="mb-4 text-sm font-semibold text-white">{col.title}</h3>
@@ -47,7 +47,7 @@ export function SiteFooter() {
             </ul>
           </div>
         ))}
-        <div className="sm:col-span-3 lg:col-span-1">
+        <div className="col-span-2 sm:col-span-3 lg:col-span-1">
           <h3 className="mb-4 text-sm font-semibold text-white">Stay updated</h3>
           <p className="mb-5 text-sm text-white/60">
             Many of our businesses are still being established. Register your interest to hear when products,

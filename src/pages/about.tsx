@@ -31,15 +31,15 @@ export default function AboutPage() {
         intro="Entrepreneur and founder of the group, building a portfolio of businesses and initiatives that connect enterprise with community."
       />
 
-      <section className="light bg-background text-foreground py-20">
-        <Container className="grid gap-12 lg:grid-cols-[2fr_3fr]">
-          <div className="grid aspect-[4/5] place-items-center rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-900 text-sm text-neutral-500">
+      <section className="light bg-background text-foreground py-12 sm:py-20">
+        <Container className="grid gap-8 lg:gap-12 lg:grid-cols-[2fr_3fr]">
+          <div className="grid aspect-[4/3] lg:aspect-[4/5] place-items-center rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-900 text-sm text-neutral-500">
             Founder portrait
           </div>
           <div>
             <Eyebrow>Biography</Eyebrow>
-            <h2 className="mt-3 text-3xl font-medium tracking-tight">A personal and professional story</h2>
-            <div className="mt-6 space-y-4 text-muted-foreground">
+            <h2 className="mt-3 text-2xl font-medium tracking-tight sm:text-3xl">A personal and professional story</h2>
+            <div className="mt-4 space-y-3 text-sm text-muted-foreground sm:mt-6 sm:space-y-4 sm:text-base">
               <p>[Personal and professional biography: background, education, career highlights and the experiences that shaped an entrepreneurial path.]</p>
               <p>[Achievements and recognition: key milestones, awards and notable contributions.]</p>
               <p>
@@ -51,10 +51,10 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-muted/60 py-20">
+      <section className="bg-muted/60 py-12 sm:py-20">
         <Container>
           <SectionHeading eyebrow="Entrepreneurial journey" title="From first venture to a group of seven" />
-          <ol className="mt-12 grid gap-6 md:grid-cols-4">
+          <ol className="mt-8 sm:mt-12 grid gap-6 md:grid-cols-4">
             {JOURNEY.map((step) => (
               <li key={step.title} className="border-t-2 border-foreground pt-5">
                 <p className="text-xs font-semibold text-muted-foreground">{step.period}</p>
@@ -66,14 +66,14 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="light bg-background text-foreground py-20">
+      <section className="light bg-background text-foreground py-12 sm:py-20">
         <Container>
           <SectionHeading
             eyebrow="Vision, mission & principles"
             title="What guides the work"
             intro="Vision: [the founder's long-term vision]. Mission: [how that vision is pursued day to day]."
           />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 sm:mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {PRINCIPLES.map((p) => (
               <div key={p.title} className="rounded-2xl border p-6">
                 <h3 className="font-semibold">{p.title}</h3>
@@ -84,11 +84,11 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-ink py-20 text-white">
-        <Container className="grid gap-12 lg:grid-cols-2">
+      <section className="bg-ink py-12 sm:py-20 text-white">
+        <Container className="grid gap-8 lg:gap-12 lg:grid-cols-2">
           <div>
             <Eyebrow>Leadership & community</Eyebrow>
-            <h2 className="mt-3 text-3xl font-medium tracking-tight">Business interests and areas of involvement</h2>
+            <h2 className="mt-3 text-2xl font-medium tracking-tight sm:text-3xl">Business interests and areas of involvement</h2>
             <p className="mt-5 text-white/70">
               [Leadership roles, board positions and community contributions.] Each of the businesses listed here is
               part of {SITE.holdingName} and reflects an area the founder is committed to.

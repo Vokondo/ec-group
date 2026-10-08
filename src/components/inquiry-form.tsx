@@ -43,7 +43,7 @@ export function InquiryForm({
 
   if (state.status === "done") {
     return (
-      <div className="rounded-2xl border bg-muted p-8 text-center">
+      <div className="rounded-2xl border bg-muted p-6 text-center sm:p-8">
         <CheckCircle2Icon className="mx-auto size-10" />
         <p className="mt-4 font-medium">{copy.done}</p>
         <p className="mt-2 text-sm">
