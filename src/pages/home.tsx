@@ -100,7 +100,7 @@ export default function HomePage() {
           <div className="flex flex-col justify-between gap-12 p-7 sm:p-12 lg:p-14">
             <div>
               <MonoLabel>The founder</MonoLabel>
-              <h2 className="mt-4 text-[2.5rem] leading-[1.02] font-light tracking-tight text-black sm:text-6xl lg:text-7xl">
+              <h2 className="mt-4 text-3xl leading-[1.05] font-light tracking-tight text-black sm:text-4xl lg:text-5xl">
                 {SITE.founderName}
               </h2>
               <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase sm:text-[11px]">
