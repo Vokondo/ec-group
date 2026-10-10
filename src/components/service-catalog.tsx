@@ -1,16 +1,46 @@
 import { useMemo } from "react";
 import { Link, useSearchParams } from "react-router";
-import { CalendarCheckIcon, CheckIcon, SearchIcon, ShoppingBagIcon, SparklesIcon } from "lucide-react";
+import { CalendarCheckIcon, CheckIcon, ChevronDownIcon, SearchIcon, ShoppingBagIcon, SparklesIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BUSINESSES, CATALOG, KIND_LABELS, formatPrice, getBusiness, type Offering, type OfferingKind } from "@/lib/site";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CoverImage } from "@/components/business-image";
 import { StatusBadge } from "@/components/shared";
+import { Mosaic, type MosaicSize } from "@/components/mosaic";
 import { useCart } from "@/components/cart-provider";
 
 type KindFilter = OfferingKind | "all";
+
+// Native select styled as a soft pill; on phones it opens the system picker.
+function FilterSelect({
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: { value: string; label: string }[];
+}) {
+  return (
+    <label className="relative">
+      <span className="sr-only">{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="h-10 w-full cursor-pointer appearance-none rounded-full bg-muted/70 pr-9 pl-4 text-sm text-foreground outline-none transition hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/40 sm:w-auto sm:min-w-40"
+      >
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+      <ChevronDownIcon aria-hidden className="pointer-events-none absolute top-1/2 right-3.5 size-4 -translate-y-1/2 text-muted-foreground" />
+    </label>
+  );
+}
 
 // Filters live in the URL (?q=&kind=&business=) so results can be linked and shared.
 export function ServiceCatalog() {
@@ -43,47 +73,51 @@ export function ServiceCatalog() {
 
   return (
     <div>
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div className="relative w-full lg:max-w-sm">
-          <SearchIcon className="absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted-foreground" />
-          <Input
+      {/* One filter bar: search plus Type and Business dropdowns */}
+      <div className="relative flex flex-col gap-2 rounded-3xl border border-foreground/[0.08] bg-card/60 p-2 sm:flex-row sm:items-center sm:rounded-full">
+        {/* A light that travels around the bar's border */}
+        <span aria-hidden className="border-beam" />
+        <div className="relative flex-1">
+          <SearchIcon aria-hidden className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-muted-foreground" />
+          <input
+            type="search"
             value={query}
             onChange={(e) => setParam("q", e.target.value)}
             placeholder="Search products, services, programmes…"
-            className="h-11 rounded-full pl-10"
             aria-label="Search the Service Center"
+            className="h-10 w-full rounded-full bg-transparent pr-4 pl-11 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring/40"
           />
         </div>
-        <Tabs value={kind} onValueChange={(v) => setParam("kind", String(v))}>
-          <TabsList className="h-auto flex-wrap rounded-full">
-            <TabsTrigger value="all" className="rounded-full px-3">All</TabsTrigger>
-            {(Object.keys(KIND_LABELS) as OfferingKind[]).map((k) => (
-              <TabsTrigger key={k} value={k} className="rounded-full px-3">{KIND_LABELS[k]}</TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:gap-1">
+          <FilterSelect
+            label="Type"
+            value={kind}
+            onChange={(v) => setParam("kind", v)}
+            options={[{ value: "all", label: "All types" }, ...(Object.keys(KIND_LABELS) as OfferingKind[]).map((k) => ({ value: k, label: KIND_LABELS[k] }))]}
+          />
+          <FilterSelect
+            label="Business"
+            value={business}
+            onChange={(v) => setParam("business", v)}
+            options={[{ value: "", label: "All businesses" }, ...BUSINESSES.map((b) => ({ value: b.slug, label: b.name }))]}
+          />
+        </div>
       </div>
 
-      <div className="mt-5 flex flex-wrap gap-2">
-        {[{ slug: "", name: "All businesses" }, ...BUSINESSES].map((b) => (
+      <div className="mt-6 flex items-center justify-between gap-4 text-sm text-muted-foreground sm:mt-8">
+        <p>
+          {results.length} {results.length === 1 ? "offering" : "offerings"}
+        </p>
+        {(query || kind !== "all" || business) && (
           <button
-            key={b.slug}
             type="button"
-            onClick={() => setParam("business", b.slug)}
-            aria-pressed={business === b.slug}
-            className={cn(
-              "rounded-full border px-3.5 py-1.5 text-xs transition",
-              business === b.slug ? "border-foreground bg-foreground text-background" : "text-muted-foreground hover:border-foreground hover:text-foreground",
-            )}
+            onClick={() => setParams(new URLSearchParams(), { replace: true, preventScrollReset: true })}
+            className="font-medium text-foreground underline-offset-4 hover:underline"
           >
-            {b.name}
+            Clear filters
           </button>
-        ))}
+        )}
       </div>
-
-      <p className="mt-8 text-sm text-muted-foreground">
-        {results.length} {results.length === 1 ? "offering" : "offerings"}
-      </p>
       {results.length === 0 ? (
         <div className="mt-4 rounded-2xl border border-dashed p-12 text-center text-sm text-muted-foreground">
           Nothing matches yet.{" "}
@@ -93,84 +127,19 @@ export function ServiceCatalog() {
           .
         </div>
       ) : (
-        <div className="mt-4 flex flex-col gap-4">
-          {toMosaicGroups(results).map((group) => (
-            <MosaicGroup key={group.items[0].id} {...group} />
-          ))}
-        </div>
+        <Mosaic
+          className="mt-4"
+          items={results}
+          getKey={(o) => o.id}
+          renderItem={(o, size, cls) => <OfferingCard offering={o} size={size} className={cls} />}
+        />
       )}
     </div>
   );
 }
 
-// Mosaic layout: offerings are split into self-contained row groups, each of which fills its full
-// width at every breakpoint, so the layout never leaves an empty slot whatever the count or filters.
-type GroupKind = "featureLeft" | "featureRight" | "pair" | "pairReverse" | "trio" | "single";
 
-const GROUP_SIZE: Record<GroupKind, number> = { featureLeft: 3, featureRight: 3, pair: 2, pairReverse: 2, trio: 3, single: 1 };
-const PATTERN: GroupKind[] = ["featureLeft", "pair", "featureRight", "pairReverse"];
-// Used when fewer offerings remain than the next pattern group needs.
-const REMAINDER: Record<number, GroupKind> = { 1: "single", 2: "pair", 3: "trio" };
-
-type MosaicGroupData = { kind: GroupKind; items: Offering[] };
-
-function toMosaicGroups(items: Offering[]): MosaicGroupData[] {
-  const groups: MosaicGroupData[] = [];
-  for (let i = 0, step = 0; i < items.length; step++) {
-    let kind = PATTERN[step % PATTERN.length];
-    if (GROUP_SIZE[kind] > items.length - i) kind = REMAINDER[items.length - i];
-    groups.push({ kind, items: items.slice(i, i + GROUP_SIZE[kind]) });
-    i += GROUP_SIZE[kind];
-  }
-  return groups;
-}
-
-function MosaicGroup({ kind, items }: MosaicGroupData) {
-  const row = "grid gap-4 sm:grid-cols-2 lg:grid-cols-3";
-  switch (kind) {
-    case "featureLeft":
-    case "featureRight": {
-      // Large card spanning two columns and two rows, beside two stacked cards.
-      const [feature, a, b] = items;
-      const right = kind === "featureRight";
-      return (
-        <div className={cn(row, "lg:grid-rows-2")}>
-          <OfferingCard offering={feature} size="feature" className={cn("sm:col-span-2 lg:row-span-2 lg:row-start-1", right ? "lg:col-start-2" : "lg:col-start-1")} />
-          <OfferingCard offering={a} className={right ? "lg:col-start-1 lg:row-start-1" : undefined} />
-          <OfferingCard offering={b} className={right ? "lg:col-start-1 lg:row-start-2" : undefined} />
-        </div>
-      );
-    }
-    case "pair":
-    case "pairReverse": {
-      // A wide card (two thirds) and a regular card (one third), alternating sides.
-      const [a, b] = items;
-      const wideFirst = kind === "pair";
-      return (
-        <div className={row}>
-          <OfferingCard offering={a} size={wideFirst ? "wide" : "regular"} className={wideFirst ? "lg:col-span-2" : undefined} />
-          <OfferingCard offering={b} size={wideFirst ? "regular" : "wide"} className={wideFirst ? undefined : "lg:col-span-2"} />
-        </div>
-      );
-    }
-    case "trio": {
-      // On two-column screens the first card spans the row so the remaining two pair up.
-      return (
-        <div className={row}>
-          {items.map((o, i) => (
-            <OfferingCard key={o.id} offering={o} className={i === 0 ? "sm:col-span-2 lg:col-span-1" : undefined} />
-          ))}
-        </div>
-      );
-    }
-    case "single":
-      return <OfferingCard offering={items[0]} size="banner" />;
-  }
-}
-
-type CardSize = "feature" | "wide" | "banner" | "regular";
-
-const SIZE_CLASSES: Record<CardSize, { card: string; image: string; body: string; title: string }> = {
+const SIZE_CLASSES: Record<MosaicSize, { card: string; image: string; body: string; title: string }> = {
   // Large image that grows to fill the card's height.
   feature: { card: "", image: "min-h-48 flex-1 sm:min-h-64", body: "shrink-0 p-5 sm:p-8", title: "text-xl sm:text-2xl" },
   // Image beside the text when it spans two thirds of the row.
@@ -180,7 +149,7 @@ const SIZE_CLASSES: Record<CardSize, { card: string; image: string; body: string
   regular: { card: "", image: "h-36 shrink-0", body: "flex-1 p-5", title: "" },
 };
 
-function OfferingCard({ offering, size = "regular", className }: { offering: Offering; size?: CardSize; className?: string }) {
+function OfferingCard({ offering, size = "regular", className }: { offering: Offering; size?: MosaicSize; className?: string }) {
   const sizing = SIZE_CLASSES[size];
   const { add, lines } = useCart();
   const business = getBusiness(offering.business)!;

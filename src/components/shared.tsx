@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import pageHeroBg from "@/assets/page-hero-bg.jpg";
 import type { BusinessStatus } from "@/lib/site";
 
 export function Container({ className, children }: { className?: string; children: React.ReactNode }) {
@@ -64,10 +65,10 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden bg-ink text-white">
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,oklch(1_0_0/0.12),transparent_60%)]"
-      />
+      {/* Abstract blue light background; the fade keeps the left-aligned text legible */}
+      <img src={pageHeroBg} alt="" aria-hidden className="absolute inset-0 size-full object-cover" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-black/10" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
       <Container className="relative pt-28 pb-12 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24">
         {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
         <h1 className="max-w-3xl text-3xl font-light tracking-tight sm:text-4xl lg:text-5xl">{title}</h1>

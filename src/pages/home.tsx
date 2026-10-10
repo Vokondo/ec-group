@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { ChevronRightIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -132,12 +132,19 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* CTA band: the reference's sunset, warm orange into steel blue, then into the dark footer */}
-      <section className="relative overflow-hidden bg-[linear-gradient(to_bottom,oklch(0.7_0.14_50),oklch(0.72_0.08_70)_14%,oklch(0.62_0.05_262)_32%,oklch(0.42_0.06_262)_55%,var(--ink))] py-24 text-center text-white sm:py-36">
+      {/* CTA band: black gradient with a soft spotlight behind the heading and a thin light line along the top */}
+      <section className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,oklch(0.11_0_0),oklch(0.05_0_0)_60%,var(--ink))] py-24 text-center text-white sm:py-36">
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+          {/* Spotlight behind the heading */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_55%_at_50%_42%,oklch(0.42_0_0/0.55),transparent_70%)]" />
+          {/* Thin light line along the top edge */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <div className="absolute inset-x-[20%] top-0 h-24 bg-[radial-gradient(ellipse_50%_100%_at_50%_0%,rgb(255_255_255/0.10),transparent)]" />
+        </div>
         <Container>
           <h2 className="text-3xl font-light tracking-tight sm:text-5xl">Ready to get started?</h2>
           <div className="mt-6 flex justify-center gap-2 sm:mt-8 sm:gap-3">
-            <MonoLink to="/contact" variant="outline-dark" className="bg-black/20 backdrop-blur-sm">
+            <MonoLink to="/contact" variant="outline-dark">
               Contact us
             </MonoLink>
             <MonoLink to="/service-center">Service Center</MonoLink>
@@ -152,11 +159,6 @@ function Hero() {
   return (
     <section className="relative isolate flex min-h-[80vh] items-end overflow-hidden text-white sm:min-h-[85vh]">
       <CoverImage src={HERO_IMAGE} alt="" overlay="from-ink via-ink/50 to-ink/70" variant="top" />
-      {/* Horizon band, echoing the reference's sunrise: steel-blue sky over a warm orange line */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-[34%] -z-10 h-56 bg-[linear-gradient(to_bottom,transparent,oklch(0.45_0.08_262/0.7)_40%,oklch(0.68_0.08_262/0.6)_55%,oklch(0.72_0.15_50/0.85)_66%,transparent_85%)] blur-xl"
-      />
       <Container className="grid gap-6 pt-28 pb-10 sm:pb-14 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-16 lg:pb-16">
         <h1 className="text-[2.6rem] leading-[1] font-light tracking-tight sm:text-6xl lg:text-7xl">
           Building a group
@@ -180,12 +182,34 @@ function Hero() {
 }
 
 // White card listing the seven businesses; selecting one shows its details on the right.
+// How long each business stays selected before the explorer moves on.
+const ROTATE_MS = 5000;
+
 function BusinessExplorer() {
   const [active, setActive] = useState(BUSINESSES[0].slug);
+  // Paused while the visitor hovers or focuses the card, so it never moves under them.
+  const [paused, setPaused] = useState(false);
+  const [reducedMotion] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const business = BUSINESSES.find((b) => b.slug === active)!;
 
+  // Auto-advance; keyed on `active`, so a manual click restarts the timer from that business.
+  useEffect(() => {
+    if (paused || reducedMotion) return;
+    const id = window.setTimeout(() => {
+      const i = BUSINESSES.findIndex((b) => b.slug === active);
+      setActive(BUSINESSES[(i + 1) % BUSINESSES.length].slug);
+    }, ROTATE_MS);
+    return () => window.clearTimeout(id);
+  }, [active, paused, reducedMotion]);
+
   return (
-    <div className={cn(whiteCard, "grid gap-10 p-6 sm:rounded-3xl sm:p-14 lg:min-h-[38rem] lg:grid-cols-2 lg:gap-24 lg:p-24")}>
+    <div
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setPaused(false)}
+      className={cn(whiteCard, "grid gap-10 p-6 sm:rounded-3xl sm:p-14 lg:min-h-[38rem] lg:grid-cols-2 lg:gap-24 lg:p-24")}
+    >
       <ul role="tablist" aria-label="Businesses" className="self-center">
         {BUSINESSES.map((b) => {
           const selected = b.slug === active;
@@ -198,18 +222,31 @@ function BusinessExplorer() {
                 aria-controls="business-details"
                 onClick={() => setActive(b.slug)}
                 className={cn(
-                  "flex w-full items-center justify-between gap-4 py-4 text-left text-base transition sm:py-5 sm:text-lg",
-                  selected ? "border-b-2 border-foreground font-medium" : "border-b border-border text-foreground/75 hover:text-foreground",
+                  "relative flex w-full items-center justify-between gap-4 border-b border-border py-4 text-left text-base transition-colors duration-500 sm:py-5 sm:text-lg",
+                  selected ? "text-foreground" : "text-foreground/60 hover:text-foreground",
                 )}
               >
-                {b.name}
+                {/* Active underline doubles as a progress bar that fills until the next business */}
+                {selected && (
+                  <span
+                    key={b.slug}
+                    aria-hidden
+                    className="absolute inset-x-0 -bottom-px h-0.5 origin-left bg-foreground"
+                    style={
+                      reducedMotion
+                        ? undefined
+                        : { animation: `explorer-progress ${ROTATE_MS}ms linear`, animationPlayState: paused ? "paused" : "running" }
+                    }
+                  />
+                )}
+                <span className={cn("transition-transform duration-500 ease-out", selected && "translate-x-1.5")}>{b.name}</span>
                 <span
                   className={cn(
-                    "grid size-6 shrink-0 place-items-center rounded-full border transition sm:size-7",
-                    selected ? "border-foreground bg-foreground text-background" : "border-foreground/25 text-foreground/40",
+                    "grid size-6 shrink-0 place-items-center rounded-full border transition-all duration-500 ease-out sm:size-7",
+                    selected ? "scale-110 border-foreground bg-foreground text-background" : "border-foreground/25 text-foreground/40",
                   )}
                 >
-                  <ChevronRightIcon className="size-3.5 sm:size-4" />
+                  <ChevronRightIcon className={cn("size-3.5 transition-transform duration-500 sm:size-4", selected && "translate-x-px")} />
                 </span>
               </button>
             </li>
@@ -218,18 +255,25 @@ function BusinessExplorer() {
       </ul>
 
       <div id="business-details" role="tabpanel" aria-label={business.name} className="flex flex-col">
-        {/* The selected business's photo (set `image` in src/lib/site.ts); keyed so it fades in on change */}
-        <div
-          key={business.slug}
-          className="group relative isolate flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-xl p-4 text-white animate-in fade-in duration-500 sm:p-5 lg:aspect-auto lg:flex-1"
-        >
-          <CoverImage src={business.image} alt={business.name} overlay="from-black/70 via-transparent to-black/25" />
-          <div className="flex justify-end">
-            <StatusBadge status={business.status} onDark />
-          </div>
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.25em] text-white/70 uppercase sm:text-[11px]">{business.sector}</p>
-            <p className="mt-1 text-xl font-light tracking-tight sm:text-2xl">{business.name}</p>
+        {/* The selected business's photo (set `image` in src/lib/site.ts). The dark frame stays put while each
+            new image settles in from a slight zoom and blur, and the caption slides up after it. */}
+        <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-900 lg:aspect-auto lg:flex-1">
+          <div
+            key={business.slug}
+            className="explorer-image group absolute inset-0 isolate flex flex-col justify-between p-4 text-white sm:p-5"
+          >
+            <CoverImage src={business.image} alt={business.name} overlay="from-black/70 via-transparent to-black/25" />
+            <div className="explorer-rise flex justify-end [--rise-delay:250ms]">
+              <StatusBadge status={business.status} onDark />
+            </div>
+            <div>
+              <p className="explorer-rise font-mono text-[10px] tracking-[0.25em] text-white/70 uppercase [--rise-delay:200ms] sm:text-[11px]">
+                {business.sector}
+              </p>
+              <p className="explorer-rise mt-1 text-xl font-light tracking-tight [--rise-delay:320ms] sm:text-2xl">
+                {business.name}
+              </p>
+            </div>
           </div>
         </div>
         <div className="mt-6 flex flex-wrap gap-2 sm:mt-8 sm:gap-3 lg:justify-end">

@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { BUSINESSES, SITE } from "@/lib/site";
 import { usePageTitle } from "@/lib/use-page-title";
 import { MonoLink } from "@/components/mono-link";
@@ -67,10 +68,27 @@ export default function HoldingPage() {
             title="Seven businesses and initiatives"
             intro="Each entity has its own page describing what it is, why it is being established, what it intends to offer and how you can engage today."
           />
-          <div className="mt-8 sm:mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {BUSINESSES.map((b) => (
-              <BusinessTile key={b.slug} business={b} />
-            ))}
+          {/* Bento: the first business fills a 2×2 block beside a 2×2 of four more; the rest share the
+              last row in pairs (an odd one out spans it), so the grid always ends flush. */}
+          <div className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
+            {BUSINESSES.map((b, i) => {
+              const feature = i === 0;
+              const tail = i >= 5;
+              const lastAlone = tail && i === BUSINESSES.length - 1 && (BUSINESSES.length - 5) % 2 === 1;
+              return (
+                <BusinessTile
+                  key={b.slug}
+                  business={b}
+                  large={feature}
+                  className={cn(
+                    "min-h-36 sm:min-h-40",
+                    feature && "min-h-52 sm:col-span-2 sm:min-h-52 lg:row-span-2 lg:min-h-0",
+                    tail && !lastAlone && "lg:col-span-2",
+                    lastAlone && "sm:col-span-2 lg:col-span-4",
+                  )}
+                />
+              );
+            })}
           </div>
         </Container>
       </section>

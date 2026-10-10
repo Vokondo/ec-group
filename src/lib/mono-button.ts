@@ -5,8 +5,8 @@ const VARIANTS = {
   // Steel blue for primary actions, as in the reference.
   solid: "border-brand bg-brand text-brand-foreground hover:bg-brand/85",
   "outline-dark": "border-white/40 text-white hover:border-white/70 hover:bg-white/10",
-  "outline-light": "border-foreground/25 bg-card text-foreground hover:border-foreground/50",
-  pill: "rounded-full border-transparent bg-white px-6 text-ink shadow-sm hover:bg-white/90 sm:px-8",
+  "outline-light": "border-foreground/25 bg-white/50 text-foreground backdrop-blur-md hover:border-foreground/50 hover:bg-white/70",
+  pill: "rounded-full border-white/70 bg-white/60 px-6 text-ink shadow-sm backdrop-blur-md hover:bg-white/80 sm:px-8",
 };
 
 export type MonoVariant = keyof typeof VARIANTS;

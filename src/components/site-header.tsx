@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { MenuIcon, ShoppingBagIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -9,11 +10,24 @@ import { useCart } from "@/components/cart-provider";
 export function SiteHeader() {
   const { count } = useCart();
   const overlayHover = "hover:bg-white/10 hover:text-white";
+  const scrolled = useScrolled(8);
 
   return (
-    // Every page opens with a dark hero, so the header sits transparently over it, as on the landing page.
-    <header className="absolute inset-x-0 top-0 z-40 w-full text-white">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+    // Transparent over each page's dark hero; once the page scrolls it pops in as a solid bar.
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-40 w-full text-white transition-[background-color,box-shadow,border-color] duration-300",
+        scrolled
+          ? "border-b border-white/10 bg-ink shadow-[0_10px_30px_-12px_rgb(0_0_0/0.5)]"
+          : "border-b border-transparent",
+      )}
+    >
+      <div
+        className={cn(
+          "mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 transition-[height] duration-300 sm:px-6 lg:px-8",
+          scrolled ? "h-14" : "h-16",
+        )}
+      >
         <Link to="/" className="text-sm font-semibold tracking-wide sm:text-base">
           {SITE.siteName}
         </Link>
@@ -87,4 +101,16 @@ export function SiteHeader() {
       </div>
     </header>
   );
+}
+
+// True once the page has scrolled past `threshold` pixels.
+function useScrolled(threshold: number) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > threshold);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, [threshold]);
+  return scrolled;
 }
