@@ -22,7 +22,7 @@ export default function ServiceCenterPage() {
         intro="Shop products, request appointments, explore programmes and register interest across all seven businesses. Items marked “In development” are not yet available; register interest and we'll keep you informed."
       />
 
-      <section className="light bg-background text-foreground">
+      <section className="bg-card text-card-foreground">
         <Container className="grid gap-6 py-10 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map(({ icon: Icon, title, text }, i) => (
             <div key={title} className="flex gap-4">

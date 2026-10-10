@@ -67,7 +67,7 @@ export function PageHero({
         aria-hidden
         className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,oklch(1_0_0/0.12),transparent_60%)]"
       />
-      <Container className="relative py-12 sm:py-20 lg:py-24">
+      <Container className="relative pt-28 pb-12 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24">
         {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
         <h1 className="max-w-3xl text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">{title}</h1>
         {intro && <p className="mt-4 max-w-2xl text-sm text-white/70 sm:mt-5 sm:text-base">{intro}</p>}

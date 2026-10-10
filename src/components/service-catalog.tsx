@@ -93,9 +93,9 @@ export function ServiceCatalog() {
           .
         </div>
       ) : (
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {results.map((o) => (
-            <OfferingCard key={o.id} offering={o} />
+        <div className="mt-4 flex flex-col gap-4">
+          {toMosaicGroups(results).map((group) => (
+            <MosaicGroup key={group.items[0].id} {...group} />
           ))}
         </div>
       )}
@@ -103,7 +103,85 @@ export function ServiceCatalog() {
   );
 }
 
-function OfferingCard({ offering }: { offering: Offering }) {
+// Mosaic layout: offerings are split into self-contained row groups, each of which fills its full
+// width at every breakpoint, so the layout never leaves an empty slot whatever the count or filters.
+type GroupKind = "featureLeft" | "featureRight" | "pair" | "pairReverse" | "trio" | "single";
+
+const GROUP_SIZE: Record<GroupKind, number> = { featureLeft: 3, featureRight: 3, pair: 2, pairReverse: 2, trio: 3, single: 1 };
+const PATTERN: GroupKind[] = ["featureLeft", "pair", "featureRight", "pairReverse"];
+// Used when fewer offerings remain than the next pattern group needs.
+const REMAINDER: Record<number, GroupKind> = { 1: "single", 2: "pair", 3: "trio" };
+
+type MosaicGroupData = { kind: GroupKind; items: Offering[] };
+
+function toMosaicGroups(items: Offering[]): MosaicGroupData[] {
+  const groups: MosaicGroupData[] = [];
+  for (let i = 0, step = 0; i < items.length; step++) {
+    let kind = PATTERN[step % PATTERN.length];
+    if (GROUP_SIZE[kind] > items.length - i) kind = REMAINDER[items.length - i];
+    groups.push({ kind, items: items.slice(i, i + GROUP_SIZE[kind]) });
+    i += GROUP_SIZE[kind];
+  }
+  return groups;
+}
+
+function MosaicGroup({ kind, items }: MosaicGroupData) {
+  const row = "grid gap-4 sm:grid-cols-2 lg:grid-cols-3";
+  switch (kind) {
+    case "featureLeft":
+    case "featureRight": {
+      // Large card spanning two columns and two rows, beside two stacked cards.
+      const [feature, a, b] = items;
+      const right = kind === "featureRight";
+      return (
+        <div className={cn(row, "lg:grid-rows-2")}>
+          <OfferingCard offering={feature} size="feature" className={cn("sm:col-span-2 lg:row-span-2 lg:row-start-1", right ? "lg:col-start-2" : "lg:col-start-1")} />
+          <OfferingCard offering={a} className={right ? "lg:col-start-1 lg:row-start-1" : undefined} />
+          <OfferingCard offering={b} className={right ? "lg:col-start-1 lg:row-start-2" : undefined} />
+        </div>
+      );
+    }
+    case "pair":
+    case "pairReverse": {
+      // A wide card (two thirds) and a regular card (one third), alternating sides.
+      const [a, b] = items;
+      const wideFirst = kind === "pair";
+      return (
+        <div className={row}>
+          <OfferingCard offering={a} size={wideFirst ? "wide" : "regular"} className={wideFirst ? "lg:col-span-2" : undefined} />
+          <OfferingCard offering={b} size={wideFirst ? "regular" : "wide"} className={wideFirst ? undefined : "lg:col-span-2"} />
+        </div>
+      );
+    }
+    case "trio": {
+      // On two-column screens the first card spans the row so the remaining two pair up.
+      return (
+        <div className={row}>
+          {items.map((o, i) => (
+            <OfferingCard key={o.id} offering={o} className={i === 0 ? "sm:col-span-2 lg:col-span-1" : undefined} />
+          ))}
+        </div>
+      );
+    }
+    case "single":
+      return <OfferingCard offering={items[0]} size="banner" />;
+  }
+}
+
+type CardSize = "feature" | "wide" | "banner" | "regular";
+
+const SIZE_CLASSES: Record<CardSize, { card: string; image: string; body: string; title: string }> = {
+  // Large image that grows to fill the card's height.
+  feature: { card: "", image: "min-h-48 flex-1 sm:min-h-64", body: "shrink-0 p-5 sm:p-8", title: "text-xl sm:text-2xl" },
+  // Image beside the text when it spans two thirds of the row.
+  wide: { card: "lg:flex-row", image: "h-36 lg:h-auto lg:w-1/2 lg:shrink-0", body: "flex-1 p-5 lg:p-7", title: "lg:text-xl" },
+  // Full-width card with the image beside the text.
+  banner: { card: "sm:flex-row", image: "h-40 sm:h-auto sm:min-h-52 sm:w-1/2 sm:shrink-0", body: "flex-1 p-5 sm:p-8", title: "sm:text-xl" },
+  regular: { card: "", image: "h-36 shrink-0", body: "flex-1 p-5", title: "" },
+};
+
+function OfferingCard({ offering, size = "regular", className }: { offering: Offering; size?: CardSize; className?: string }) {
+  const sizing = SIZE_CLASSES[size];
   const { add, lines } = useCart();
   const business = getBusiness(offering.business)!;
   const inCart = lines.some((l) => l.id === offering.id);
@@ -111,10 +189,15 @@ function OfferingCard({ offering }: { offering: Offering }) {
   const bookable = offering.kind === "service" && offering.business === "barbering-shop";
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-2xl border bg-card">
-      <div className="group relative isolate h-36 overflow-hidden">
+    <article className={cn("flex h-full flex-col overflow-hidden rounded-2xl border bg-card", sizing.card, className)}>
+      <div className={cn("group relative isolate overflow-hidden", sizing.image)}>
         {/* An offering's own photo, falling back to its business's photo */}
-        <CoverImage src={offering.image ?? business.image} alt={offering.name} overlay="from-black/20 via-transparent to-black/40" variant="compact" />
+        <CoverImage
+          src={offering.image ?? business.image}
+          alt={offering.name}
+          overlay="from-black/20 via-transparent to-black/40"
+          variant={size === "feature" ? "center" : "compact"}
+        />
         <div className="absolute top-3 left-3">
           <StatusBadge status={offering.status} onDark />
         </div>
@@ -122,9 +205,9 @@ function OfferingCard({ offering }: { offering: Offering }) {
           {KIND_LABELS[offering.kind].replace(/s$/, "")}
         </span>
       </div>
-      <div className="flex flex-1 flex-col p-5">
+      <div className={cn("flex flex-col", sizing.body)}>
         <p className="text-xs text-muted-foreground">{business.name}</p>
-        <h3 className="mt-1 font-semibold">{offering.name}</h3>
+        <h3 className={cn("mt-1 font-semibold", sizing.title)}>{offering.name}</h3>
         <p className="mt-2 flex-1 text-sm text-muted-foreground">{offering.description}</p>
         <div className="mt-5 flex items-center justify-between gap-3">
           <span className="text-sm font-semibold">

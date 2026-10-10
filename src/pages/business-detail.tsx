@@ -21,7 +21,7 @@ export default function BusinessDetailPage() {
     <>
       <section className="relative isolate overflow-hidden text-white">
         <CoverImage src={business.image} alt={business.name} overlay="from-black/90 via-black/60 to-black/30" variant="corner" />
-        <Container className="relative py-12 sm:py-20 lg:py-28">
+        <Container className="relative pt-28 pb-12 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-28">
           <StatusBadge status={business.status} onDark />
           <p className="mt-6 text-xs font-semibold tracking-[0.2em] text-white/70 uppercase">{business.sector}</p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">{business.name}</h1>
@@ -52,7 +52,7 @@ export default function BusinessDetailPage() {
         </div>
       )}
 
-      <section className="light bg-background text-foreground py-12 sm:py-20">
+      <section className="bg-card text-card-foreground py-12 sm:py-20">
         <Container className="grid gap-8 lg:gap-12 lg:grid-cols-3">
           <div className="space-y-8 sm:space-y-12 lg:col-span-2">
             <div>

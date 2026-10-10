@@ -31,7 +31,7 @@ export default function AboutPage() {
         intro="Entrepreneur and founder of the group, building a portfolio of businesses and initiatives that connect enterprise with community."
       />
 
-      <section className="light bg-background text-foreground py-12 sm:py-20">
+      <section className="bg-card text-card-foreground py-12 sm:py-20">
         <Container className="grid gap-8 lg:gap-12 lg:grid-cols-[2fr_3fr]">
           <div className="grid aspect-[4/3] lg:aspect-[4/5] place-items-center rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-900 text-sm text-neutral-500">
             Founder portrait
@@ -66,7 +66,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="light bg-background text-foreground py-12 sm:py-20">
+      <section className="bg-card text-card-foreground py-12 sm:py-20">
         <Container>
           <SectionHeading
             eyebrow="Vision, mission & principles"

@@ -67,7 +67,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-white/10 py-6 text-center text-xs text-white/50">
-        © {YEAR} {SITE.holdingName}. All rights reserved.
+        © {YEAR} {SITE.siteName}. All rights reserved.
       </div>
     </footer>
   );

@@ -112,7 +112,7 @@ export function Checkout() {
         </div>
       </div>
 
-      <form onSubmit={onSubmit} className="light bg-background text-foreground h-fit space-y-5 rounded-3xl p-6 lg:sticky lg:top-24">
+      <form onSubmit={onSubmit} className="h-fit space-y-5 rounded-3xl bg-card p-6 text-card-foreground shadow-[0_20px_50px_-25px_oklch(0.3_0.05_240/0.25)] lg:sticky lg:top-24">
         <h2 className="text-lg font-semibold">Your details</h2>
         <div className="space-y-2">
           <Label htmlFor="name">Full name *</Label>

@@ -3,10 +3,12 @@
 // Anything not yet operational is marked status "proposed" and must not show prices or timelines.
 
 export const SITE = {
-  holdingName: "[Holding Company Name]",
-  founderName: "[Founder Name]",
+  // Brand shown in the header, browser tab titles and footer, with this exact casing.
+  siteName: "enock CHANIMBE",
+  holdingName: "CHANIMBE GROUP",
+  founderName: "Enock Chanimbe",
   description:
-    "The official home of [Founder Name] and [Holding Company Name], bringing together the group's businesses, initiatives and opportunities.",
+    "The official home of Enock Chanimbe and CHANIMBE GROUP, bringing together the group's businesses, initiatives and opportunities.",
   contactEmail: "hello@example.com",
   contactPhone: "+000 000 000 000",
   address: "[City, Country]",

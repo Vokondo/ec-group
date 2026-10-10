@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, NavLink } from "react-router";
 import { MenuIcon, ShoppingBagIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS, SITE } from "@/lib/site";
@@ -7,22 +7,15 @@ import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger 
 import { useCart } from "@/components/cart-provider";
 
 export function SiteHeader() {
-  const { pathname } = useLocation();
   const { count } = useCart();
-  // The home page hero sits under a transparent header, like the reference design.
-  const overlay = pathname === "/";
-  const overlayHover = overlay && "hover:bg-white/10 hover:text-white";
+  const overlayHover = "hover:bg-white/10 hover:text-white";
 
   return (
-    <header
-      className={cn(
-        "z-40 w-full",
-        overlay ? "absolute inset-x-0 top-0 text-white" : "sticky top-0 border-b bg-background/85 backdrop-blur",
-      )}
-    >
+    // Every page opens with a dark hero, so the header sits transparently over it, as on the landing page.
+    <header className="absolute inset-x-0 top-0 z-40 w-full text-white">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="text-xs font-semibold tracking-wide uppercase sm:text-sm">
-          {SITE.holdingName}
+        <Link to="/" className="text-sm font-semibold tracking-wide sm:text-base">
+          {SITE.siteName}
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
@@ -60,7 +53,7 @@ export function SiteHeader() {
             className={cn(
               buttonVariants({ variant: "outline" }),
               "hidden rounded-full sm:inline-flex",
-              overlay && "border-white/60 bg-transparent text-white hover:bg-white/10 hover:text-white",
+              "border-white/60 bg-transparent text-white hover:bg-white/10 hover:text-white",
             )}
           >
             Partner with us
@@ -74,7 +67,7 @@ export function SiteHeader() {
             </SheetTrigger>
             <SheetContent side="right">
               <SheetHeader>
-                <SheetTitle>{SITE.holdingName}</SheetTitle>
+                <SheetTitle>{SITE.siteName}</SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-1 px-4">
                 {NAV_LINKS.map((link) => (

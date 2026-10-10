@@ -30,7 +30,7 @@ export default function HoldingPage() {
         </Link>
       </PageHero>
 
-      <section className="light bg-background text-foreground py-12 sm:py-20">
+      <section className="bg-card text-card-foreground py-12 sm:py-20">
         <Container className="grid gap-8 lg:gap-12 lg:grid-cols-2">
           <div>
             <Eyebrow>Who we are</Eyebrow>
@@ -53,7 +53,7 @@ export default function HoldingPage() {
 
       <section className="bg-muted/60 py-12 sm:py-20">
         <Container className="grid gap-4 md:grid-cols-2">
-          <div className="light rounded-3xl bg-background p-6 text-foreground sm:p-8">
+          <div className="rounded-3xl bg-card p-6 text-card-foreground sm:p-8">
             <Eyebrow>Vision</Eyebrow>
             <p className="mt-3 text-lg font-medium sm:mt-4 sm:text-xl">[A diversified group that creates lasting value for its customers, people and communities.]</p>
           </div>

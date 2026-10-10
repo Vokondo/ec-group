@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 // Prefixes root-relative paths ("/images/...") with the deploy base path.
 const withBase = (src: string) => (src.startsWith("/") ? import.meta.env.BASE_URL + src.slice(1) : src);
 
-type PlaceholderVariant = "center" | "compact" | "corner";
+type PlaceholderVariant = "center" | "compact" | "corner" | "top";
 
 // Fills its nearest positioned (and `isolate`d) parent with a photo, or with a placeholder
 // until a photo is supplied. Set `image` on a business (or offering) in src/lib/site.ts.
@@ -18,7 +18,8 @@ export function CoverImage({
   alt?: string;
   // Gradient that keeps text on top of the image legible.
   overlay?: string;
-  // Where the placeholder label sits: "corner" keeps it clear of large banner text.
+  // Where the placeholder label sits: "corner" (bottom-right) and "top" (top-right, below the header)
+  // keep it clear of large banner text.
   variant?: PlaceholderVariant;
 }) {
   return (
@@ -44,13 +45,13 @@ export function ImagePlaceholder({ variant = "center" }: { variant?: Placeholder
       aria-hidden
       className={cn(
         "absolute inset-0 -z-20 flex bg-neutral-800 bg-[linear-gradient(135deg,rgb(255_255_255/0.04)_25%,transparent_25%,transparent_50%,rgb(255_255_255/0.04)_50%,rgb(255_255_255/0.04)_75%,transparent_75%)] bg-[length:24px_24px]",
-        variant === "corner" ? "items-end justify-end p-5" : "items-center justify-center",
+        variant === "corner" ? "items-end justify-end p-5" : variant === "top" ? "items-start justify-end px-5 pt-24" : "items-center justify-center",
       )}
     >
       <div
         className={cn(
           "flex items-center gap-2 text-white/35",
-          variant === "corner" ? "flex-row" : "flex-col",
+          variant === "corner" || variant === "top" ? "flex-row" : "flex-col",
           variant === "center" && "-translate-y-6",
           variant === "compact" && "-translate-y-2",
         )}

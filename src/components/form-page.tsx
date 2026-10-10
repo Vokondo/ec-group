@@ -27,7 +27,7 @@ export function FormPage({
       <PageHero eyebrow={eyebrow} title={title} intro={intro} />
       <section className="py-12 sm:py-16 lg:py-20">
         <Container className="grid gap-8 lg:gap-12 lg:grid-cols-[2fr_1fr]">
-          <div className="light bg-background text-foreground rounded-3xl p-6 sm:p-10">
+          <div className="rounded-3xl bg-card p-6 text-card-foreground shadow-[0_20px_50px_-25px_oklch(0.3_0.05_240/0.25)] sm:p-10">
             {/* Keyed so the form resets when the URL preselects a different business or topic */}
             <InquiryForm
               key={`${defaultBusiness}-${defaultTopic}`}

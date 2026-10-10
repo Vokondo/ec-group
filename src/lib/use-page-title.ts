@@ -3,6 +3,6 @@ import { SITE } from "@/lib/site";
 
 export function usePageTitle(title?: string) {
   useEffect(() => {
-    document.title = title ? `${title} · ${SITE.holdingName}` : SITE.holdingName;
+    document.title = title ? `${title} · ${SITE.siteName}` : SITE.siteName;
   }, [title]);
 }
