@@ -263,14 +263,14 @@ function BusinessExplorer() {
             className="explorer-image group absolute inset-0 isolate flex flex-col justify-between p-4 text-white sm:p-5"
           >
             <CoverImage src={business.image} alt={business.name} overlay="from-black/70 via-transparent to-black/25" />
-            <div className="explorer-rise flex justify-end [--rise-delay:250ms]">
+            <div className="rise-in flex justify-end [--rise-delay:250ms]">
               <StatusBadge status={business.status} onDark />
             </div>
             <div>
-              <p className="explorer-rise font-mono text-[10px] tracking-[0.25em] text-white/70 uppercase [--rise-delay:200ms] sm:text-[11px]">
+              <p className="rise-in font-mono text-[10px] tracking-[0.25em] text-white/70 uppercase [--rise-delay:200ms] sm:text-[11px]">
                 {business.sector}
               </p>
-              <p className="explorer-rise mt-1 text-xl font-light tracking-tight [--rise-delay:320ms] sm:text-2xl">
+              <p className="rise-in mt-1 text-xl font-light tracking-tight [--rise-delay:320ms] sm:text-2xl">
                 {business.name}
               </p>
             </div>

@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router";
-import { MenuIcon, ShoppingBagIcon } from "lucide-react";
+import { Link, NavLink, useLocation } from "react-router";
+import { MenuIcon, ShoppingBagIcon, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS, SITE } from "@/lib/site";
 import { buttonVariants } from "@/components/ui/button";
-import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { monoButtonClass } from "@/lib/mono-button";
 import { useCart } from "@/components/cart-provider";
+
+// The mobile menu also lists Home.
+const MENU_LINKS = [{ to: "/", label: "Home" }, ...NAV_LINKS];
 
 export function SiteHeader() {
   const { count } = useCart();
   const overlayHover = "hover:bg-white/10 hover:text-white";
   const scrolled = useScrolled(8);
+  const { pathname } = useLocation();
 
   return (
     // Transparent over each page's dark hero; once the page scrolls it pops in as a solid bar.
@@ -79,22 +84,46 @@ export function SiteHeader() {
             >
               <MenuIcon />
             </SheetTrigger>
-            <SheetContent side="right">
-              <SheetHeader>
-                <SheetTitle>{SITE.siteName}</SheetTitle>
-              </SheetHeader>
-              <nav className="flex flex-col gap-1 px-4">
-                {NAV_LINKS.map((link) => (
-                  <SheetClose
-                    key={link.to}
-                    render={<Link to={link.to} />}
-                    nativeButton={false}
-                    className="rounded-md px-2 py-2.5 text-left text-sm hover:bg-muted"
-                  >
-                    {link.label}
-                  </SheetClose>
-                ))}
+            {/* Full-screen dark menu: page links and one call to action */}
+            <SheetContent
+              side="top"
+              showCloseButton={false}
+              className="gap-0 border-0 bg-ink p-0 text-white data-[side=top]:h-dvh data-[side=top]:border-b-0"
+            >
+              <div className="flex h-16 shrink-0 items-center justify-between px-4 sm:px-6">
+                <SheetTitle className="text-sm font-semibold tracking-wide text-white sm:text-base">{SITE.siteName}</SheetTitle>
+                <SheetClose className={cn(buttonVariants({ variant: "ghost", size: "icon" }), overlayHover)} aria-label="Close menu">
+                  <XIcon />
+                </SheetClose>
+              </div>
+              <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-4 pt-6 sm:px-6">
+                {MENU_LINKS.map((link) => {
+                  const active = link.to === "/" ? pathname === "/" : pathname.startsWith(link.to);
+                  return (
+                    <SheetClose
+                      key={link.to}
+                      render={<Link to={link.to} />}
+                      nativeButton={false}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "py-2.5 text-left text-2xl font-light transition-colors",
+                        active ? "text-white" : "text-white/60 hover:text-white",
+                      )}
+                    >
+                      {link.label}
+                    </SheetClose>
+                  );
+                })}
               </nav>
+              <div className="shrink-0 px-4 pt-4 pb-8 sm:px-6">
+                <SheetClose
+                  render={<Link to="/contact?topic=partnership" />}
+                  nativeButton={false}
+                  className={monoButtonClass("solid", "w-full")}
+                >
+                  Partner with us
+                </SheetClose>
+              </div>
             </SheetContent>
           </Sheet>
         </div>
