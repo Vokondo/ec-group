@@ -23,7 +23,7 @@ export function BusinessTile({ business, className, large }: { business: Busines
       </div>
       <div className="relative">
         <p className="text-[11px] font-medium tracking-wider text-white/70 uppercase">{business.sector}</p>
-        <h3 className={cn("font-semibold", large ? "text-xl sm:text-2xl" : "text-lg")}>{business.name}</h3>
+        <h3 className={cn("font-medium", large ? "text-xl sm:text-2xl" : "text-lg")}>{business.name}</h3>
         {large && <p className="mt-2 max-w-md text-sm text-white/80">{business.summary}</p>}
       </div>
     </Link>

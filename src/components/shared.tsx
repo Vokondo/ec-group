@@ -6,7 +6,8 @@ export function Container({ className, children }: { className?: string; childre
 }
 
 export function Eyebrow({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <p className={cn("text-xs font-semibold tracking-[0.2em] uppercase opacity-60", className)}>{children}</p>;
+  // Same monospace label as the home page.
+  return <p className={cn("font-mono text-[10px] tracking-[0.25em] uppercase opacity-60 sm:text-[11px]", className)}>{children}</p>;
 }
 
 // Two-column heading used throughout, mirroring the reference layout:
@@ -28,7 +29,7 @@ export function SectionHeading({
     return (
       <div className="mx-auto max-w-2xl text-center">
         {eyebrow && <Eyebrow className="mb-3">{eyebrow}</Eyebrow>}
-        <h2 className="text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl">{title}</h2>
+        <h2 className="text-2xl font-light tracking-tight sm:text-3xl lg:text-4xl">{title}</h2>
         {intro && <p className="mt-4 text-muted-foreground">{intro}</p>}
         {actions && <div className="mt-6 flex justify-center gap-3">{actions}</div>}
       </div>
@@ -38,7 +39,7 @@ export function SectionHeading({
     <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
       <div>
         {eyebrow && <Eyebrow className="mb-3">{eyebrow}</Eyebrow>}
-        <h2 className="max-w-lg text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl">{title}</h2>
+        <h2 className="max-w-lg text-2xl font-light tracking-tight sm:text-3xl lg:text-4xl">{title}</h2>
       </div>
       {(intro || actions) && (
         <div className="lg:max-w-md lg:justify-self-end">
@@ -69,7 +70,7 @@ export function PageHero({
       />
       <Container className="relative pt-28 pb-12 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24">
         {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
-        <h1 className="max-w-3xl text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">{title}</h1>
+        <h1 className="max-w-3xl text-3xl font-light tracking-tight sm:text-4xl lg:text-5xl">{title}</h1>
         {intro && <p className="mt-4 max-w-2xl text-sm text-white/70 sm:mt-5 sm:text-base">{intro}</p>}
         {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
       </Container>
@@ -91,7 +92,3 @@ export function StatusBadge({ status, onDark }: { status: BusinessStatus; onDark
     </span>
   );
 }
-
-// Shared class strings for links styled as buttons on dark backgrounds.
-export const onDarkPrimary = "rounded-full bg-brand px-5 text-brand-foreground hover:bg-brand/85";
-export const onDarkOutline = "rounded-full border-white/50 bg-transparent px-5 text-white hover:bg-white/10 hover:text-white";

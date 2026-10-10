@@ -1,9 +1,9 @@
 import { Link } from "react-router";
-import { cn } from "@/lib/utils";
 import { BUSINESSES, SITE } from "@/lib/site";
 import { usePageTitle } from "@/lib/use-page-title";
-import { buttonVariants } from "@/components/ui/button";
-import { Container, Eyebrow, PageHero, SectionHeading, onDarkPrimary } from "@/components/shared";
+import { MonoLink } from "@/components/mono-link";
+import { FounderPortrait } from "@/components/founder-portrait";
+import { Container, Eyebrow, PageHero, SectionHeading } from "@/components/shared";
 
 // Placeholder copy throughout: replace with the founder's confirmed biography.
 const JOURNEY = [
@@ -33,12 +33,10 @@ export default function AboutPage() {
 
       <section className="bg-card text-card-foreground py-12 sm:py-20">
         <Container className="grid gap-8 lg:gap-12 lg:grid-cols-[2fr_3fr]">
-          <div className="grid aspect-[4/3] lg:aspect-[4/5] place-items-center rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-900 text-sm text-neutral-500">
-            Founder portrait
-          </div>
+          <FounderPortrait className="aspect-[4/3] rounded-3xl lg:aspect-[4/5]" />
           <div>
             <Eyebrow>Biography</Eyebrow>
-            <h2 className="mt-3 text-2xl font-medium tracking-tight sm:text-3xl">A personal and professional story</h2>
+            <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">A personal and professional story</h2>
             <div className="mt-4 space-y-3 text-sm text-muted-foreground sm:mt-6 sm:space-y-4 sm:text-base">
               <p>[Personal and professional biography: background, education, career highlights and the experiences that shaped an entrepreneurial path.]</p>
               <p>[Achievements and recognition: key milestones, awards and notable contributions.]</p>
@@ -57,8 +55,8 @@ export default function AboutPage() {
           <ol className="mt-8 sm:mt-12 grid gap-6 md:grid-cols-4">
             {JOURNEY.map((step) => (
               <li key={step.title} className="border-t-2 border-foreground pt-5">
-                <p className="text-xs font-semibold text-muted-foreground">{step.period}</p>
-                <h3 className="mt-2 font-semibold">{step.title}</h3>
+                <p className="text-xs font-medium text-muted-foreground">{step.period}</p>
+                <h3 className="mt-2 font-medium">{step.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{step.text}</p>
               </li>
             ))}
@@ -76,7 +74,7 @@ export default function AboutPage() {
           <div className="mt-8 sm:mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {PRINCIPLES.map((p) => (
               <div key={p.title} className="rounded-2xl border p-6">
-                <h3 className="font-semibold">{p.title}</h3>
+                <h3 className="font-medium">{p.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{p.text}</p>
               </div>
             ))}
@@ -88,14 +86,14 @@ export default function AboutPage() {
         <Container className="grid gap-8 lg:gap-12 lg:grid-cols-2">
           <div>
             <Eyebrow>Leadership & community</Eyebrow>
-            <h2 className="mt-3 text-2xl font-medium tracking-tight sm:text-3xl">Business interests and areas of involvement</h2>
+            <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">Business interests and areas of involvement</h2>
             <p className="mt-5 text-white/70">
               [Leadership roles, board positions and community contributions.] Each of the businesses listed here is
               part of {SITE.holdingName} and reflects an area the founder is committed to.
             </p>
-            <Link to="/holding" className={cn(buttonVariants({ size: "lg" }), onDarkPrimary, "mt-8")}>
+            <MonoLink to="/holding" className="mt-8">
               About the holding company
-            </Link>
+            </MonoLink>
           </div>
           <ul className="grid gap-3 sm:grid-cols-2">
             {BUSINESSES.map((b) => (

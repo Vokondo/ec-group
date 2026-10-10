@@ -7,6 +7,8 @@ export const SITE = {
   siteName: "enock CHANIMBE",
   holdingName: "CHANIMBE GROUP",
   founderName: "Enock Chanimbe",
+  // Founder portrait, e.g. "/images/founder.jpg" in public/. Shown on the home page and the Founder page.
+  founderImage: undefined as string | undefined,
   description:
     "The official home of Enock Chanimbe and CHANIMBE GROUP, bringing together the group's businesses, initiatives and opportunities.",
   contactEmail: "hello@example.com",

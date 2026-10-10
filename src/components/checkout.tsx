@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { PAYMENT, formatPrice } from "@/lib/site";
 import { submitRequest } from "@/lib/submit";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { monoButtonClass } from "@/lib/mono-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -35,9 +36,9 @@ export function Checkout() {
     return (
       <div className="mx-auto max-w-xl rounded-3xl border bg-muted p-6 text-center sm:p-10">
         <CheckCircle2Icon className="mx-auto size-12" />
-        <h2 className="mt-4 text-xl font-semibold">Order received, awaiting payment verification</h2>
+        <h2 className="mt-4 text-xl font-medium">Order received, awaiting payment verification</h2>
         <p className="mt-3 text-sm">
-          Your order reference is <span className="font-mono font-semibold">{state.message}</span>. We'll check your
+          Your order reference is <span className="font-mono font-medium">{state.message}</span>. We'll check your
           Mobile Money payment and contact you to confirm your order and arrange delivery or collection.
         </p>
         <Link to="/service-center" className={cn(buttonVariants(), "mt-6 rounded-full")}>
@@ -51,7 +52,7 @@ export function Checkout() {
     return (
       <div className="mx-auto max-w-xl rounded-3xl border border-dashed p-12 text-center">
         <ShoppingBagIcon className="mx-auto size-10 text-muted-foreground" />
-        <h2 className="mt-4 text-lg font-semibold">Your cart is empty</h2>
+        <h2 className="mt-4 text-lg font-medium">Your cart is empty</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Products will be available to order here as our businesses launch them. Until then you can register interest.
         </p>
@@ -66,7 +67,7 @@ export function Checkout() {
   return (
     <div className="grid gap-8 lg:gap-10 lg:grid-cols-[3fr_2fr]">
       <div>
-        <h2 className="text-lg font-semibold">Order summary</h2>
+        <h2 className="text-lg font-medium">Order summary</h2>
         <ul className="mt-4 divide-y rounded-2xl border">
           {lines.map((l) => (
             <li key={l.id} className="flex flex-wrap items-center gap-4 p-4">
@@ -83,11 +84,11 @@ export function Checkout() {
                   <PlusIcon />
                 </Button>
               </div>
-              <p className="w-24 text-right text-sm font-semibold">{formatPrice(l.qty * l.price)}</p>
+              <p className="w-24 text-right text-sm font-medium">{formatPrice(l.qty * l.price)}</p>
             </li>
           ))}
         </ul>
-        <div className="mt-4 flex justify-between px-4 text-lg font-semibold">
+        <div className="mt-4 flex justify-between px-4 text-lg font-medium">
           <span>Total</span>
           <span>{formatPrice(total)}</span>
         </div>
@@ -95,7 +96,7 @@ export function Checkout() {
         <div className="mt-10 rounded-2xl bg-ink p-6 text-white">
           <div className="flex items-center gap-3">
             <SmartphoneIcon className="size-5" />
-            <h3 className="font-semibold">How to pay with Mobile Money</h3>
+            <h3 className="font-medium">How to pay with Mobile Money</h3>
           </div>
           <ol className="mt-5 list-decimal space-y-2 pl-5 text-sm text-white/80">
             <li>Open your Mobile Money menu or app and choose “Send money”.</li>
@@ -112,8 +113,8 @@ export function Checkout() {
         </div>
       </div>
 
-      <form onSubmit={onSubmit} className="h-fit space-y-5 rounded-3xl bg-card p-6 text-card-foreground shadow-[0_20px_50px_-25px_oklch(0.3_0.05_240/0.25)] lg:sticky lg:top-24">
-        <h2 className="text-lg font-semibold">Your details</h2>
+      <form onSubmit={onSubmit} className="h-fit space-y-5 rounded-3xl bg-card p-6 text-card-foreground shadow-[0_20px_50px_-25px_oklch(0.3_0.05_262/0.25)] lg:sticky lg:top-24">
+        <h2 className="text-lg font-medium">Your details</h2>
         <div className="space-y-2">
           <Label htmlFor="name">Full name *</Label>
           <Input id="name" name="name" required autoComplete="name" />
@@ -136,9 +137,9 @@ export function Checkout() {
           <Input id="transactionId" name="transactionId" required placeholder="From your payment confirmation SMS" />
         </div>
         {state.status === "error" && <p className="text-sm text-destructive">{state.message}</p>}
-        <Button type="submit" size="lg" className="w-full rounded-full" disabled={state.status === "sending"}>
+        <button type="submit" className={monoButtonClass("solid", "w-full sm:h-10")} disabled={state.status === "sending"}>
           {state.status === "sending" ? "Submitting…" : "Submit order for confirmation"}
-        </Button>
+        </button>
         <p className="text-xs text-muted-foreground">
           Your order is confirmed only after we verify your payment. We'll contact you by phone or email.
         </p>

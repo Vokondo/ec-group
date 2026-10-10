@@ -1,12 +1,11 @@
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import { CheckIcon, InfoIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { BUSINESSES, getBusiness } from "@/lib/site";
 import { usePageTitle } from "@/lib/use-page-title";
-import { buttonVariants } from "@/components/ui/button";
+import { MonoLink } from "@/components/mono-link";
 import { CoverImage } from "@/components/business-image";
 import { BusinessTile } from "@/components/business-visual";
-import { Container, Eyebrow, StatusBadge, onDarkOutline, onDarkPrimary } from "@/components/shared";
+import { Container, Eyebrow, StatusBadge } from "@/components/shared";
 import NotFoundPage from "@/pages/not-found";
 
 export default function BusinessDetailPage() {
@@ -23,17 +22,15 @@ export default function BusinessDetailPage() {
         <CoverImage src={business.image} alt={business.name} overlay="from-black/90 via-black/60 to-black/30" variant="corner" />
         <Container className="relative pt-28 pb-12 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-28">
           <StatusBadge status={business.status} onDark />
-          <p className="mt-6 text-xs font-semibold tracking-[0.2em] text-white/70 uppercase">{business.sector}</p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">{business.name}</h1>
+          <p className="mt-6 font-mono text-[10px] tracking-[0.25em] text-white/70 uppercase sm:text-[11px]">{business.sector}</p>
+          <h1 className="mt-2 text-3xl font-light tracking-tight sm:text-5xl lg:text-6xl">{business.name}</h1>
           <p className="mt-4 max-w-2xl text-base text-white/80 sm:mt-5 sm:text-lg">{business.summary}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to={business.cta.to} className={cn(buttonVariants({ size: "lg" }), onDarkPrimary)}>
-              {business.cta.label}
-            </Link>
+            <MonoLink to={business.cta.to}>{business.cta.label}</MonoLink>
             {business.secondaryCta && (
-              <Link to={business.secondaryCta.to} className={cn(buttonVariants({ variant: "outline", size: "lg" }), onDarkOutline)}>
+              <MonoLink to={business.secondaryCta.to} variant="outline-dark">
                 {business.secondaryCta.label}
-              </Link>
+              </MonoLink>
             )}
           </div>
         </Container>
@@ -57,7 +54,7 @@ export default function BusinessDetailPage() {
           <div className="space-y-8 sm:space-y-12 lg:col-span-2">
             <div>
               <Eyebrow>Why it is being established</Eyebrow>
-              <p className="mt-3 text-xl font-medium sm:text-2xl">{business.why}</p>
+              <p className="mt-3 text-xl font-light tracking-tight sm:text-2xl">{business.why}</p>
             </div>
             <div>
               <Eyebrow>What it intends to offer</Eyebrow>
@@ -81,7 +78,7 @@ export default function BusinessDetailPage() {
           </div>
 
           <aside className="h-fit rounded-3xl bg-muted/60 p-6 lg:sticky lg:top-24">
-            <h2 className="font-semibold">Available now</h2>
+            <h2 className="font-medium">Available now</h2>
             <ul className="mt-4 space-y-2 text-sm">
               {business.available.map((a) => (
                 <li key={a} className="flex gap-2">
@@ -91,12 +88,12 @@ export default function BusinessDetailPage() {
               ))}
             </ul>
             <div className="mt-6 flex flex-col gap-2">
-              <Link to={business.cta.to} className={cn(buttonVariants(), "rounded-full")}>
+              <MonoLink to={business.cta.to} className="justify-between">
                 {business.cta.label}
-              </Link>
-              <Link to={`/service-center?business=${business.slug}`} className={cn(buttonVariants({ variant: "outline" }), "rounded-full")}>
+              </MonoLink>
+              <MonoLink to={`/service-center?business=${business.slug}`} variant="outline-light" className="justify-between">
                 View in Service Center
-              </Link>
+              </MonoLink>
             </div>
           </aside>
         </Container>

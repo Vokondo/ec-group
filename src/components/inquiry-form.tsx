@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CheckCircle2Icon } from "lucide-react";
 import { BUSINESSES } from "@/lib/site";
 import { submitRequest } from "@/lib/submit";
-import { Button } from "@/components/ui/button";
+import { monoButtonClass } from "@/lib/mono-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -47,7 +47,7 @@ export function InquiryForm({
         <CheckCircle2Icon className="mx-auto size-10" />
         <p className="mt-4 font-medium">{copy.done}</p>
         <p className="mt-2 text-sm">
-          Reference: <span className="font-mono font-semibold">{state.message}</span>
+          Reference: <span className="font-mono font-medium">{state.message}</span>
         </p>
       </div>
     );
@@ -109,9 +109,9 @@ export function InquiryForm({
       {state.status === "error" && <p className="text-sm text-destructive sm:col-span-2">{state.message}</p>}
 
       <div className="sm:col-span-2">
-        <Button type="submit" size="lg" className="rounded-full px-6" disabled={state.status === "sending"}>
+        <button type="submit" className={monoButtonClass("solid", "sm:h-10 sm:px-6")} disabled={state.status === "sending"}>
           {state.status === "sending" ? "Sending…" : copy.submit}
-        </Button>
+        </button>
       </div>
     </form>
   );

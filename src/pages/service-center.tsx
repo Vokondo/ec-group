@@ -30,7 +30,7 @@ export default function ServiceCenterPage() {
                 <Icon className="size-4" />
               </span>
               <div>
-                <p className="text-sm font-semibold">
+                <p className="text-sm font-medium">
                   <span className="text-muted-foreground">{i + 1}.</span> {title}
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">{text}</p>

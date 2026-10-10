@@ -5,7 +5,8 @@ import { cn } from "@/lib/utils";
 import { BUSINESSES, CATALOG, SITE, type OfferingKind } from "@/lib/site";
 import { usePageTitle } from "@/lib/use-page-title";
 import { CoverImage } from "@/components/business-image";
-import { MonoLabel, MonoLink, TwoTone } from "@/components/mono-link";
+import { FounderPortrait } from "@/components/founder-portrait";
+import { MonoLabel, MonoLink } from "@/components/mono-link";
 import { Container, StatusBadge } from "@/components/shared";
 
 // Landing page layout is modelled on the FMI reference: image hero, a white "explorer" card,
@@ -24,26 +25,18 @@ const SERVICE_LINKS = [
   { label: "Programmes & opportunities", to: "/service-center?kind=programme", count: countOf("programme", "event") },
 ];
 
-const ABOUT_POINTS = [
-  {
-    title: "Founder-led",
-    text: `Every venture is shaped by ${SITE.founderName}'s long-term vision for enterprise, opportunity and community.`,
-  },
-  {
-    title: `${BUSINESSES.length} ventures, one group`,
-    text: `${SITE.holdingName} brings education, food, grooming, finance, beauty, social impact and wellness under one roof.`,
-  },
-  {
-    title: "Community at the core",
-    text: "Through the Foundation and the Bicycle Run, the group gives back to the communities that make it possible.",
-  },
-];
+// Founder card bio (placeholder copy until the founder's own words are confirmed).
+const FOUNDER_BIO =
+  `An entrepreneur building a portfolio of businesses across education, enterprise and community impact. ` +
+  `Every venture is shaped by ${SITE.founderName}'s long-term vision, and ${SITE.holdingName} brings education, food, ` +
+  `grooming, finance, beauty, social impact and wellness under one roof. Through the Foundation and the Bicycle Run, ` +
+  `the group gives back to the communities that make it possible.`;
 
 // Home-page cards sit in a wider container than the rest of the site, like the reference's near-full-width cards.
 const cardContainer = "max-w-[88rem]";
 
 // White card surface floating on the pale page, like the reference's cards.
-const whiteCard = "rounded-2xl bg-card text-card-foreground shadow-[0_20px_50px_-25px_oklch(0.3_0.05_240/0.25)] ring-1 ring-foreground/5";
+const whiteCard = "rounded-2xl bg-card text-card-foreground shadow-[0_20px_50px_-25px_oklch(0.3_0.05_262/0.25)] ring-1 ring-foreground/5";
 
 export default function HomePage() {
   usePageTitle();
@@ -56,16 +49,8 @@ export default function HomePage() {
       <section className="pt-16 pb-10 text-center sm:pt-24 sm:pb-14">
         <Container>
           <MonoLabel>Our businesses</MonoLabel>
-          <h2 className="mx-auto mt-4 max-w-xl text-2xl leading-tight font-light tracking-tight sm:text-4xl">
-            <TwoTone
-              parts={[
-                ["Seven ventures ", "base"],
-                ["are each ", "steel"],
-                ["a part of ", "soft"],
-                ["something ", "base"],
-                ["bigger.", "soft"],
-              ]}
-            />
+          <h2 className="mx-auto mt-4 max-w-xl text-2xl leading-tight font-light tracking-tight text-black sm:text-4xl">
+            Seven ventures are each a part of something bigger.
           </h2>
         </Container>
       </section>
@@ -107,35 +92,30 @@ export default function HomePage() {
         </div>
       </Container>
 
-      {/* About the group */}
+      {/* Founder card: portrait on the left, details on the right */}
       <Container className={cn(cardContainer, "mt-8 sm:mt-14")}>
-        <div className={cn(whiteCard, "grid gap-12 p-7 sm:rounded-3xl sm:p-14 lg:min-h-[34rem] lg:grid-cols-2 lg:items-center lg:gap-24 lg:p-24")}>
-          <div>
-            <MonoLabel>About the group</MonoLabel>
-            <h2 className="mt-5 max-w-md text-[2.25rem] leading-tight font-light tracking-tight sm:text-5xl lg:text-6xl">
-              <TwoTone
-                parts={[
-                  ["Long-term thinking ", "base"],
-                  ["is at ", "steel"],
-                  ["the core ", "warm"],
-                  ["of what we build.", "base"],
-                ]}
-              />
-            </h2>
-            <div className="mt-6 flex flex-wrap gap-2 sm:mt-8 sm:gap-3">
-              <MonoLink to="/about">The founder</MonoLink>
-              <MonoLink to="/holding" variant="outline-light">
-                Holding company
-              </MonoLink>
+        <div className={cn(whiteCard, "grid overflow-hidden sm:rounded-3xl lg:min-h-[42rem] lg:grid-cols-[1.1fr_1fr]")}>
+          <FounderPortrait className="aspect-[4/3] lg:aspect-auto" />
+          {/* Name at the top, bio and actions at the bottom, as in the reference's text cards */}
+          <div className="flex flex-col justify-between gap-12 p-7 sm:p-12 lg:p-14">
+            <div>
+              <MonoLabel>The founder</MonoLabel>
+              <h2 className="mt-4 text-[2.5rem] leading-[1.02] font-light tracking-tight text-black sm:text-6xl lg:text-7xl">
+                {SITE.founderName}
+              </h2>
+              <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase sm:text-[11px]">
+                Founder · {SITE.holdingName}
+              </p>
             </div>
-          </div>
-          <div className="space-y-8 sm:space-y-10">
-            {ABOUT_POINTS.map((point) => (
-              <div key={point.title}>
-                <h3 className="text-base font-medium sm:text-lg">{point.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground sm:text-base">{point.text}</p>
+            <div>
+              <p className="text-base leading-relaxed font-light text-muted-foreground sm:text-lg">{FOUNDER_BIO}</p>
+              <div className="mt-8 flex flex-wrap gap-2 sm:gap-3">
+                <MonoLink to="/about">Read the story</MonoLink>
+                <MonoLink to="/holding" variant="outline-light">
+                  Holding company
+                </MonoLink>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </Container>
@@ -153,7 +133,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA band: the reference's sunset, warm orange into steel blue, then into the dark footer */}
-      <section className="relative overflow-hidden bg-[linear-gradient(to_bottom,oklch(0.7_0.14_50),oklch(0.72_0.08_70)_14%,oklch(0.62_0.05_230)_32%,oklch(0.42_0.06_240)_55%,var(--ink))] py-24 text-center text-white sm:py-36">
+      <section className="relative overflow-hidden bg-[linear-gradient(to_bottom,oklch(0.7_0.14_50),oklch(0.72_0.08_70)_14%,oklch(0.62_0.05_262)_32%,oklch(0.42_0.06_262)_55%,var(--ink))] py-24 text-center text-white sm:py-36">
         <Container>
           <h2 className="text-3xl font-light tracking-tight sm:text-5xl">Ready to get started?</h2>
           <div className="mt-6 flex justify-center gap-2 sm:mt-8 sm:gap-3">
@@ -175,7 +155,7 @@ function Hero() {
       {/* Horizon band, echoing the reference's sunrise: steel-blue sky over a warm orange line */}
       <div
         aria-hidden
-        className="absolute inset-x-0 top-[34%] -z-10 h-56 bg-[linear-gradient(to_bottom,transparent,oklch(0.45_0.08_240/0.7)_40%,oklch(0.68_0.08_220/0.6)_55%,oklch(0.72_0.15_50/0.85)_66%,transparent_85%)] blur-xl"
+        className="absolute inset-x-0 top-[34%] -z-10 h-56 bg-[linear-gradient(to_bottom,transparent,oklch(0.45_0.08_262/0.7)_40%,oklch(0.68_0.08_262/0.6)_55%,oklch(0.72_0.15_50/0.85)_66%,transparent_85%)] blur-xl"
       />
       <Container className="grid gap-6 pt-28 pb-10 sm:pb-14 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-16 lg:pb-16">
         <h1 className="text-[2.6rem] leading-[1] font-light tracking-tight sm:text-6xl lg:text-7xl">

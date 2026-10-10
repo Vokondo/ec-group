@@ -207,10 +207,10 @@ function OfferingCard({ offering, size = "regular", className }: { offering: Off
       </div>
       <div className={cn("flex flex-col", sizing.body)}>
         <p className="text-xs text-muted-foreground">{business.name}</p>
-        <h3 className={cn("mt-1 font-semibold", sizing.title)}>{offering.name}</h3>
+        <h3 className={cn("mt-1 font-medium", sizing.title)}>{offering.name}</h3>
         <p className="mt-2 flex-1 text-sm text-muted-foreground">{offering.description}</p>
         <div className="mt-5 flex items-center justify-between gap-3">
-          <span className="text-sm font-semibold">
+          <span className="text-sm font-medium">
             {offering.price !== null ? (
               formatPrice(offering.price)
             ) : (
