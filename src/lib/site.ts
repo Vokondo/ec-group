@@ -52,6 +52,7 @@ export const BUSINESSES: Business[] = [
     available: ["Expressions of interest from students and educators"],
     cta: { label: "Express interest", to: "/service-center/interest?business=university" },
     secondaryCta: { label: "Contact us", to: "/contact" },
+    image: "/images/businesses/university.jpg",
   },
   {
     slug: "green-foods",
@@ -80,6 +81,7 @@ export const BUSINESSES: Business[] = [
     audience: "Men looking for regular, quality grooming.",
     available: ["Appointment and service requests"],
     cta: { label: "Request an appointment", to: "/service-center/booking?business=barbering-shop" },
+    image: "/images/businesses/barbering-shop.jpg",
   },
   {
     slug: "bank",
@@ -96,6 +98,7 @@ export const BUSINESSES: Business[] = [
     available: ["No banking services are offered at this time", "Registering interest for future updates"],
     cta: { label: "Register interest", to: "/service-center/interest?business=bank" },
     secondaryCta: { label: "Contact us", to: "/contact" },
+    image: "/images/businesses/bank.jpg",
   },
   {
     slug: "cosmetics",
@@ -136,6 +139,7 @@ export const BUSINESSES: Business[] = [
     audience: "Cyclists, fitness enthusiasts and community groups.",
     available: ["Interest registration for upcoming activities"],
     cta: { label: "Join the community", to: "/service-center/interest?business=bicycle-run" },
+    image: "/images/businesses/bicycle-run.jpg",
   },
 ];
 
@@ -176,19 +180,19 @@ export const KIND_LABELS: Record<OfferingKind, string> = {
 };
 
 export const CATALOG: Offering[] = [
-  { id: "uni-programmes", business: "university", kind: "programme", name: "Prospective academic programmes", description: "Register interest in proposed programmes as academic areas are confirmed.", category: "Education", price: null, status: "proposed" },
-  { id: "uni-faculty", business: "university", kind: "programme", name: "Educator & faculty interest", description: "For educators who would like to teach or collaborate with the university.", category: "Education", price: null, status: "proposed" },
+  { id: "uni-programmes", business: "university", kind: "programme", name: "Prospective academic programmes", description: "Register interest in proposed programmes as academic areas are confirmed.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-programmes.jpg" },
+  { id: "uni-faculty", business: "university", kind: "programme", name: "Educator & faculty interest", description: "For educators who would like to teach or collaborate with the university.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-faculty.jpg" },
   { id: "gf-products", business: "green-foods", kind: "product", name: "Green Foods product range", description: "Nutritious food products, with categories to be announced.", category: "Food", price: null, status: "proposed" },
-  { id: "gf-distribution", business: "green-foods", kind: "service", name: "Distribution partnership", description: "For retailers and distributors interested in stocking Green Foods.", category: "Food", price: null, status: "proposed" },
-  { id: "bb-haircut", business: "barbering-shop", kind: "service", name: "Haircut & styling", description: "Classic and modern cuts. Request an appointment.", category: "Grooming", price: null, status: "proposed" },
-  { id: "bb-beard", business: "barbering-shop", kind: "service", name: "Beard trim & shave", description: "Beard shaping, trims and hot-towel shaves.", category: "Grooming", price: null, status: "proposed" },
-  { id: "bank-interest", business: "bank", kind: "service", name: "Future financial services", description: "Register interest only. No banking services are offered at this time.", category: "Finance", price: null, status: "proposed" },
+  { id: "gf-distribution", business: "green-foods", kind: "service", name: "Distribution partnership", description: "For retailers and distributors interested in stocking Green Foods.", category: "Food", price: null, status: "proposed", image: "/images/offerings/gf-distribution.jpg" },
+  { id: "bb-haircut", business: "barbering-shop", kind: "service", name: "Haircut & styling", description: "Classic and modern cuts. Request an appointment.", category: "Grooming", price: null, status: "proposed", image: "/images/offerings/bb-haircut.jpg" },
+  { id: "bb-beard", business: "barbering-shop", kind: "service", name: "Beard trim & shave", description: "Beard shaping, trims and hot-towel shaves.", category: "Grooming", price: null, status: "proposed", image: "/images/offerings/bb-beard.jpg" },
+  { id: "bank-interest", business: "bank", kind: "service", name: "Future financial services", description: "Register interest only. No banking services are offered at this time.", category: "Finance", price: null, status: "proposed", image: "/images/offerings/bank-interest.jpg" },
   { id: "cos-skincare", business: "cosmetics", kind: "product", name: "Skincare collection", description: "Everyday skincare products, coming soon.", category: "Beauty", price: null, status: "proposed" },
   { id: "cos-personal-care", business: "cosmetics", kind: "product", name: "Personal care range", description: "Personal care essentials, coming soon.", category: "Beauty", price: null, status: "proposed" },
   { id: "fd-volunteer", business: "foundation", kind: "programme", name: "Volunteer programme", description: "Support the Foundation's community initiatives.", category: "Community", price: null, status: "proposed" },
   { id: "fd-partner", business: "foundation", kind: "programme", name: "Community partnerships", description: "For organizations interested in partnering on community programmes.", category: "Community", price: null, status: "proposed" },
-  { id: "br-rides", business: "bicycle-run", kind: "event", name: "Community rides", description: "Group rides for all levels. Register to hear about upcoming dates.", category: "Wellness", price: null, status: "proposed" },
-  { id: "br-events", business: "bicycle-run", kind: "event", name: "Bicycle Run events", description: "Prospective cycling events and fitness activities.", category: "Wellness", price: null, status: "proposed" },
+  { id: "br-rides", business: "bicycle-run", kind: "event", name: "Community rides", description: "Group rides for all levels. Register to hear about upcoming dates.", category: "Wellness", price: null, status: "proposed", image: "/images/offerings/br-rides.jpg" },
+  { id: "br-events", business: "bicycle-run", kind: "event", name: "Bicycle Run events", description: "Prospective cycling events and fitness activities.", category: "Wellness", price: null, status: "proposed", image: "/images/offerings/br-events.jpg" },
 ];
 
 // Mobile Money payment details shown at checkout. Replace with the confirmed account.

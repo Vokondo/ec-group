@@ -13,7 +13,7 @@ import { Container, StatusBadge } from "@/components/shared";
 // a dark image card with a link list, a white about card, a short statement and a CTA band.
 
 // Hero photo, e.g. "/images/hero.jpg" in public/. Unset shows a placeholder.
-const HERO_IMAGE: string | undefined = undefined;
+const HERO_IMAGE: string | undefined = "/images/hero.jpg";
 // Background photo for the Service Center card.
 const SERVICE_IMAGE: string | undefined = undefined;
 
