@@ -5,6 +5,7 @@ import { usePageTitle } from "@/lib/use-page-title";
 import { MonoLink } from "@/components/mono-link";
 import { CoverImage } from "@/components/business-image";
 import { BusinessTile } from "@/components/business-visual";
+import { DonationPanel } from "@/components/donation-panel";
 import { Container, Eyebrow, SectionHeading, StatusBadge } from "@/components/shared";
 import NotFoundPage from "@/pages/not-found";
 
@@ -106,6 +107,8 @@ export default function BusinessDetailPage() {
           </aside>
         </Container>
       </section>
+
+      {business.donation && <DonationPanel donation={business.donation} />}
 
       {business.schools && business.schools.length > 0 && (
         <section className="border-t py-12 sm:py-20">
