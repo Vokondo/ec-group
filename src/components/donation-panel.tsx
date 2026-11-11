@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { CheckIcon, CopyIcon, MailIcon, SmartphoneIcon } from "lucide-react";
 import type { Donation } from "@/lib/site";
-import { Container, Eyebrow } from "@/components/shared";
+import { cn } from "@/lib/utils";
+import { CoverImage } from "@/components/business-image";
+import { Container, Eyebrow, SectionHeading } from "@/components/shared";
 
 function CopyRow({ label, value }: { label: string; value: string }) {
   const [copied, setCopied] = useState(false);
@@ -72,6 +74,57 @@ export function DonationPanel({ donation }: { donation: Donation }) {
             <span className="break-all">{donation.email}</span>
           </a>
         </div>
+      </Container>
+    </section>
+  );
+}
+
+// "About the project" text followed by a photo gallery; renders nothing if neither is set.
+export function ProjectStory({ donation }: { donation: Donation }) {
+  const { about, gallery } = donation;
+  if (!about?.length && !gallery?.length) return null;
+  return (
+    <section className="border-t py-12 sm:py-20">
+      <Container>
+        {about && about.length > 0 && (
+          <div className="grid gap-6 lg:grid-cols-3 lg:gap-12">
+            <div>
+              <Eyebrow>About the project</Eyebrow>
+              <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl lg:text-4xl">{donation.project}</h2>
+            </div>
+            <div className="space-y-4 text-base text-muted-foreground sm:text-lg lg:col-span-2">
+              {about.map((para) => (
+                <p key={para}>{para}</p>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {gallery && gallery.length > 0 && (
+          <div className={cn(about?.length && "mt-12 sm:mt-20")}>
+            <SectionHeading eyebrow="Gallery" title="From the project" intro="Photos from the schools and communities we work with." />
+            {/* Bento grid: the first photo is featured at double size */}
+            <ul className="mt-8 grid auto-rows-[9rem] grid-cols-2 gap-3 sm:auto-rows-[12rem] sm:gap-4 lg:grid-cols-4">
+              {gallery.map((item, i) => (
+                <li
+                  key={item.image ?? i}
+                  className={cn(
+                    "group relative isolate overflow-hidden rounded-2xl",
+                    i === 0 && "col-span-2 row-span-2",
+                  )}
+                >
+                  <CoverImage
+                    src={item.image}
+                    alt={item.caption ?? `${donation.project} photo ${i + 1}`}
+                    overlay={item.caption ? "from-black/70 via-transparent to-transparent" : "from-transparent to-transparent"}
+                    variant={i === 0 ? "center" : "compact"}
+                  />
+                  {item.caption && <p className="absolute inset-x-0 bottom-0 p-4 text-sm text-white">{item.caption}</p>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </Container>
     </section>
   );

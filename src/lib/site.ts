@@ -52,6 +52,11 @@ export type Donation = {
   momoNumber: string;
   merchantId: string;
   email: string;
+  // "About the project" paragraphs, shown above the gallery.
+  about?: string[];
+  // Project photos, e.g. { image: "/images/foundation/school-1.jpg", caption: "…" } (files in public/).
+  // Items without an image show a placeholder.
+  gallery?: { image?: string; caption?: string }[];
 };
 
 export type Offer = { title: string; image?: string };
@@ -228,6 +233,12 @@ export const BUSINESSES: Business[] = [
       momoNumber: "0247045213",
       merchantId: "264430",
       email: "chanimbeafricafoundation@gmail.com",
+      about: [
+        "Across Ghana, many children still learn under trees, exposed to sun and rain, without classrooms, desks or proper learning materials.",
+        "1 Cedi for Schools Under Trees invites everyone to give what they can, starting from just 1 Cedi. Small contributions, pooled together, help build classrooms and reform schools in the communities that need them most.",
+        "Over the next 20 years, Chanimbe Africa Foundation LBG aims to end schools under trees in Ghana, one school at a time.",
+      ],
+      gallery: [{}, {}, {}, {}, {}],
     },
   },
   {
