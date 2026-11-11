@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { CheckIcon, InfoIcon } from "lucide-react";
-import { BUSINESSES, getBusiness } from "@/lib/site";
+import { BUSINESSES, getBusiness, toOffer } from "@/lib/site";
 import { usePageTitle } from "@/lib/use-page-title";
 import { MonoLink } from "@/components/mono-link";
 import { CoverImage } from "@/components/business-image";
@@ -58,11 +58,19 @@ export default function BusinessDetailPage() {
             </div>
             <div>
               <Eyebrow>What it intends to offer</Eyebrow>
-              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                {business.offers.map((o) => (
-                  <li key={o} className="flex gap-3 rounded-xl border p-4 text-sm">
-                    <CheckIcon className="mt-0.5 size-4 shrink-0" />
-                    {o}
+              <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+                {business.offers.map(toOffer).map((o, i) => (
+                  <li key={o.title} className="group flex flex-col overflow-hidden rounded-2xl border bg-card transition hover:shadow-md">
+                    <div className="relative isolate aspect-[16/9] overflow-hidden">
+                      <CoverImage src={o.image} alt={o.title} overlay="from-black/20 via-transparent to-black/40" variant="compact" />
+                      <span className="absolute top-3 left-3 rounded-full bg-white/15 px-2.5 py-1 font-mono text-[10px] tracking-[0.2em] text-white backdrop-blur">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <div className="flex flex-1 items-start gap-3 p-4">
+                      <CheckIcon className="mt-0.5 size-4 shrink-0" />
+                      <p className="text-sm font-medium">{o.title}</p>
+                    </div>
                   </li>
                 ))}
               </ul>

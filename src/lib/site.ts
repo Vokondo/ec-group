@@ -25,7 +25,9 @@ export type Business = {
   status: BusinessStatus;
   summary: string;
   why: string;
-  offers: string[];
+  // A plain string, or { title, image } to give the offer card a photo
+  // (e.g. "/images/offers/university-media.jpg" in public/). Cards without one show a placeholder.
+  offers: (string | Offer)[];
   audience: string;
   available: string[];
   cta: { label: string; to: string };
@@ -38,6 +40,10 @@ export type Business = {
   // Optional "how it all fits together" section shown after the schools.
   synergy?: { title: string; points: string[]; closing: string };
 };
+
+export type Offer = { title: string; image?: string };
+
+export const toOffer = (o: string | Offer): Offer => (typeof o === "string" ? { title: o } : o);
 
 export type School = {
   name: string;
