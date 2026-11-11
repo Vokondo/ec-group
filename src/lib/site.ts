@@ -39,6 +39,24 @@ export type Business = {
   schools?: School[];
   // Optional "how it all fits together" section shown after the schools.
   synergy?: { title: string; points: string[]; closing: string };
+  // Optional flagship project with Mobile Money donation details, shown on the detail page.
+  donation?: Donation;
+};
+
+export type Donation = {
+  project: string;
+  hashtag: string;
+  intro: string;
+  appeal: string;
+  momoAccountName: string;
+  momoNumber: string;
+  merchantId: string;
+  email: string;
+  // "About the project" paragraphs, shown above the gallery.
+  about?: string[];
+  // Project photos, e.g. { image: "/images/foundation/school-1.jpg", caption: "…" } (files in public/).
+  // Items without an image show a placeholder.
+  gallery?: { image?: string; caption?: string }[];
 };
 
 export type Offer = { title: string; image?: string };
@@ -193,16 +211,35 @@ export const BUSINESSES: Business[] = [
     name: "Foundation",
     sector: "Social Impact",
     status: "proposed",
-    summary: "The group's social impact and community development arm.",
-    why: "To express the group's commitment to social responsibility and positive community outcomes.",
+    summary:
+      "Chanimbe Africa Foundation LBG. Our vision for the next 20 years is to end schools under trees in Ghana.",
+    why: "No child should learn under a tree. We are changing the narrative, one school at a time, because our schools must be reformed.",
     offers: [
-      "Community initiatives (to be confirmed)",
-      "Prospective programmes",
+      "1 Cedi for Schools Under Trees",
+      "Building and reforming schools in underserved communities",
       "Partnership, volunteering and support opportunities",
     ],
-    audience: "Communities, volunteers, donors and partner organizations.",
-    available: ["Volunteering and partnership inquiries"],
-    cta: { label: "Get involved", to: "/contact?topic=foundation" },
+    audience: "Communities, schools, volunteers, donors and partner organizations.",
+    available: ["Donations via Mobile Money", "Volunteering and partnership inquiries"],
+    cta: { label: "Donate 1 Cedi", to: "/businesses/foundation#donate" },
+    secondaryCta: { label: "Get involved", to: "/contact?topic=foundation" },
+    donation: {
+      project: "1 Cedi for Schools Under Trees",
+      hashtag: "#1CediForSchoolsUnderTrees",
+      intro: "We are changing the narrative, one school at a time. Our schools must be reformed.",
+      appeal:
+        "Don't wait until you have 100,000 or even 10,000 to make an impact on a person or a people. Use your 1 Cedi today.",
+      momoAccountName: "Chanimbe Africa Foundation LBG",
+      momoNumber: "0247045213",
+      merchantId: "264430",
+      email: "chanimbeafricafoundation@gmail.com",
+      about: [
+        "Across Ghana, many children still learn under trees, exposed to sun and rain, without classrooms, desks or proper learning materials.",
+        "1 Cedi for Schools Under Trees invites everyone to give what they can, starting from just 1 Cedi. Small contributions, pooled together, help build classrooms and reform schools in the communities that need them most.",
+        "Over the next 20 years, Chanimbe Africa Foundation LBG aims to end schools under trees in Ghana, one school at a time.",
+      ],
+      gallery: [{}, {}, {}, {}, {}],
+    },
   },
   {
     slug: "bicycle-run",
@@ -267,6 +304,7 @@ export const CATALOG: Offering[] = [
   { id: "bank-interest", business: "bank", kind: "service", name: "Future financial services", description: "Register interest only. No banking services are offered at this time.", category: "Finance", price: null, status: "proposed", image: "/images/offerings/bank-interest.jpg" },
   { id: "cos-skincare", business: "cosmetics", kind: "product", name: "Skincare collection", description: "Everyday skincare products, coming soon.", category: "Beauty", price: null, status: "proposed" },
   { id: "cos-personal-care", business: "cosmetics", kind: "product", name: "Personal care range", description: "Personal care essentials, coming soon.", category: "Beauty", price: null, status: "proposed" },
+  { id: "fd-schools", business: "foundation", kind: "programme", name: "1 Cedi for Schools Under Trees", description: "Help end schools under trees in Ghana. Donate via Mobile Money to Chanimbe Africa Foundation LBG.", category: "Community", price: null, status: "proposed" },
   { id: "fd-volunteer", business: "foundation", kind: "programme", name: "Volunteer programme", description: "Support the Foundation's community initiatives.", category: "Community", price: null, status: "proposed" },
   { id: "fd-partner", business: "foundation", kind: "programme", name: "Community partnerships", description: "For organizations interested in partnering on community programmes.", category: "Community", price: null, status: "proposed" },
   { id: "br-rides", business: "bicycle-run", kind: "event", name: "Community rides", description: "Group rides for all levels. Register to hear about upcoming dates.", category: "Wellness", price: null, status: "proposed", image: "/images/offerings/br-rides.jpg" },
