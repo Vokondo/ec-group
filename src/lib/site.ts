@@ -33,6 +33,18 @@ export type Business = {
   // Cover photo, e.g. "/images/businesses/green-foods.jpg" (put files in public/images/businesses/).
   // Leave unset to show an image placeholder.
   image?: string;
+  // Optional schools/departments, shown as a dedicated section on the detail page.
+  schools?: School[];
+  // Optional "how it all fits together" section shown after the schools.
+  synergy?: { title: string; points: string[]; closing: string };
+};
+
+export type School = {
+  name: string;
+  tagline: string;
+  intro: string;
+  programmes: string[];
+  outcome: string;
 };
 
 export const BUSINESSES: Business[] = [
@@ -41,18 +53,76 @@ export const BUSINESSES: Business[] = [
     name: "University",
     sector: "Education",
     status: "proposed",
-    summary: "An institution dedicated to education, skills development and professional advancement.",
-    why: "To widen access to quality higher education and to prepare graduates for real professional impact.",
+    summary:
+      "Three schools built around one idea: practical, career-ready education in media and creative arts, science and technology, and the green economy.",
+    why: "To turn talent, science and agriculture into careers and businesses, so graduates leave with real skills, real portfolios and links to industry, not just a certificate.",
     offers: [
-      "Proposed academic areas (to be confirmed)",
-      "Prospective programmes and certifications",
-      "Skills development and professional training",
+      "School of Media, Communication, Creative & Skilled Arts",
+      "School of Pure Science & Technology",
+      "School of Agriculture, Sanitation & Recycling (Green Economy)",
+      "Industry internships and portfolio-based learning",
     ],
-    audience: "Prospective students, educators and academic partners.",
+    audience:
+      "Prospective students, creatives, artisans, future scientists, engineers and farmers, as well as educators, industry partners and affiliated companies.",
     available: ["Expressions of interest from students and educators"],
     cta: { label: "Express interest", to: "/service-center/interest?business=university" },
     secondaryCta: { label: "Contact us", to: "/contact" },
     image: "/images/businesses/university.jpg",
+    schools: [
+      {
+        name: "School of Media, Communication, Creative & Skilled Arts",
+        tagline: "Where Talent Becomes a Career",
+        intro:
+          "Our star school. It trains people to make money from creativity, not just to earn a certificate.",
+        programmes: [
+          "Skilled Arts: Makeup, Interior Design, Event Management, Barbering, Steel Bending, Carpentry, Plumbing and Shoe Making",
+          "Social Media & Digital Marketing",
+          "Journalism, PR & Strategic Communication",
+          "Film, Photography & Content Creation",
+          "Graphic Design & Animation",
+          "Fashion, Music & Performing Arts",
+        ],
+        outcome:
+          "Every business in Ghana needs content creators, social media managers and designers. Students graduate with a portfolio, not just a certificate.",
+      },
+      {
+        name: "School of Pure Science & Technology",
+        tagline: "Science That Solves Real Problems",
+        intro: "Not just theory. Practical science and technology that builds things.",
+        programmes: [
+          "Computer Science, AI & Data",
+          "Software Engineering & Cybersecurity",
+          "Pure Sciences: Biology, Chemistry, Physics and Mathematics",
+          "Biomedical Science & Lab Technology",
+          "Engineering Technology: Electrical, Mechanical, Civil Tech, Robotics and Industrial Tech",
+        ],
+        outcome:
+          "Africa needs technical people who can build industrial equipment to turn our raw materials into finished products, build roads, and build and maintain modern labs, especially industrial chemistry labs. Students are linked directly to industries and affiliated companies for internships.",
+      },
+      {
+        name: "School of Agriculture, Sanitation & Recycling (Green Economy)",
+        tagline: "Feeding the Nation, Cleaning the Future",
+        intro: "Agriculture feeds the world. Sanitation and recycling are the next big business.",
+        programmes: [
+          "Modern Agriculture & Agribusiness",
+          "Food Processing & Food Science",
+          "Environmental Sanitation & Public Health",
+          "Waste Management, Recycling & Circular Economy",
+          "Water Technology & Renewable Energy",
+        ],
+        outcome:
+          "Students learn how to turn waste into money, plastic into products, and farms into businesses.",
+      },
+    ],
+    synergy: {
+      title: "How the three schools work together",
+      points: [
+        "Media students promote the products made by Agriculture students.",
+        "Tech students build apps for farmers and waste collectors.",
+        "Agriculture students feed the students and supply the community.",
+      ],
+      closing: "That is the Chanimbe difference: Create, Innovate, Sustain.",
+    },
   },
   {
     slug: "green-foods",
@@ -180,7 +250,9 @@ export const KIND_LABELS: Record<OfferingKind, string> = {
 };
 
 export const CATALOG: Offering[] = [
-  { id: "uni-programmes", business: "university", kind: "programme", name: "Prospective academic programmes", description: "Register interest in proposed programmes as academic areas are confirmed.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-programmes.jpg" },
+  { id: "uni-media", business: "university", kind: "programme", name: "School of Media, Communication, Creative & Skilled Arts", description: "Where talent becomes a career: skilled arts, digital marketing, journalism, film, design, fashion, music and performing arts.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-programmes.jpg" },
+  { id: "uni-science", business: "university", kind: "programme", name: "School of Pure Science & Technology", description: "Science that solves real problems: computing, AI, cybersecurity, pure sciences, biomedical science and engineering technology.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-programmes.jpg" },
+  { id: "uni-green", business: "university", kind: "programme", name: "School of Agriculture, Sanitation & Recycling", description: "Feeding the nation, cleaning the future: agribusiness, food science, sanitation, recycling, water and renewable energy.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-programmes.jpg" },
   { id: "uni-faculty", business: "university", kind: "programme", name: "Educator & faculty interest", description: "For educators who would like to teach or collaborate with the university.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-faculty.jpg" },
   { id: "gf-products", business: "green-foods", kind: "product", name: "Green Foods product range", description: "Nutritious food products, with categories to be announced.", category: "Food", price: null, status: "proposed" },
   { id: "gf-distribution", business: "green-foods", kind: "service", name: "Distribution partnership", description: "For retailers and distributors interested in stocking Green Foods.", category: "Food", price: null, status: "proposed", image: "/images/offerings/gf-distribution.jpg" },

@@ -5,7 +5,7 @@ import { usePageTitle } from "@/lib/use-page-title";
 import { MonoLink } from "@/components/mono-link";
 import { CoverImage } from "@/components/business-image";
 import { BusinessTile } from "@/components/business-visual";
-import { Container, Eyebrow, StatusBadge } from "@/components/shared";
+import { Container, Eyebrow, SectionHeading, StatusBadge } from "@/components/shared";
 import NotFoundPage from "@/pages/not-found";
 
 export default function BusinessDetailPage() {
@@ -98,6 +98,58 @@ export default function BusinessDetailPage() {
           </aside>
         </Container>
       </section>
+
+      {business.schools && business.schools.length > 0 && (
+        <section className="border-t py-12 sm:py-20">
+          <Container>
+            <SectionHeading
+              eyebrow="Schools"
+              title={`${business.schools.length} schools, one purpose`}
+              intro="Each school pairs practical training with a clear path to work or enterprise."
+            />
+            <div className="mt-8 grid gap-4 sm:mt-12 lg:grid-cols-3">
+              {business.schools.map((school, i) => (
+                <article key={school.name} className="flex flex-col rounded-3xl border bg-card p-6 text-card-foreground sm:p-8">
+                  <Eyebrow>School {String(i + 1).padStart(2, "0")}</Eyebrow>
+                  <h3 className="mt-3 text-lg font-medium tracking-tight sm:text-xl">{school.name}</h3>
+                  <p className="mt-2 text-xl font-light tracking-tight sm:text-2xl">{school.tagline}</p>
+                  <p className="mt-4 text-sm text-muted-foreground">{school.intro}</p>
+                  <Eyebrow className="mt-6">Programmes</Eyebrow>
+                  <ul className="mt-3 space-y-2 text-sm">
+                    {school.programmes.map((p) => (
+                      <li key={p} className="flex gap-3">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-6 border-t pt-4 text-sm text-muted-foreground lg:mt-auto lg:pt-6">{school.outcome}</p>
+                </article>
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {business.synergy && (
+        <section className="bg-ink py-12 text-white sm:py-20">
+          <Container className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+            <div>
+              <Eyebrow>Together</Eyebrow>
+              <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl lg:text-4xl">{business.synergy.title}</h2>
+              <p className="mt-6 text-lg font-light text-white/80 sm:text-xl">{business.synergy.closing}</p>
+            </div>
+            <ul className="space-y-3">
+              {business.synergy.points.map((p) => (
+                <li key={p} className="flex gap-3 rounded-2xl border border-white/15 p-4 text-sm sm:text-base">
+                  <CheckIcon className="mt-0.5 size-4 shrink-0" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </section>
+      )}
 
       <section className="border-t py-12 sm:py-20">
         <Container>
