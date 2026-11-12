@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router";
-import { ChevronRightIcon, MinusIcon, PlusIcon, ShieldCheckIcon, ShoppingBagIcon, TruckIcon } from "lucide-react";
+import {
+  CalendarCheckIcon,
+  ChevronRightIcon,
+  HeadsetIcon,
+  LockIcon,
+  MessageCircleIcon,
+  SmartphoneIcon,
+  StarIcon,
+  TruckIcon,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CATALOG, KIND_LABELS, formatPrice, getBusiness } from "@/lib/site";
 import { findOffering, isPurchasable, offeringAction, offeringPhotos } from "@/lib/shop";
-import { pillClass } from "@/lib/shop";
 import { usePageTitle } from "@/lib/use-page-title";
 import { Container } from "@/components/shared";
 import { ProductImage } from "@/components/shop/product-image";
@@ -12,20 +20,39 @@ import { useShop } from "@/components/shop/use-shop";
 import { OfferingCarousel } from "@/components/service-catalog";
 import NotFoundPage from "@/pages/not-found";
 
+// Large full-width buttons on the product page: warm accent for the main action, dark for the second.
+const BIG = "inline-flex h-13 w-full items-center justify-center gap-2 rounded-full text-sm font-semibold tracking-[0.12em] uppercase transition focus-visible:ring-3 focus-visible:ring-ring/50 outline-none sm:h-14";
+const BIG_WARM = cn(BIG, "bg-warm text-ink hover:bg-warm/85");
+const BIG_DARK = cn(BIG, "bg-foreground text-background hover:bg-foreground/85");
+
 export default function OfferingPage() {
   const { id } = useParams();
   const offering = findOffering(id);
   usePageTitle(offering?.name ?? "Not found");
   const [photo, setPhoto] = useState(0);
-  const [qty, setQty] = useState(1);
-  const { addToCart, buyNow } = useShop();
+  const { addToCart, buyNow, inCart } = useShop();
   if (!offering) return <NotFoundPage />;
 
   const business = getBusiness(offering.business)!;
   const photos = offeringPhotos(offering);
+  const current = photos[Math.min(photo, photos.length - 1)];
   const purchasable = isPurchasable(offering);
   const action = offeringAction(offering);
+  const { price, compareAtPrice, rating } = offering;
+  const saving = price !== null && compareAtPrice && compareAtPrice > price ? compareAtPrice - price : 0;
   const related = CATALOG.filter((o) => o.id !== offering.id && (o.business === offering.business || o.kind === offering.kind)).slice(0, 8);
+
+  const trust = purchasable
+    ? [
+        { Icon: LockIcon, label: "Secure checkout" },
+        { Icon: SmartphoneIcon, label: "Mobile Money or card" },
+        { Icon: TruckIcon, label: "Delivery or pickup" },
+        { Icon: HeadsetIcon, label: "Order support", to: "/contact" },
+      ]
+    : [
+        { Icon: CalendarCheckIcon, label: "Confirmed by phone" },
+        { Icon: MessageCircleIcon, label: "Questions welcome", to: "/contact" },
+      ];
 
   return (
     <>
@@ -46,22 +73,31 @@ export default function OfferingPage() {
             <span className="text-foreground">{offering.name}</span>
           </nav>
 
-          <div className="mt-6 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+          <div className="mt-6 grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-12">
             {/* Gallery */}
-            <div>
-              <ProductImage src={photos[photo]} alt={offering.name} zoom={false} eager className="aspect-square sm:aspect-[5/4] lg:rounded-3xl" />
+            <div className="min-w-0">
+              <ProductImage src={current?.src} alt={offering.name} zoom={false} eager className="aspect-square rounded-3xl sm:aspect-[6/5]" />
               {photos.length > 1 && (
-                <ul className="mt-3 grid grid-cols-5 gap-3">
+                <ul className="mt-4 grid grid-cols-4 gap-3">
                   {photos.map((p, i) => (
-                    <li key={p}>
+                    <li key={p.src}>
                       <button
                         type="button"
                         onClick={() => setPhoto(i)}
-                        aria-label={`Show photo ${i + 1}`}
                         aria-pressed={i === photo}
-                        className={cn("block w-full rounded-xl ring-offset-2 ring-offset-background transition", i === photo ? "ring-2 ring-foreground" : "opacity-70 hover:opacity-100")}
+                        aria-label={p.label ?? `Photo ${i + 1}`}
+                        className="group block w-full text-center"
                       >
-                        <ProductImage src={p} alt="" zoom={false} className="aspect-square rounded-xl" />
+                        <ProductImage
+                          src={p.src}
+                          alt=""
+                          zoom={false}
+                          className={cn(
+                            "aspect-square rounded-xl border-2 transition",
+                            i === photo ? "border-foreground" : "border-transparent opacity-80 group-hover:opacity-100",
+                          )}
+                        />
+                        {p.label && <span className="mt-2 block truncate text-xs text-muted-foreground">{p.label}</span>}
                       </button>
                     </li>
                   ))}
@@ -70,74 +106,86 @@ export default function OfferingPage() {
             </div>
 
             {/* Details */}
-            <div className="lg:pt-2">
-              <div className="flex items-center justify-between gap-4">
-                <Link to={`/businesses/${business.slug}`} className="flex items-center gap-2.5 text-sm font-medium hover:underline hover:underline-offset-4">
-                  <span className="grid size-8 place-items-center rounded-full bg-foreground text-xs font-semibold text-background">
-                    {business.name.charAt(0)}
-                  </span>
+            <div className="min-w-0 lg:pt-2">
+              <p className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase sm:text-[11px]">
+                <Link to={`/businesses/${business.slug}`} className="hover:text-foreground">
                   {business.name}
-                </Link>
-                <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">{KIND_LABELS[offering.kind].replace(/s$/, "")}</span>
-              </div>
-
-              <h1 className="mt-5 text-3xl font-medium tracking-tight sm:text-4xl">{offering.name}</h1>
-              <p className="mt-3 text-sm text-muted-foreground">
-                {offering.status === "available" ? "Available now" : offering.sample ? "Sample price for testing" : "Coming soon"} · {offering.category}
+                </Link>{" "}
+                · {KIND_LABELS[offering.kind].replace(/s$/, "")}
               </p>
+              <h1 className="mt-3 text-3xl font-bold tracking-tight uppercase sm:text-4xl lg:text-5xl">{offering.name}</h1>
+              <p className="mt-2 text-lg text-muted-foreground sm:text-xl">{offering.subtitle ?? offering.category}</p>
 
-              <p className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">
-                {offering.price !== null ? formatPrice(offering.price) : <span className="text-2xl font-normal text-muted-foreground">Price to be confirmed</span>}
-              </p>
-
-              <p className="mt-6 max-w-prose text-base text-muted-foreground">{offering.description}</p>
-
-              {purchasable ? (
-                <>
-                  <div className="mt-8">
-                    <p className="text-sm font-medium">Quantity</p>
-                    <div className="mt-3 inline-flex items-center gap-1 rounded-full border bg-card p-1">
-                      <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label="Decrease quantity" className={pillClass("ghost", "sm", "size-9 px-0")}>
-                        <MinusIcon />
-                      </button>
-                      <span className="w-8 text-center text-sm tabular-nums" aria-live="polite">
-                        {qty}
-                      </span>
-                      <button type="button" onClick={() => setQty((q) => q + 1)} aria-label="Increase quantity" className={pillClass("ghost", "sm", "size-9 px-0")}>
-                        <PlusIcon />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <button type="button" onClick={() => addToCart(offering, qty)} className={pillClass("solid", "lg", "flex-1")}>
-                      <ShoppingBagIcon /> Add to cart
-                    </button>
-                    <button type="button" onClick={() => buyNow(offering, qty)} className={pillClass("outline", "lg", "sm:w-44")}>
-                      Buy now
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <Link to={action.to} className={pillClass("solid", "lg", "flex-1")}>
-                    {action.label}
-                  </Link>
-                  <Link to="/contact" className={pillClass("outline", "lg", "sm:w-44")}>
-                    Ask a question
-                  </Link>
-                </div>
+              {rating && (
+                <p className="mt-4 flex items-center gap-3 text-sm">
+                  <span className="flex items-center gap-0.5" aria-label={`Rated ${rating.score} out of 5`}>
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <StarIcon key={i} className={cn("size-4", i < Math.round(rating.score) ? "fill-warm text-warm" : "text-muted-foreground/40")} />
+                    ))}
+                  </span>
+                  <span className="font-medium">{rating.score.toFixed(1)}</span>
+                  <span className="h-4 w-px bg-border" />
+                  <span className="text-muted-foreground">
+                    {rating.count.toLocaleString()} {rating.count === 1 ? "review" : "reviews"}
+                  </span>
+                </p>
               )}
 
-              <ul className="mt-8 space-y-3 border-t pt-6 text-sm text-muted-foreground">
-                {purchasable && (
-                  <li className="flex items-center gap-3">
-                    <TruckIcon className="size-4 shrink-0 text-foreground" /> Delivery or pickup, arranged by phone after you order
-                  </li>
+              <div className="mt-6">
+                {saving > 0 && <p className="text-lg text-muted-foreground line-through">{formatPrice(compareAtPrice!)}</p>}
+                <div className="flex flex-wrap items-center gap-3">
+                  <p className="text-4xl font-bold tracking-tight sm:text-5xl">
+                    {price !== null ? formatPrice(price) : <span className="text-2xl font-normal text-muted-foreground">Price to be confirmed</span>}
+                  </p>
+                  {saving > 0 && (
+                    <span className="rounded-lg bg-warm/20 px-2.5 py-1 text-sm font-medium">Save {formatPrice(saving)}</span>
+                  )}
+                </div>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {offering.status === "available" ? "Available now" : offering.sample ? "Sample price for testing" : "Coming soon"}
+                </p>
+              </div>
+
+              <p className="mt-6 max-w-prose text-base text-muted-foreground sm:text-lg">{offering.description}</p>
+
+              <div className="mt-8 space-y-3">
+                {purchasable ? (
+                  <>
+                    <button type="button" onClick={() => addToCart(offering)} className={BIG_WARM}>
+                      {inCart(offering) ? "Add another to cart" : "Add to cart"}
+                    </button>
+                    <button type="button" onClick={() => buyNow(offering)} className={BIG_DARK}>
+                      Buy now
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link to={action.to} className={BIG_WARM}>
+                      {action.label}
+                    </Link>
+                    <Link to="/contact" className={BIG_DARK}>
+                      Ask a question
+                    </Link>
+                  </>
                 )}
-                <li className="flex items-center gap-3">
-                  <ShieldCheckIcon className="size-4 shrink-0 text-foreground" />
-                  {purchasable ? "Secure payment with Mobile Money or card" : "We'll contact you with details as soon as they're confirmed"}
-                </li>
+                <p className="pt-1 text-center text-sm text-muted-foreground">
+                  {purchasable ? "Delivery or pickup, arranged after you order" : "We'll contact you to confirm the details"}
+                </p>
+              </div>
+
+              <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-4 rounded-2xl bg-muted/70 p-5 text-sm">
+                {trust.map(({ Icon, label, to }) => (
+                  <li key={label} className="flex items-center gap-2.5">
+                    <Icon className="size-4 shrink-0" />
+                    {to ? (
+                      <Link to={to} className="hover:underline hover:underline-offset-4">
+                        {label}
+                      </Link>
+                    ) : (
+                      label
+                    )}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

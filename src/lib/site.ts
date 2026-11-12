@@ -283,7 +283,12 @@ export type Offering = {
   price: number | null;
   status: BusinessStatus;
   image?: string; // Optional photo; falls back to the business's image
-  gallery?: string[]; // Optional extra photos for the product page (include the main photo first)
+  // Product page extras (all optional):
+  subtitle?: string; // Short line under the name, e.g. "Everyday skincare essentials"
+  compareAtPrice?: number; // Previous price, shown struck through with a "Save" badge when higher than `price`
+  rating?: { score: number; count: number }; // Only set from real customer reviews
+  // Photos for the product page, main photo first; labels show under the thumbnails.
+  gallery?: { src: string; label?: string }[];
   // Test-only price so the checkout can be tried end to end. Purchasable while "proposed" and
   // labelled "Sample price". Remove `sample` and set status "available" once the real price is set.
   sample?: boolean;
@@ -301,13 +306,13 @@ export const CATALOG: Offering[] = [
   { id: "uni-science", business: "university", kind: "programme", name: "School of Pure Science & Technology", description: "Science that solves real problems: computing, AI, cybersecurity, pure sciences, biomedical science and engineering technology.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-programmes.jpg" },
   { id: "uni-green", business: "university", kind: "programme", name: "School of Agriculture, Sanitation & Recycling", description: "Feeding the nation, cleaning the future: agribusiness, food science, sanitation, recycling, water and renewable energy.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-programmes.jpg" },
   { id: "uni-faculty", business: "university", kind: "programme", name: "Educator & faculty interest", description: "For educators who would like to teach or collaborate with the university.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-faculty.jpg" },
-  { id: "gf-products", business: "green-foods", kind: "product", name: "Green Foods product range", description: "Nutritious food products, with categories to be announced.", category: "Food", price: 25, status: "proposed", sample: true },
+  { id: "gf-products", business: "green-foods", kind: "product", name: "Green Foods product range", subtitle: "Nutritious everyday foods", description: "Nutritious food products, with categories to be announced.", category: "Food", price: 25, status: "proposed", sample: true },
   { id: "gf-distribution", business: "green-foods", kind: "service", name: "Distribution partnership", description: "For retailers and distributors interested in stocking Green Foods.", category: "Food", price: null, status: "proposed", image: "/images/offerings/gf-distribution.jpg" },
   { id: "bb-haircut", business: "barbering-shop", kind: "service", name: "Haircut & styling", description: "Classic and modern cuts. Request an appointment.", category: "Grooming", price: null, status: "proposed", image: "/images/offerings/bb-haircut.jpg" },
   { id: "bb-beard", business: "barbering-shop", kind: "service", name: "Beard trim & shave", description: "Beard shaping, trims and hot-towel shaves.", category: "Grooming", price: null, status: "proposed", image: "/images/offerings/bb-beard.jpg" },
   { id: "bank-interest", business: "bank", kind: "service", name: "Future financial services", description: "Register interest only. No banking services are offered at this time.", category: "Finance", price: null, status: "proposed", image: "/images/offerings/bank-interest.jpg" },
-  { id: "cos-skincare", business: "cosmetics", kind: "product", name: "Skincare collection", description: "Everyday skincare products, coming soon.", category: "Beauty", price: 85, status: "proposed", sample: true },
-  { id: "cos-personal-care", business: "cosmetics", kind: "product", name: "Personal care range", description: "Personal care essentials, coming soon.", category: "Beauty", price: 40, status: "proposed", sample: true },
+  { id: "cos-skincare", business: "cosmetics", kind: "product", name: "Skincare collection", subtitle: "Everyday skincare essentials", description: "Everyday skincare products, coming soon.", category: "Beauty", price: 85, status: "proposed", sample: true },
+  { id: "cos-personal-care", business: "cosmetics", kind: "product", name: "Personal care range", subtitle: "Personal care essentials", description: "Personal care essentials, coming soon.", category: "Beauty", price: 40, status: "proposed", sample: true },
   { id: "fd-schools", business: "foundation", kind: "programme", name: "1 Cedi for Schools Under Trees", description: "Help end schools under trees in Ghana. Donate via Mobile Money to Chanimbe Africa Foundation LBG.", category: "Community", price: null, status: "proposed" },
   { id: "fd-volunteer", business: "foundation", kind: "programme", name: "Volunteer programme", description: "Support the Foundation's community initiatives.", category: "Community", price: null, status: "proposed" },
   { id: "fd-partner", business: "foundation", kind: "programme", name: "Community partnerships", description: "For organizations interested in partnering on community programmes.", category: "Community", price: null, status: "proposed" },

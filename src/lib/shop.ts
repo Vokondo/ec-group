@@ -28,9 +28,10 @@ export const isBookable = (o: Offering) => o.kind === "service" && o.business ==
 export const offeringImage = (o: Offering | undefined) => o?.image ?? (o ? getBusiness(o.business)?.image : undefined);
 
 // Every photo for the product page: the offering's gallery, else its main photo.
-export const offeringPhotos = (o: Offering) => {
-  const photos = o.gallery?.length ? o.gallery : [offeringImage(o)];
-  return photos.filter((p): p is string => !!p);
+export const offeringPhotos = (o: Offering): { src: string; label?: string }[] => {
+  if (o.gallery?.length) return o.gallery;
+  const main = offeringImage(o);
+  return main ? [{ src: main }] : [];
 };
 
 // Where the secondary action of a non-purchasable offering leads.
