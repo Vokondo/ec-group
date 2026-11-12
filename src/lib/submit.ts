@@ -10,7 +10,10 @@ export type RequestType = "inquiry" | "booking" | "interest" | "order";
 const ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
 const PREFIX: Record<RequestType, string> = { inquiry: "INQ", booking: "BKG", interest: "INT", order: "ORD" };
 
-export async function submitRequest(type: RequestType, data: Record<string, unknown>): Promise<string> {
+export const newReference = (type: RequestType) => `${PREFIX[type]}-${Date.now().toString(36).toUpperCase()}`;
+
+// Pass `reference` to reuse one created earlier (e.g. the order reference already sent to Paystack).
+export async function submitRequest(type: RequestType, data: Record<string, unknown>, reference = newReference(type)): Promise<string> {
   const name = typeof data.name === "string" ? data.name.trim() : "";
   const email = typeof data.email === "string" ? data.email.trim() : "";
   const phone = typeof data.phone === "string" ? data.phone.trim() : "";
@@ -19,7 +22,6 @@ export async function submitRequest(type: RequestType, data: Record<string, unkn
   if (!email && !phone) throw new Error("Please enter an email or phone number");
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Please enter a valid email");
 
-  const reference = `${PREFIX[type]}-${Date.now().toString(36).toUpperCase()}`;
   const payload = { reference, type, ...data, submittedAt: new Date().toISOString() };
 
   if (!ENDPOINT) {

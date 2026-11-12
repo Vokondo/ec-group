@@ -8,8 +8,8 @@ export default function CheckoutPage() {
     <>
       <PageHero
         eyebrow="Service Center · Checkout"
-        title="Your cart"
-        intro="Review your items, pay by Mobile Money and send us your transaction ID. We verify each payment manually before confirming your order."
+        title="Checkout"
+        intro="Review your items, add your details and pay securely with Mobile Money or card."
       />
       <section className="py-10 sm:py-16">
         <Container>
