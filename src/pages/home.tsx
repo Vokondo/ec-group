@@ -14,8 +14,26 @@ import { Container, StatusBadge } from "@/components/shared";
 
 // Hero photo, e.g. "/images/hero.jpg" in public/. Unset shows a placeholder.
 const HERO_IMAGE: string | undefined = "/images/hero.jpg";
-// Background photo for the Service Center card.
-const SERVICE_IMAGE: string | undefined = undefined;
+// Custom-generated homepage artwork for the unified Service Center.
+const SERVICE_IMAGE = "/images/home/service-center.jpg";
+
+// Homepage-only African-context stock photography from Pexels (free to use).
+// Keeping the overrides here prevents them from changing the individual business pages.
+const HOME_BUSINESS_IMAGES: Partial<Record<string, string>> = {
+  university:
+    "https://images.pexels.com/photos/33920052/pexels-photo-33920052.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  "green-foods":
+    "https://images.pexels.com/photos/8357259/pexels-photo-8357259.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  "barbering-shop":
+    "https://images.pexels.com/photos/7697319/pexels-photo-7697319.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  bank:
+    "https://images.pexels.com/photos/32103473/pexels-photo-32103473.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  cosmetics:
+    "https://images.pexels.com/photos/34476770/pexels-photo-34476770.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  foundation:
+    "https://images.pexels.com/photos/28593054/pexels-photo-28593054.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  "bicycle-run": "/images/businesses/bicycle-run.jpg",
+};
 
 const countOf = (...kinds: OfferingKind[]) => CATALOG.filter((o) => kinds.includes(o.kind)).length;
 
@@ -62,7 +80,7 @@ export default function HomePage() {
       {/* Service Center: dark image card with a link list */}
       <Container className={cn(cardContainer, "mt-8 sm:mt-14")}>
         <div className="relative isolate grid min-h-[28rem] items-center gap-10 overflow-hidden rounded-2xl p-7 pb-14 text-white ring-1 ring-white/10 sm:min-h-[36rem] sm:rounded-3xl sm:p-14 lg:min-h-[42rem] lg:grid-cols-2 lg:gap-20 lg:p-24">
-          <CoverImage src={SERVICE_IMAGE} alt="" overlay="from-black/70 via-black/40 to-black/60" variant="corner" />
+          <CoverImage src={SERVICE_IMAGE} alt="" overlay="from-black/85 via-black/60 to-black/70" variant="corner" />
           <div>
             <MonoLabel>Unified Service Center</MonoLabel>
             <h2 className="mt-4 text-[2.5rem] leading-[1.02] font-light tracking-tight sm:text-6xl lg:text-7xl">
@@ -262,7 +280,11 @@ function BusinessExplorer() {
             key={business.slug}
             className="explorer-image group absolute inset-0 isolate flex flex-col justify-between p-4 text-white sm:p-5"
           >
-            <CoverImage src={business.image} alt={business.name} overlay="from-black/70 via-transparent to-black/25" />
+            <CoverImage
+              src={HOME_BUSINESS_IMAGES[business.slug] ?? business.image}
+              alt={business.name}
+              overlay="from-black/70 via-transparent to-black/25"
+            />
             <div className="rise-in flex justify-end [--rise-delay:250ms]">
               <StatusBadge status={business.status} onDark />
             </div>
