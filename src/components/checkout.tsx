@@ -20,8 +20,8 @@ import { cn } from "@/lib/utils";
 import { CATALOG, PAYMENT, formatPrice } from "@/lib/site";
 import { newReference, submitRequest } from "@/lib/submit";
 import { payWithPaystack, paystackEnabled } from "@/lib/paystack";
-import { monoButtonClass } from "@/lib/mono-button";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { findOffering, offeringImage, offeringPath, pillClass } from "@/lib/shop";
+import { ProductImage } from "@/components/shop/product-image";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -77,10 +77,10 @@ export function Checkout() {
           interest.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link to="/service-center?kind=product" className={cn(buttonVariants(), "rounded-full")}>
+          <Link to="/service-center?kind=product" className={pillClass("solid")}>
             Browse products
           </Link>
-          <Link to="/service-center/interest" className={cn(buttonVariants({ variant: "outline" }), "rounded-full")}>
+          <Link to="/service-center/interest" className={pillClass("outline")}>
             Register interest
           </Link>
         </div>
@@ -135,8 +135,8 @@ function Stepper({ current, onStep }: { current: Step; onStep: (s: Step) => void
               <span
                 className={cn(
                   "grid size-7 shrink-0 place-items-center rounded-full border font-mono text-[11px] transition",
-                  active && "border-brand bg-brand text-brand-foreground",
-                  done && "border-foreground bg-foreground text-background",
+                  active && "border-foreground bg-foreground text-background",
+                  done && "border-foreground bg-background text-foreground",
                   !active && !done && "text-muted-foreground",
                 )}
               >
@@ -176,44 +176,56 @@ function CartStep({
   return (
     <section>
       <h2 className="text-xl font-light tracking-tight sm:text-2xl">Review your cart</h2>
-      <ul className="mt-5 divide-y rounded-2xl border bg-card">
-        {lines.map((l) => (
-          <li key={l.id} className="flex flex-wrap items-center gap-x-4 gap-y-3 p-4">
-            <div className="min-w-40 flex-1">
-              <p className="font-medium">{l.name}</p>
-              <p className="text-xs text-muted-foreground">
-                {l.business} · {formatPrice(l.price)} each
-                {isSample(l.id) && <span className="ml-2 rounded-full bg-muted px-2 py-0.5 text-[10px]">Sample price</span>}
-              </p>
-            </div>
-            <div className="flex items-center gap-1 rounded-full border p-0.5">
-              <Button size="icon-sm" variant="ghost" className="rounded-full" aria-label={`Decrease ${l.name}`} onClick={() => setQty(l.id, l.qty - 1)}>
-                <MinusIcon />
-              </Button>
-              <span className="w-6 text-center text-sm" aria-live="polite">
-                {l.qty}
-              </span>
-              <Button size="icon-sm" variant="ghost" className="rounded-full" aria-label={`Increase ${l.name}`} onClick={() => setQty(l.id, l.qty + 1)}>
-                <PlusIcon />
-              </Button>
-            </div>
-            <p className="w-20 text-right text-sm font-medium">{formatPrice(l.qty * l.price)}</p>
-            <Button size="icon-sm" variant="ghost" className="rounded-full text-muted-foreground" aria-label={`Remove ${l.name}`} onClick={() => setQty(l.id, 0)}>
-              <Trash2Icon />
-            </Button>
-          </li>
-        ))}
+      <ul className="mt-5 divide-y rounded-3xl border bg-card px-4 sm:px-6">
+        {lines.map((l) => {
+          const o = findOffering(l.id);
+          return (
+            <li key={l.id} className="flex gap-4 py-5">
+              <Link to={o ? offeringPath(o) : "/service-center"} className="shrink-0">
+                <ProductImage src={offeringImage(o)} alt={l.name} zoom={false} className="size-20 rounded-xl sm:size-24" />
+              </Link>
+              <div className="flex min-w-0 flex-1 flex-col">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="font-medium">{l.name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {l.business} · {formatPrice(l.price)} each
+                      {isSample(l.id) && " · Sample price"}
+                    </p>
+                  </div>
+                  <p className="shrink-0 font-medium">{formatPrice(l.qty * l.price)}</p>
+                </div>
+                <div className="mt-auto flex items-center justify-between gap-3 pt-3">
+                  <div className="inline-flex items-center rounded-lg border">
+                    <button type="button" onClick={() => setQty(l.id, l.qty - 1)} aria-label={`Decrease ${l.name}`} className="grid size-8 place-items-center rounded-lg hover:bg-muted">
+                      <MinusIcon className="size-3.5" />
+                    </button>
+                    <span className="w-7 text-center text-sm tabular-nums" aria-live="polite">
+                      {l.qty}
+                    </span>
+                    <button type="button" onClick={() => setQty(l.id, l.qty + 1)} aria-label={`Increase ${l.name}`} className="grid size-8 place-items-center rounded-lg hover:bg-muted">
+                      <PlusIcon className="size-3.5" />
+                    </button>
+                  </div>
+                  <button type="button" onClick={() => setQty(l.id, 0)} className="flex items-center gap-1.5 font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase hover:text-foreground">
+                    <Trash2Icon className="size-3.5" /> Remove
+                  </button>
+                </div>
+              </div>
+            </li>
+          );
+        })}
       </ul>
       <div className="mt-4 flex justify-between px-4 text-lg font-medium">
         <span>Subtotal</span>
         <span>{formatPrice(total)}</span>
       </div>
       <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
-        <Link to="/service-center" className={monoButtonClass("outline-light", "sm:h-10")}>
+        <Link to="/service-center" className={pillClass("outline", "lg", "")}>
           Continue shopping
         </Link>
-        <button type="button" onClick={onNext} className={monoButtonClass("solid", "sm:h-10")}>
-          Continue to details <span aria-hidden className="text-[8px]">▶</span>
+        <button type="button" onClick={onNext} className={pillClass("solid", "lg", "")}>
+          Continue to details
         </button>
       </div>
     </section>
@@ -315,11 +327,11 @@ function DetailsStep({
       </section>
 
       <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
-        <button type="button" onClick={onBack} className={monoButtonClass("outline-light", "sm:h-10")}>
+        <button type="button" onClick={onBack} className={pillClass("outline", "lg", "")}>
           <ArrowLeftIcon className="size-3.5" /> Back to cart
         </button>
-        <button type="submit" className={monoButtonClass("solid", "sm:h-10")}>
-          Continue to payment <span aria-hidden className="text-[8px]">▶</span>
+        <button type="submit" className={pillClass("solid", "lg", "")}>
+          Continue to payment
         </button>
       </div>
     </form>
@@ -452,7 +464,7 @@ function PaymentStep({
             details. We never see your PIN or card number.
           </p>
           {error && <p className="mt-4 text-sm text-destructive">{error}</p>}
-          <button type="button" onClick={payOnline} disabled={busy} className={monoButtonClass("solid", "mt-5 w-full sm:h-10")}>
+          <button type="button" onClick={payOnline} disabled={busy} className={pillClass("solid", "lg", "mt-5 w-full")}>
             {busy ? "Waiting for payment…" : `Pay ${formatPrice(total)}`}
           </button>
         </div>
@@ -484,13 +496,13 @@ function PaymentStep({
             />
           </div>
           {error && <p className="text-sm text-destructive">{error}</p>}
-          <button type="submit" disabled={busy} className={monoButtonClass("solid", "w-full sm:h-10")}>
+          <button type="submit" disabled={busy} className={pillClass("solid", "lg", "w-full")}>
             {busy ? "Submitting…" : "Submit order for confirmation"}
           </button>
         </form>
       )}
 
-      <button type="button" onClick={onBack} disabled={busy} className={monoButtonClass("outline-light", "mt-6 sm:h-10")}>
+      <button type="button" onClick={onBack} disabled={busy} className={pillClass("outline", "lg", "mt-6")}>
         <ArrowLeftIcon className="size-3.5" /> Back to details
       </button>
     </section>
@@ -517,14 +529,15 @@ function Confirmation({ placed }: { placed: Placed }) {
         {placed.warning && <p className="mt-4 rounded-xl bg-destructive/10 p-3 text-sm text-destructive">{placed.warning}</p>}
       </div>
 
-      <div className="mt-6 rounded-3xl border p-6">
+      <div className="mt-6 rounded-3xl border bg-card p-6">
         <h3 className="flex items-center gap-2 font-medium">
           <PackageIcon className="size-4" /> Order summary
         </h3>
-        <ul className="mt-4 space-y-2 text-sm">
+        <ul className="mt-4 space-y-3 text-sm">
           {placed.lines.map((l) => (
-            <li key={l.id} className="flex justify-between gap-4">
-              <span>
+            <li key={l.id} className="flex items-center gap-3">
+              <ProductImage src={offeringImage(findOffering(l.id))} alt="" zoom={false} className="size-12 shrink-0 rounded-lg" />
+              <span className="min-w-0 flex-1">
                 {l.qty} × {l.name}
               </span>
               <span>{formatPrice(l.qty * l.price)}</span>
@@ -538,8 +551,8 @@ function Confirmation({ placed }: { placed: Placed }) {
       </div>
 
       <div className="mt-8 flex justify-center">
-        <Link to="/service-center" className={monoButtonClass("solid", "sm:h-10")}>
-          Back to the Service Center <span aria-hidden className="text-[8px]">▶</span>
+        <Link to="/service-center" className={pillClass("solid", "lg", "")}>
+          Back to the Service Center
         </Link>
       </div>
     </div>
@@ -563,7 +576,7 @@ function Summary({
 }) {
   const count = lines.reduce((n, l) => n + l.qty, 0);
   return (
-    <aside className="h-fit space-y-5 rounded-3xl bg-muted/60 p-6 lg:sticky lg:top-24">
+    <aside className="h-fit space-y-5 rounded-3xl border bg-card p-6 lg:sticky lg:top-24">
       <div className="flex items-center justify-between">
         <h2 className="font-medium">Order summary</h2>
         {editable && (
@@ -572,12 +585,16 @@ function Summary({
           </button>
         )}
       </div>
-      <ul className="space-y-2 text-sm">
+      <ul className="space-y-3 text-sm">
         {lines.map((l) => (
-          <li key={l.id} className="flex justify-between gap-4">
-            <span className="text-muted-foreground">
-              {l.qty} × {l.name}
+          <li key={l.id} className="flex items-center gap-3">
+            <span className="relative shrink-0">
+              <ProductImage src={offeringImage(findOffering(l.id))} alt="" zoom={false} className="size-12 rounded-lg bg-card" />
+              <span className="absolute -top-1.5 -right-1.5 grid size-5 place-items-center rounded-full bg-foreground text-[10px] font-medium text-background">
+                {l.qty}
+              </span>
             </span>
+            <span className="min-w-0 flex-1 truncate">{l.name}</span>
             <span>{formatPrice(l.qty * l.price)}</span>
           </li>
         ))}
@@ -639,11 +656,11 @@ function Choice({
     <label
       className={cn(
         "relative flex cursor-pointer gap-3 rounded-2xl border bg-card p-4 transition has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring/40",
-        checked ? "border-brand ring-1 ring-brand" : "hover:border-foreground/30",
+        checked ? "border-foreground ring-1 ring-foreground" : "hover:border-foreground/30",
       )}
     >
       <input type="radio" name={name} checked={checked} onChange={onSelect} className="sr-only" />
-      <span className={cn("grid size-10 shrink-0 place-items-center rounded-full", checked ? "bg-brand text-brand-foreground" : "bg-muted")}>{icon}</span>
+      <span className={cn("grid size-10 shrink-0 place-items-center rounded-full", checked ? "bg-foreground text-background" : "bg-muted")}>{icon}</span>
       <span className="min-w-0">
         <span className="flex flex-wrap items-center gap-2 font-medium">
           {title}

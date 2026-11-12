@@ -1,7 +1,14 @@
 import { Link } from "react-router";
+import { CATALOG } from "@/lib/site";
+import { isPurchasable, offeringImage } from "@/lib/shop";
 import { usePageTitle } from "@/lib/use-page-title";
 import { Container, PageHero } from "@/components/shared";
-import { ServiceCatalog } from "@/components/service-catalog";
+import { OfferingCarousel, ServiceCatalog } from "@/components/service-catalog";
+
+// Buyable items first, then anything with a photo.
+const RECOMMENDED = [...CATALOG]
+  .sort((a, b) => Number(isPurchasable(b)) - Number(isPurchasable(a)) || Number(!!offeringImage(b)) - Number(!!offeringImage(a)))
+  .slice(0, 8);
 
 export default function ServiceCenterPage() {
   usePageTitle("Service Center");
@@ -11,13 +18,19 @@ export default function ServiceCenterPage() {
       <PageHero
         eyebrow="Unified Service Center"
         title="Every offering in one place"
-        intro="Shop products, request appointments, explore programmes and register interest across all seven businesses. Items marked “In development” are not yet available; register interest and we'll keep you informed."
+        intro="Shop products, book appointments, explore programmes and register interest across all seven businesses."
       />
 
       <section className="py-10 sm:py-16">
         <Container>
           <ServiceCatalog />
-          <p className="mt-8 sm:mt-12 text-center text-sm text-muted-foreground">
+        </Container>
+      </section>
+
+      <section className="border-t py-12 sm:py-20">
+        <Container>
+          <OfferingCarousel title="Recommended for you" offerings={RECOMMENDED} />
+          <p className="mt-12 text-center text-sm text-muted-foreground">
             Can't find what you need?{" "}
             <Link to="/contact" className="font-medium text-foreground underline underline-offset-4">
               Send us an inquiry
