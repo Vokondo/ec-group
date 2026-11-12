@@ -1,4 +1,4 @@
-import { createContext, useContext, useSyncExternalStore } from "react";
+import { createContext, useContext, useState, useSyncExternalStore } from "react";
 
 export type CartLine = { id: string; name: string; business: string; price: number; qty: number };
 
@@ -6,9 +6,13 @@ type CartContextValue = {
   lines: CartLine[];
   count: number;
   total: number;
-  add: (line: Omit<CartLine, "qty">) => void;
+  // Adds `qty` (default 1) and opens the cart drawer unless `silent`.
+  add: (line: Omit<CartLine, "qty">, options?: { qty?: number; silent?: boolean }) => void;
   setQty: (id: string, qty: number) => void;
   clear: () => void;
+  // Cart drawer
+  isOpen: boolean;
+  setOpen: (open: boolean) => void;
 };
 
 // Cart lives in a tiny external store persisted to localStorage, so it survives
@@ -47,24 +51,28 @@ const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const current = useSyncExternalStore(subscribe, read);
+  const [isOpen, setOpen] = useState(false);
 
   const value: CartContextValue = {
     lines: current,
     count: current.reduce((n, l) => n + l.qty, 0),
     total: current.reduce((n, l) => n + l.qty * l.price, 0),
-    add: (line) => {
+    add: (line, { qty = 1, silent = false } = {}) => {
       const prev = read();
       write(
         prev.some((l) => l.id === line.id)
-          ? prev.map((l) => (l.id === line.id ? { ...l, qty: l.qty + 1 } : l))
-          : [...prev, { ...line, qty: 1 }],
+          ? prev.map((l) => (l.id === line.id ? { ...l, qty: l.qty + qty } : l))
+          : [...prev, { ...line, qty }],
       );
+      if (!silent) setOpen(true);
     },
     setQty: (id, qty) => {
       const prev = read();
       write(qty <= 0 ? prev.filter((l) => l.id !== id) : prev.map((l) => (l.id === id ? { ...l, qty } : l)));
     },
     clear: () => write([]),
+    isOpen,
+    setOpen,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

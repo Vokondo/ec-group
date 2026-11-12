@@ -19,6 +19,7 @@ npm run dev
 
 - **Content:** `src/lib/site.ts` holds names, contact details, the seven businesses, the Service Center catalog and the Mobile Money details. Replace every `[placeholder]` before launch.
 - **Pages:** `src/pages/`, with routes in `src/App.tsx`.
+- **Shop:** each Service Center item has its own page at `/service-center/<id>` (`src/pages/offering.tsx`). Product cards, the cart drawer and shared shop styles live in `src/components/shop/` and `src/lib/shop.ts`. Give an offering extra product-page photos with `gallery: ["/images/…", …]`.
 - **Colours and font:** `src/index.css`. Gold (`--brand`) is reserved for buttons.
 - **Images:** put photos in `public/images/` and set `image` on a business or offering in `src/lib/site.ts`. The founder portrait and the home page Service Center cards are set at the top of `src/pages/home.tsx`. Anything without an image shows a placeholder.
 

@@ -283,6 +283,7 @@ export type Offering = {
   price: number | null;
   status: BusinessStatus;
   image?: string; // Optional photo; falls back to the business's image
+  gallery?: string[]; // Optional extra photos for the product page (include the main photo first)
   // Test-only price so the checkout can be tried end to end. Purchasable while "proposed" and
   // labelled "Sample price". Remove `sample` and set status "available" once the real price is set.
   sample?: boolean;

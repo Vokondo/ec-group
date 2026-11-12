@@ -12,7 +12,7 @@ import { useCart } from "@/components/cart-provider";
 const MENU_LINKS = [{ to: "/", label: "Home" }, ...NAV_LINKS];
 
 export function SiteHeader() {
-  const { count } = useCart();
+  const { count, setOpen } = useCart();
   const overlayHover = "hover:bg-white/10 hover:text-white";
   const scrolled = useScrolled(8);
   const { pathname } = useLocation();
@@ -55,9 +55,10 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            to="/service-center/checkout"
-            aria-label={`Cart, ${count} items`}
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label={`Open cart, ${count} ${count === 1 ? "item" : "items"}`}
             className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "relative rounded-full", overlayHover)}
           >
             <ShoppingBagIcon />
@@ -66,7 +67,7 @@ export function SiteHeader() {
                 {count}
               </span>
             )}
-          </Link>
+          </button>
           <Link
             to="/contact?topic=partnership"
             className={cn(

@@ -9,6 +9,7 @@ import HoldingPage from "@/pages/holding";
 import HomePage from "@/pages/home";
 import NotFoundPage from "@/pages/not-found";
 import ServiceCenterPage from "@/pages/service-center";
+import OfferingPage from "@/pages/offering";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: "service-center/booking", element: <BookingPage /> },
       { path: "service-center/interest", element: <InterestPage /> },
       { path: "service-center/checkout", element: <CheckoutPage /> },
+      { path: "service-center/:id", element: <OfferingPage /> },
       { path: "contact", element: <ContactPage /> },
       { path: "*", element: <NotFoundPage /> },
     ],
