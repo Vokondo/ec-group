@@ -65,7 +65,7 @@
     --steel: oklch(0.56 0.09 262); /* lighter blue accent: focus rings, highlights */
     --warm: oklch(0.72 0.12 55); /* warm orange accents */
     --ink: oklch(0.17 0.012 262); /* dark panels, hero, footer */
-    --background: oklch(0.945 0.012 262); /* pale blue-tinted ash page */
+    --background: oklch(0.94 0 0); /* neutral ash page */
     --foreground: oklch(0.27 0.03 262); /* deep navy text */
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.27 0.03 262);
@@ -73,15 +73,15 @@
     --popover-foreground: oklch(0.27 0.03 262);
     --primary: oklch(0.48 0.11 262);
     --primary-foreground: oklch(0.99 0 0);
-    --secondary: oklch(0.92 0.014 262);
+    --secondary: oklch(0.92 0 0);
     --secondary-foreground: oklch(0.27 0.03 262);
-    --muted: oklch(0.92 0.014 262);
+    --muted: oklch(0.92 0 0);
     --muted-foreground: oklch(0.55 0.02 262);
-    --accent: oklch(0.92 0.014 262);
+    --accent: oklch(0.92 0 0);
     --accent-foreground: oklch(0.27 0.03 262);
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.87 0.014 262);
-    --input: oklch(0.86 0.014 262);
+    --border: oklch(0.87 0 0);
+    --input: oklch(0.86 0 0);
     --ring: oklch(0.56 0.09 262);
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
@@ -93,9 +93,9 @@
     --sidebar-foreground: oklch(0.27 0.03 262);
     --sidebar-primary: oklch(0.48 0.11 262);
     --sidebar-primary-foreground: oklch(0.99 0 0);
-    --sidebar-accent: oklch(0.92 0.014 262);
+    --sidebar-accent: oklch(0.92 0 0);
     --sidebar-accent-foreground: oklch(0.27 0.03 262);
-    --sidebar-border: oklch(0.87 0.014 262);
+    --sidebar-border: oklch(0.87 0 0);
     --sidebar-ring: oklch(0.56 0.09 262);
 }
 
@@ -205,7 +205,7 @@
 
 /* ------------------------------------------------------------------------
    Glassmorphism
-   Soft blue/lavender glows sit behind the whole site so the frosted
+   Soft white and ash glows sit behind the whole site so the frosted
    surfaces below have something to blur.
    ------------------------------------------------------------------------ */
 body::before {
@@ -215,10 +215,10 @@ body::before {
     z-index: -1;
     pointer-events: none;
     background:
-        radial-gradient(42rem 32rem at 6% 14%, oklch(0.78 0.09 262 / 0.45), transparent 70%),
-        radial-gradient(38rem 30rem at 94% 26%, oklch(0.82 0.07 290 / 0.4), transparent 70%),
-        radial-gradient(46rem 34rem at 28% 88%, oklch(0.8 0.08 255 / 0.35), transparent 70%),
-        radial-gradient(34rem 26rem at 82% 92%, oklch(0.85 0.05 300 / 0.35), transparent 70%);
+        radial-gradient(42rem 32rem at 6% 14%, oklch(1 0 0 / 0.95), transparent 70%),
+        radial-gradient(38rem 30rem at 94% 26%, oklch(0.84 0 0 / 0.55), transparent 70%),
+        radial-gradient(46rem 34rem at 28% 88%, oklch(0.86 0 0 / 0.5), transparent 70%),
+        radial-gradient(34rem 26rem at 82% 92%, oklch(1 0 0 / 0.9), transparent 70%);
 }
 
 /* Frosted light card: the main card surface across the site. */
