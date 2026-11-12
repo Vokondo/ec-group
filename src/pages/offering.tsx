@@ -21,7 +21,7 @@ import { OfferingCarousel } from "@/components/service-catalog";
 import NotFoundPage from "@/pages/not-found";
 
 // Large full-width buttons on the product page: warm accent for the main action, dark for the second.
-const BIG = "inline-flex h-13 w-full items-center justify-center gap-2 rounded-full text-sm font-semibold tracking-[0.12em] uppercase transition focus-visible:ring-3 focus-visible:ring-ring/50 outline-none sm:h-14";
+const BIG = "inline-flex h-13 w-full items-center justify-center gap-2 rounded-full font-mono text-[11px] font-medium tracking-[0.2em] uppercase sm:text-xs transition focus-visible:ring-3 focus-visible:ring-ring/50 outline-none sm:h-14";
 const BIG_WARM = cn(BIG, "bg-warm text-ink hover:bg-warm/85");
 const BIG_DARK = cn(BIG, "bg-foreground text-background hover:bg-foreground/85");
 
@@ -113,8 +113,8 @@ export default function OfferingPage() {
                 </Link>{" "}
                 · {KIND_LABELS[offering.kind].replace(/s$/, "")}
               </p>
-              <h1 className="mt-3 text-3xl font-bold tracking-tight uppercase sm:text-4xl lg:text-5xl">{offering.name}</h1>
-              <p className="mt-2 text-lg text-muted-foreground sm:text-xl">{offering.subtitle ?? offering.category}</p>
+              <h1 className="mt-3 text-3xl font-light tracking-tight sm:text-4xl lg:text-5xl">{offering.name}</h1>
+              <p className="mt-2 text-base text-muted-foreground sm:text-lg">{offering.subtitle ?? offering.category}</p>
 
               {rating && (
                 <p className="mt-4 flex items-center gap-3 text-sm">
@@ -132,13 +132,13 @@ export default function OfferingPage() {
               )}
 
               <div className="mt-6">
-                {saving > 0 && <p className="text-lg text-muted-foreground line-through">{formatPrice(compareAtPrice!)}</p>}
+                {saving > 0 && <p className="text-base text-muted-foreground line-through">{formatPrice(compareAtPrice!)}</p>}
                 <div className="flex flex-wrap items-center gap-3">
-                  <p className="text-4xl font-bold tracking-tight sm:text-5xl">
-                    {price !== null ? formatPrice(price) : <span className="text-2xl font-normal text-muted-foreground">Price to be confirmed</span>}
+                  <p className="text-3xl font-light tracking-tight sm:text-4xl">
+                    {price !== null ? formatPrice(price) : <span className="text-2xl text-muted-foreground">Price to be confirmed</span>}
                   </p>
                   {saving > 0 && (
-                    <span className="rounded-lg bg-warm/20 px-2.5 py-1 text-sm font-medium">Save {formatPrice(saving)}</span>
+                    <span className="rounded-full bg-warm/20 px-3 py-1 font-mono text-[10px] tracking-[0.15em] uppercase sm:text-[11px]">Save {formatPrice(saving)}</span>
                   )}
                 </div>
                 <p className="mt-2 text-xs text-muted-foreground">
@@ -146,7 +146,7 @@ export default function OfferingPage() {
                 </p>
               </div>
 
-              <p className="mt-6 max-w-prose text-base text-muted-foreground sm:text-lg">{offering.description}</p>
+              <p className="mt-6 max-w-prose text-sm text-muted-foreground sm:text-base">{offering.description}</p>
 
               <div className="mt-8 space-y-3">
                 {purchasable ? (
