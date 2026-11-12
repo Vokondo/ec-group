@@ -13,7 +13,7 @@ import { Container, StatusBadge } from "@/components/shared";
 // a dark image card with a link list, a white about card, a short statement and a CTA band.
 
 // Hero photo, e.g. "/images/hero.jpg" in public/. Unset shows a placeholder.
-const HERO_IMAGE: string | undefined = "/images/hero.jpg";
+const HERO_IMAGE: string | undefined = "/images/home/hero.jpg";
 // Custom-generated homepage artwork for the unified Service Center.
 const SERVICE_IMAGE = "/images/home/service-center.jpg";
 
@@ -22,8 +22,7 @@ const SERVICE_IMAGE = "/images/home/service-center.jpg";
 const HOME_BUSINESS_IMAGES: Partial<Record<string, string>> = {
   university:
     "https://images.pexels.com/photos/33920052/pexels-photo-33920052.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  "green-foods":
-    "https://images.pexels.com/photos/8357259/pexels-photo-8357259.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  "green-foods": "/images/home/green-foods.jpg",
   "barbering-shop":
     "https://images.pexels.com/photos/7697319/pexels-photo-7697319.jpeg?auto=compress&cs=tinysrgb&w=1600",
   bank:

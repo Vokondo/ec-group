@@ -8,6 +8,10 @@ import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/com
 import { monoButtonClass } from "@/lib/mono-button";
 import { useCart } from "@/components/cart-provider";
 
+// Glass edge: a bright top highlight, a faint lower rim and a soft drop shadow.
+const glassEdge =
+  "shadow-[inset_0_1px_0_rgb(255_255_255/0.35),inset_0_-1px_0_rgb(255_255_255/0.08),0_12px_32px_-12px_rgb(0_0_0/0.45)]";
+
 // The mobile menu also lists Home.
 const MENU_LINKS = [{ to: "/", label: "Home" }, ...NAV_LINKS];
 
@@ -18,34 +22,36 @@ export function SiteHeader() {
   const { pathname } = useLocation();
 
   return (
-    // Transparent over each page's dark hero; once the page scrolls it pops in as a solid bar.
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-40 w-full text-white transition-[background-color,box-shadow,border-color] duration-300",
-        scrolled
-          ? "border-b border-white/10 bg-ink shadow-[0_10px_30px_-12px_rgb(0_0_0/0.5)]"
-          : "border-b border-transparent",
-      )}
-    >
+    // A floating frosted-glass pill below the top edge: light frost over the dark hero, smoked
+    // frost once the page scrolls so white text stays readable over light sections.
+    <header className="fixed inset-x-0 top-0 z-40 w-full px-3 pt-3 text-white sm:px-6 sm:pt-4">
       <div
         className={cn(
-          "mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 transition-[height] duration-300 sm:px-6 lg:px-8",
-          scrolled ? "h-14" : "h-16",
+          "relative isolate mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto] items-center gap-4 rounded-full pr-2 pl-5 ring-1 backdrop-blur-2xl backdrop-saturate-[1.8] transition-[background-color,box-shadow] duration-300 sm:pl-6 lg:grid-cols-[1fr_auto_1fr]",
+          glassEdge,
+          scrolled ? "bg-neutral-900/55 ring-white/15" : "bg-white/10 ring-white/25",
         )}
       >
-        <Link to="/" className="text-sm font-semibold tracking-wide sm:text-base">
+        {/* Liquid sheen: a soft light falling from the top edge */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-gradient-to-b from-white/20 via-white/5 to-transparent"
+        />
+        <Link to="/" className="text-[13px] font-light tracking-wide sm:text-sm">
           {SITE.siteName}
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
                 cn(
-                  "text-xs font-medium tracking-wider uppercase transition-opacity hover:opacity-100",
-                  isActive ? "opacity-100" : "opacity-70",
+                  "rounded-full px-3.5 py-1.5 text-sm font-light transition-colors",
+                  isActive
+                    ? "bg-white/20 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3)]"
+                    : "text-white/75 hover:bg-white/10 hover:text-white",
                 )
               }
             >
@@ -54,7 +60,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-end gap-1.5">
           <button
             type="button"
             onClick={() => setOpen(true)}
@@ -70,17 +76,13 @@ export function SiteHeader() {
           </button>
           <Link
             to="/contact?topic=partnership"
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "hidden rounded-full sm:inline-flex",
-              "border-white/60 bg-transparent text-white hover:bg-white/10 hover:text-white",
-            )}
+            className="hidden h-10 items-center rounded-full bg-white/90 px-5 text-sm font-medium text-ink shadow-[inset_0_1px_0_rgb(255_255_255),0_4px_14px_-4px_rgb(0_0_0/0.3)] transition-colors hover:bg-white sm:inline-flex"
           >
             Partner with us
           </Link>
           <Sheet>
             <SheetTrigger
-              className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "lg:hidden", overlayHover)}
+              className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "rounded-full lg:hidden", overlayHover)}
               aria-label="Open menu"
             >
               <MenuIcon />
@@ -92,7 +94,7 @@ export function SiteHeader() {
               className="gap-0 border-0 bg-ink p-0 text-white data-[side=top]:h-dvh data-[side=top]:border-b-0"
             >
               <div className="flex h-16 shrink-0 items-center justify-between px-4 sm:px-6">
-                <SheetTitle className="text-sm font-semibold tracking-wide text-white sm:text-base">{SITE.siteName}</SheetTitle>
+                <SheetTitle className="text-[13px] font-light tracking-wide text-white sm:text-sm">{SITE.siteName}</SheetTitle>
                 <SheetClose className={cn(buttonVariants({ variant: "ghost", size: "icon" }), overlayHover)} aria-label="Close menu">
                   <XIcon />
                 </SheetClose>

@@ -4,7 +4,7 @@
 
 export const SITE = {
   // Brand shown in the header, browser tab titles and footer, with this exact casing.
-  siteName: "enock CHANIMBE",
+  siteName: "Enock Chanimbe",
   holdingName: "CHANIMBE GROUP",
   founderName: "Enock Chanimbe",
   // Founder portrait, e.g. "/images/founder.jpg" in public/. Shown on the home page and the Founder page.
