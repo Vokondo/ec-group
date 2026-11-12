@@ -154,7 +154,7 @@ function OfferingCard({ offering, size = "regular", className }: { offering: Off
   const { add, lines } = useCart();
   const business = getBusiness(offering.business)!;
   const inCart = lines.some((l) => l.id === offering.id);
-  const purchasable = offering.kind === "product" && offering.price !== null && offering.status === "available";
+  const purchasable = offering.kind === "product" && offering.price !== null && (offering.status === "available" || offering.sample);
   const bookable = offering.kind === "service" && offering.business === "barbering-shop";
 
   return (
@@ -181,7 +181,10 @@ function OfferingCard({ offering, size = "regular", className }: { offering: Off
         <div className="mt-5 flex items-center justify-between gap-3">
           <span className="text-sm font-medium">
             {offering.price !== null ? (
-              formatPrice(offering.price)
+              <>
+                {formatPrice(offering.price)}
+                {offering.sample && <span className="ml-2 rounded-full bg-muted px-2 py-0.5 text-[10px] font-normal text-muted-foreground">Sample price</span>}
+              </>
             ) : (
               <span className="font-normal text-muted-foreground">Price to be confirmed</span>
             )}
