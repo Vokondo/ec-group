@@ -84,7 +84,6 @@ export const BUSINESSES: Business[] = [
       "School of Media, Communication, Creative & Skilled Arts",
       "School of Pure Science & Technology",
       "School of Agriculture, Sanitation & Recycling (Green Economy)",
-      "Industry internships and portfolio-based learning",
     ],
     audience:
       "Prospective students, creatives, artisans, future scientists, engineers and farmers, as well as educators, industry partners and affiliated companies.",

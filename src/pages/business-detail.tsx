@@ -59,18 +59,14 @@ export default function BusinessDetailPage() {
             </div>
             <div>
               <Eyebrow>What it intends to offer</Eyebrow>
-              <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {business.offers.map(toOffer).map((o, i) => (
-                  <li key={o.title} className="group flex flex-col overflow-hidden rounded-2xl border bg-card transition hover:shadow-md">
-                    <div className="relative isolate aspect-[16/9] overflow-hidden">
-                      <CoverImage src={o.image} alt={o.title} overlay="from-black/20 via-transparent to-black/40" variant="compact" />
-                      <span className="absolute top-3 left-3 rounded-full bg-white/15 px-2.5 py-1 font-mono text-[10px] tracking-[0.2em] text-white backdrop-blur">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                    <div className="flex flex-1 items-start gap-3 p-4">
-                      <CheckIcon className="mt-0.5 size-4 shrink-0" />
-                      <p className="text-sm font-medium">{o.title}</p>
+                  // Photo card with a white panel floating over its lower edge.
+                  <li key={o.title} className="group relative isolate aspect-[4/3] overflow-hidden rounded-2xl lg:aspect-square">
+                    <CoverImage src={o.image} alt={o.title} overlay="from-transparent to-transparent" variant="compact" />
+                    <div className="absolute inset-x-2.5 bottom-2.5 rounded-xl bg-white p-3 text-ink shadow-sm">
+                      <span className="grid size-5 place-items-center rounded-full bg-ink text-[10px] font-medium text-white">{i + 1}</span>
+                      <p className="mt-3 text-sm leading-snug font-light">{o.title}</p>
                     </div>
                   </li>
                 ))}
