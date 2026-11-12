@@ -98,8 +98,9 @@ export function Checkout() {
     <div ref={top} className="scroll-mt-24">
       <Stepper current={step} onStep={go} />
 
-      <div className="mt-8 grid gap-8 lg:mt-10 lg:grid-cols-[3fr_2fr] lg:gap-10">
-        <div>
+      {/* grid-cols-1 / min-w-0 stop long product names from widening the column on phones */}
+      <div className="mt-8 grid grid-cols-1 gap-8 lg:mt-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-10">
+        <div className="min-w-0">
           {step === "cart" && <CartStep lines={lines} setQty={setQty} total={total} onNext={() => go("details")} />}
           {step === "details" && (
             <DetailsStep details={details} onChange={setDetails} onBack={() => go("cart")} onNext={() => go("payment")} />
@@ -576,7 +577,7 @@ function Summary({
 }) {
   const count = lines.reduce((n, l) => n + l.qty, 0);
   return (
-    <aside className="h-fit space-y-5 rounded-3xl border bg-card p-6 lg:sticky lg:top-24">
+    <aside className="h-fit min-w-0 space-y-5 rounded-3xl border bg-card p-6 lg:sticky lg:top-24">
       <div className="flex items-center justify-between">
         <h2 className="font-medium">Order summary</h2>
         {editable && (
