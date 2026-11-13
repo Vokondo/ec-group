@@ -52,6 +52,9 @@ export type Business = {
   hours?: string;
   // Optional content for the page sections each business uses (see lib/business-layouts.ts).
   tagline?: string; // The brand line from the business's logo, shown under its name
+  // The cover is a designed poster with its own lettering: show it whole beside the banner text
+  // instead of behind it.
+  coverIsPoster?: boolean;
   statement?: string; // A short, bold line shown large on its own
   stats?: { value: string; label: string }[]; // Only facts or stated goals, never invented results
   pillars?: { heading: string; items: { title: string; text: string }[] };
@@ -479,6 +482,7 @@ export const BUSINESSES: Business[] = [
     slug: "bicycle-run",
     name: "Pedal with Enock",
     tagline: "Turn miles into mindset",
+    coverIsPoster: true,
     sector: "Cycling & Wellness",
     status: "proposed",
     summary: "A cycling community bringing people together for group rides, fitness and fun.",
