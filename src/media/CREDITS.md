@@ -66,12 +66,14 @@ Replace any of them by saving your own photo with the same file name (see README
 | `bicycle-run/offer-1.jpg` | [4295443](https://www.pexels.com/photo/4295443/) |
 | `bicycle-run/offer-2.jpg` | [15523795](https://www.pexels.com/photo/15523795/) |
 | `bicycle-run/offer-3.jpg` | [40552559](https://www.pexels.com/photo/40552559/) |
-| `bicycle-run/offer-4.jpg` | [4296354](https://www.pexels.com/photo/4296354/) |
+| `bicycle-run/offer-4.jpg` | [8353400](https://www.pexels.com/photo/8353400/) |
+| `bicycle-run/banner.jpg` | [4296354](https://www.pexels.com/photo/4296354/) |
 | `bicycle-run/gallery-1.jpg` | [30316482](https://www.pexels.com/photo/30316482/) |
 | `bicycle-run/gallery-2.jpg` | [17377367](https://www.pexels.com/photo/17377367/) |
 | `bicycle-run/gallery-3.jpg` | [32562892](https://www.pexels.com/photo/32562892/) |
 | `bicycle-run/feature.jpg` | [37794214](https://www.pexels.com/photo/37794214/) |
 | `bicycle-run/br-rides.jpg` | [4295443](https://www.pexels.com/photo/4295443/) |
 | `bicycle-run/br-events.jpg` | [15523795](https://www.pexels.com/photo/15523795/) |
+| `bicycle-run/cover.jpg` | Pedal with Enock (own poster) |
 
 Business logos (`logo.png` in each folder, and `public/brand/chanimbe-group.png`) are the businesses' own artwork.

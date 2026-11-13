@@ -52,8 +52,8 @@ export type Business = {
   hours?: string;
   // Optional content for the page sections each business uses (see lib/business-layouts.ts).
   tagline?: string; // The brand line from the business's logo, shown under its name
-  // The cover is a designed poster with its own lettering: show it whole beside the banner text
-  // instead of behind it.
+  // The cover is a designed poster with its own lettering: it is used on tiles, but the page banner
+  // stays plain so the poster's text never sits behind the heading.
   coverIsPoster?: boolean;
   statement?: string; // A short, bold line shown large on its own
   stats?: { value: string; label: string }[]; // Only facts or stated goals, never invented results

@@ -145,18 +145,17 @@ export const BUSINESS_LAYOUTS: Record<string, BusinessLayout> = {
     ],
     labels: { why: "Our mission", stats: "The goal", pillars: "Why it matters", actions: "Take action" },
   },
-  // Like cycling club sites (Rapha Cycling Club): a punchy line, member benefits, the ride
-  // programmes, how to join and where the club rides.
+  // Like cycling club sites (Rapha Cycling Club): the story, the rides, how to join, member
+  // benefits and where the club rides.
   "bicycle-run": {
     sections: [
-      { type: "statement", variant: "plain" },
-      { type: "checklist" },
-      { type: "offers", variant: "cards" },
-      { type: "gallery", variant: "trio" },
-      { type: "steps", variant: "numbers" },
       { type: "why", variant: "card" },
+      { type: "gallery", variant: "trio" },
+      { type: "offers", variant: "cards" },
+      { type: "steps", variant: "numbers" },
+      { type: "checklist" },
       { type: "feature", variant: "left" },
-      { type: "faq", variant: "grid" },
+      { type: "faq", variant: "accordion" },
       { type: "contact", variant: "strip" },
     ],
     labels: { checklist: "Membership", offers: "Rides and events", steps: "How to join", feature: "Routes" },

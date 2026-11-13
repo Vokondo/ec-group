@@ -112,6 +112,7 @@ placeholder shows the file name it is waiting for.
 | File | Where it shows |
 |---|---|
 | `cover.jpg` | Page banner, business tiles and the home page |
+| `banner.jpg` | Photo behind the page heading only (used instead of the cover, which is a poster) |
 | `logo.png` | Logo on the page banner and business tiles (transparent PNG works best) |
 | `gallery-1.jpg` | Photo gallery, tile 1 |
 | `gallery-2.jpg` | Photo gallery, tile 2 |
