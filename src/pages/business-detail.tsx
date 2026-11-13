@@ -38,10 +38,12 @@ export default function BusinessDetailPage() {
         />
         <Container className="relative pt-12 pb-12 sm:pt-16 sm:pb-20 lg:pt-24 lg:pb-28">
           {logo && <BrandMark src={logo} alt={`${business.name} logo`} className="mb-6 h-14 sm:h-16" />}
-          <div>
-            <StatusBadge status={business.status} onDark />
-          </div>
-          <p className="text-xs font-medium mt-6 text-white/70">{business.sector}</p>
+          {business.status === "available" && (
+            <div className="mb-5">
+              <StatusBadge status={business.status} onDark />
+            </div>
+          )}
+          <p className="text-xs font-medium text-white/70">{business.sector}</p>
           <h1 className="mt-2 text-[1.75rem] leading-tight font-light tracking-tight sm:text-5xl lg:text-6xl">{business.name}</h1>
           {business.tagline && <p className="mt-2 text-sm font-medium text-white/70 sm:text-base">{business.tagline}</p>}
           <p className="mt-4 max-w-2xl text-base text-white/80 sm:mt-5 sm:text-lg">{business.summary}</p>

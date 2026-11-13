@@ -83,17 +83,18 @@ export function PageHero({
   );
 }
 
+// Shown only once a business is open; businesses still in development carry no tag.
 export function StatusBadge({ status, onDark }: { status: BusinessStatus; onDark?: boolean }) {
-  const available = status === "available";
+  if (status !== "available") return null;
   return (
     <span
       className={cn(
         "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium",
-        onDark ? "bg-white/15 text-white backdrop-blur" : available ? "bg-foreground text-background" : "bg-muted text-foreground",
+        onDark ? "bg-white/15 text-white backdrop-blur" : "bg-foreground text-background",
       )}
     >
-      <span className={cn("size-1.5 rounded-full", available ? "bg-current" : "border border-current")} />
-      {available ? "Available now" : "In development"}
+      <span className="size-1.5 rounded-full bg-current" />
+      Available now
     </span>
   );
 }
