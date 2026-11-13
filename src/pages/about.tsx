@@ -37,7 +37,7 @@ export default function AboutPage() {
           <FounderPortrait className="aspect-[4/3] rounded-3xl lg:aspect-square" />
           <div>
             <Eyebrow>Biography</Eyebrow>
-            <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">Building with purpose</h2>
+            <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">An entrepreneur from the Central Region</h2>
             <div className="mt-4 space-y-3 text-sm text-muted-foreground sm:mt-6 sm:space-y-4 sm:text-base">
               <p>
                 {SITE.founderName} is an entrepreneur based in the Central Region of Ghana, whose work starts from a
@@ -59,7 +59,7 @@ export default function AboutPage() {
 
       <section className="bg-muted/60 py-12 sm:py-20">
         <Container>
-          <SectionHeading eyebrow="Entrepreneurial journey" title="From one idea to a group of eight" />
+          <SectionHeading eyebrow="Entrepreneurial journey" title="How the group came together" />
           <ol className="mt-8 sm:mt-12 grid gap-6 md:grid-cols-4">
             {JOURNEY.map((step) => (
               <li key={step.title} className="border-t-2 border-foreground pt-5">
@@ -75,8 +75,8 @@ export default function AboutPage() {
       <section className="bg-card text-card-foreground py-12 sm:py-20">
         <Container>
           <SectionHeading
-            eyebrow="Vision, mission & principles"
-            title="What guides the work"
+            eyebrow="Principles"
+            title="Vision and mission"
             intro="Vision: a Ghana where quality education, healthy food and good services are within everyone's reach. Mission: to build businesses that meet those needs honestly and give back to the communities they serve."
           />
           <div className="mt-8 sm:mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

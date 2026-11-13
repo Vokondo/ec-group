@@ -111,18 +111,17 @@ export default function HoldingPage() {
         <Container>
           <SectionHeading
             eyebrow="How the group works"
-            title="Shared strength, separate focus"
+            title="What every business gets from the group"
             intro="Every business in the group stands on the same foundations, so each one can spend its energy on its customers."
           />
-          <ol className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
-            {SHARED_SUPPORT.map((item, i) => (
+          <ul className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
+            {SHARED_SUPPORT.map((item) => (
               <li key={item.title} className="rounded-2xl bg-muted/60 p-6">
-                <span className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground">0{i + 1}</span>
-                <h3 className="mt-3 font-medium">{item.title}</h3>
+                <h3 className="font-medium">{item.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{item.text}</p>
               </li>
             ))}
-          </ol>
+          </ul>
         </Container>
       </section>
 
@@ -130,7 +129,7 @@ export default function HoldingPage() {
         <Container className="grid gap-8 lg:gap-12 lg:grid-cols-2">
           <div>
             <Eyebrow>Strategic areas of interest</Eyebrow>
-            <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">Where we invest our energy</h2>
+            <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">Sectors we plan to grow in</h2>
             <p className="mt-5 text-white/70">
               We welcome conversations with partners, investors and institutions who share these interests.
             </p>
@@ -139,10 +138,9 @@ export default function HoldingPage() {
             </MonoLink>
           </div>
           <ul className="grid gap-3 sm:grid-cols-2">
-            {STRATEGIC_AREAS.map((area, i) => (
-              <li key={area} className="flex items-center gap-3 rounded-xl border border-white/15 p-4">
-                <span className="text-xs font-medium text-white/50">0{i + 1}</span>
-                <span className="text-sm">{area}</span>
+            {STRATEGIC_AREAS.map((area) => (
+              <li key={area} className="rounded-xl border border-white/15 p-4 text-sm">
+                {area}
               </li>
             ))}
           </ul>

@@ -39,7 +39,9 @@ type Tone = "card" | "page";
 
 type SectionProps = { business: Business; label: string };
 
-const headingClass = "mt-3 text-xl font-light tracking-tight sm:text-3xl lg:text-4xl";
+// Section title; headingClass is the same title sitting under a small label.
+const titleClass = "text-xl font-light tracking-tight sm:text-3xl lg:text-4xl";
+const headingClass = `mt-3 ${titleClass}`;
 
 function Shell({ tone, children }: { tone: Tone; children: React.ReactNode }) {
   return (
@@ -166,8 +168,7 @@ function OffersSection({ business, label, variant }: SectionProps & { variant: "
   if (variant === "cards")
     return (
       <div>
-        <Eyebrow>{label}</Eyebrow>
-        <h2 className={headingClass}>Inside {business.name}</h2>
+        <h2 className={titleClass}>{label}</h2>
         <ul className={cn("mt-8 grid gap-3 sm:grid-cols-2", offers.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3")}>
           {offers.map((o, i) => (
             // Photo card with a white panel floating over its lower edge.
@@ -193,14 +194,12 @@ function OffersSection({ business, label, variant }: SectionProps & { variant: "
     return (
       <div className="grid gap-6 lg:grid-cols-[1fr_2fr] lg:gap-16">
         <div>
-          <Eyebrow>{label}</Eyebrow>
-          <h2 className={headingClass}>{business.name}</h2>
+          <h2 className={titleClass}>{label}</h2>
         </div>
         <div>
           <ol className="divide-y border-y">
-            {offers.map((o, i) => (
+            {offers.map((o) => (
               <li key={o.title} className="flex items-baseline gap-6 py-4">
-                <span className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground">0{i + 1}</span>
                 <span className="text-base sm:text-lg">{o.title}</span>
               </li>
             ))}
@@ -227,9 +226,9 @@ function OffersSection({ business, label, variant }: SectionProps & { variant: "
     <div>
       <Eyebrow>{label}</Eyebrow>
       <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {offers.map((o, i) => (
+        {offers.map((o) => (
           <li key={o.title} className="flex gap-3 rounded-xl border p-4 text-sm">
-            <span className="font-mono text-[11px] text-muted-foreground tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+            <Bullet className="mt-1.5" />
             {o.title}
           </li>
         ))}
@@ -307,8 +306,7 @@ function StepsSection({ business, label, variant }: SectionProps & { variant: "c
     return (
       <div className="grid gap-8 lg:grid-cols-[1fr_2fr] lg:gap-16">
         <div>
-          <Eyebrow>{label}</Eyebrow>
-          <h2 className={headingClass}>Step by step</h2>
+          <h2 className={titleClass}>{label}</h2>
         </div>
         <ol className="space-y-8 border-l pl-8">
           {business.steps.map((step, i) => (
@@ -339,8 +337,7 @@ function StepsSection({ business, label, variant }: SectionProps & { variant: "c
     );
   return (
     <div>
-      <Eyebrow>{label}</Eyebrow>
-      <h2 className={headingClass}>Getting started with {business.name}</h2>
+      <h2 className={titleClass}>{label}</h2>
       <ol className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3">
         {business.steps.map((step, i) => (
           <li key={step.title} className="rounded-2xl bg-card p-6 ring-1 ring-foreground/5">
@@ -360,8 +357,7 @@ function FaqSection({ business, label, variant }: SectionProps & { variant: "acc
   if (variant === "grid")
     return (
       <div>
-        <Eyebrow>{label}</Eyebrow>
-        <h2 className={headingClass}>Frequently asked</h2>
+        <h2 className={titleClass}>{label}</h2>
         <dl className="mt-8 grid gap-x-12 gap-y-8 sm:mt-10 sm:grid-cols-2">
           {business.faqs.map((faq) => (
             <div key={faq.q}>
@@ -375,8 +371,7 @@ function FaqSection({ business, label, variant }: SectionProps & { variant: "acc
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_2fr] lg:gap-16">
       <div>
-        <Eyebrow>{label}</Eyebrow>
-        <h2 className={headingClass}>Frequently asked</h2>
+        <h2 className={titleClass}>{label}</h2>
       </div>
       <div className="divide-y border-y">
         {business.faqs.map((faq) => (
@@ -430,8 +425,7 @@ function ContactSection({ business, label, variant }: SectionProps & { variant: 
       <div className="rounded-3xl bg-card p-6 ring-1 ring-foreground/5 sm:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <Eyebrow>{label}</Eyebrow>
-            <h2 className="mt-3 text-xl font-light tracking-tight sm:text-3xl">Get in touch with {business.name}</h2>
+            <h2 className="text-xl font-light tracking-tight sm:text-3xl">{label}</h2>
           </div>
           <div className="[&>div]:mt-0">{buttons}</div>
         </div>
@@ -456,8 +450,7 @@ function ContactSection({ business, label, variant }: SectionProps & { variant: 
       )}
     >
       <div>
-        <Eyebrow>{label}</Eyebrow>
-        <h2 className="mt-3 text-xl font-light tracking-tight sm:text-3xl">Get in touch with {business.name}</h2>
+        <h2 className="text-xl font-light tracking-tight sm:text-3xl">{label}</h2>
         {buttons}
       </div>
       <dl className={cn("grid gap-6 sm:grid-cols-2", !dark && "content-start")}>
@@ -599,10 +592,9 @@ function PillarsSection({ business, label, variant }: SectionProps & { variant: 
       <Eyebrow>{label}</Eyebrow>
       <h2 className={headingClass}>{heading}</h2>
       <ul className={cn("mt-8 grid gap-6 sm:grid-cols-2", items.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3")}>
-        {items.map((item, i) => (
+        {items.map((item) => (
           <li key={item.title} className={cn("border-t pt-5", dark ? "border-white/20" : "border-foreground/80")}>
-            <span className={cn("font-mono text-[11px] tracking-[0.2em]", dark ? "text-white/50" : "text-muted-foreground")}>0{i + 1}</span>
-            <h3 className="mt-3 text-lg font-medium">{item.title}</h3>
+            <h3 className="text-lg font-medium">{item.title}</h3>
             <p className={cn("mt-2 text-sm", dark ? "text-white/70" : "text-muted-foreground")}>{item.text}</p>
           </li>
         ))}
@@ -727,8 +719,7 @@ function CatalogSection({ business, label }: SectionProps) {
     <div>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <Eyebrow>{label}</Eyebrow>
-          <h2 className={headingClass}>{business.name}</h2>
+          <h2 className={titleClass}>{label}</h2>
         </div>
         <MonoLink to={`/service-center?business=${business.slug}`} variant="outline-light">
           View in The Shop

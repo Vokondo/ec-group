@@ -202,7 +202,7 @@ export const BUSINESSES: Business[] = [
     summary: "Fresh, nutritious food products sourced with care for everyday households.",
     why: "Healthy food should be easy to find, affordable and trustworthy.",
     pillars: {
-      heading: "What we stand for",
+      heading: "How we source and handle food",
       items: [
         { title: "Fresh first", text: "Picked, packed and delivered with care, so food reaches you at its best." },
         { title: "Local growers", text: "Working with farmers across the region and paying them fairly for good produce." },
