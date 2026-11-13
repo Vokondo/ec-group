@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { BUSINESSES, SITE } from "@/lib/site";
+import { Logo } from "@/components/logo";
 
 const YEAR = new Date().getFullYear();
 
@@ -65,8 +66,11 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
-      <div className="border-t border-white/10 py-6 text-center text-xs text-white/50">
-        © {YEAR} {SITE.siteName}. All rights reserved.
+      <div className="flex items-center justify-center gap-3 border-t border-white/10 py-6 text-xs text-white/50">
+        <Logo className="size-7 ring-1 ring-white/20" />
+        <span>
+          © {YEAR} {SITE.siteName}. All rights reserved.
+        </span>
       </div>
     </footer>
   );

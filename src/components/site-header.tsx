@@ -7,6 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { monoButtonClass } from "@/lib/mono-button";
 import { useCart } from "@/components/cart-provider";
+import { Logo } from "@/components/logo";
 import { useTheme } from "@/lib/theme";
 
 // The header and the mobile menu both list Home.
@@ -49,7 +50,8 @@ export function SiteHeader() {
             </div>
           </div>
 
-          <Link to="/" className="text-base font-light tracking-wide whitespace-nowrap sm:text-xl">
+          <Link to="/" className="flex items-center gap-2.5 text-base font-light tracking-wide whitespace-nowrap sm:gap-3 sm:text-xl">
+            <Logo className="size-8 sm:size-10" />
             {SITE.siteName}
           </Link>
 
@@ -99,7 +101,10 @@ export function SiteHeader() {
           className="gap-0 border-0 bg-ink p-0 text-white data-[side=top]:h-dvh data-[side=top]:border-b-0"
         >
           <div className="flex h-16 shrink-0 items-center justify-between px-4 sm:px-6">
-            <SheetTitle className="text-base font-light tracking-wide text-white">{SITE.siteName}</SheetTitle>
+            <SheetTitle className="flex items-center gap-2.5 text-base font-light tracking-wide text-white">
+              <Logo className="size-8 ring-1 ring-white/20" />
+              {SITE.siteName}
+            </SheetTitle>
             <SheetClose className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "hover:bg-white/10 hover:text-white")} aria-label="Close menu">
               <XIcon />
             </SheetClose>
