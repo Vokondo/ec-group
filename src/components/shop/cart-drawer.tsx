@@ -30,7 +30,7 @@ export function CartDrawer() {
           <div className="mx-5 flex items-center gap-3 border-y py-4 sm:mx-6">
             <LockIcon className="size-4 shrink-0" />
             <SheetDescription className="text-xs">
-              <span className="block font-mono text-[10px] tracking-[0.2em] text-foreground uppercase">Secure payment</span>
+              <span className="text-xs font-medium block text-foreground">Secure payment</span>
               Mobile Money (MTN, Telecel, AirtelTigo) or card
             </SheetDescription>
           </div>
@@ -74,7 +74,7 @@ export function CartDrawer() {
                             <PlusIcon className="size-3.5" />
                           </button>
                         </div>
-                        <button type="button" onClick={() => setQty(l.id, 0)} className="flex items-center gap-1.5 font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase hover:text-foreground">
+                        <button type="button" onClick={() => setQty(l.id, 0)} className="text-xs font-medium flex items-center gap-1.5 text-muted-foreground hover:text-foreground">
                           <Trash2Icon className="size-3.5" /> Remove
                         </button>
                       </div>
@@ -101,7 +101,7 @@ export function CartDrawer() {
                       <button
                         type="button"
                         onClick={() => addToCart(o)}
-                        className="mt-auto flex w-fit items-center gap-2 font-mono text-[10px] tracking-[0.2em] uppercase hover:underline hover:underline-offset-4"
+                        className="text-xs font-medium mt-auto flex w-fit items-center gap-2 hover:underline hover:underline-offset-4"
                       >
                         Add <span aria-hidden className="size-1.5 rounded-full bg-foreground" />
                       </button>

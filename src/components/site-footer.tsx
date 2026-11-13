@@ -30,7 +30,7 @@ const COLUMNS = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-ink text-white/80">
+    <footer className="bg-black text-white/80">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-12 sm:gap-10 sm:py-16 sm:grid-cols-3 sm:px-6 lg:grid-cols-[1fr_1fr_1fr_1.4fr] lg:px-8">
         {COLUMNS.map((col) => (
           <div key={col.title}>

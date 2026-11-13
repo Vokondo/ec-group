@@ -52,7 +52,7 @@ const FOUNDER_BIO =
 const cardContainer = "max-w-[88rem]";
 
 // White card surface floating on the pale page, like the reference's cards.
-const whiteCard = "rounded-2xl bg-card text-card-foreground shadow-[0_20px_50px_-25px_oklch(0.3_0.05_262/0.25)] ring-1 ring-foreground/5";
+const whiteCard = "rounded-2xl bg-card text-card-foreground shadow-[0_20px_50px_-25px_oklch(0.3_0_0/0.25)] ring-1 ring-foreground/5";
 
 export default function HomePage() {
   usePageTitle();
@@ -65,7 +65,7 @@ export default function HomePage() {
       <section className="pt-16 pb-10 text-center sm:pt-24 sm:pb-14">
         <Container>
           <MonoLabel>Our businesses</MonoLabel>
-          <h2 className="mx-auto mt-4 max-w-xl text-2xl leading-tight font-light tracking-tight text-black sm:text-4xl">
+          <h2 className="mx-auto mt-4 max-w-xl text-2xl leading-tight font-light tracking-tight text-black sm:text-4xl dark:text-white">
             Eight ventures, each a part of something bigger.
           </h2>
         </Container>
@@ -113,10 +113,10 @@ export default function HomePage() {
           <div className="flex flex-col justify-between gap-12 p-7 sm:p-12 lg:p-14">
             <div>
               <MonoLabel>The founder</MonoLabel>
-              <h2 className="mt-4 text-3xl leading-[1.05] font-light tracking-tight text-black sm:text-4xl lg:text-5xl">
+              <h2 className="mt-4 text-3xl leading-[1.05] font-light tracking-tight text-black sm:text-4xl lg:text-5xl dark:text-white">
                 {SITE.founderName}
               </h2>
-              <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase sm:text-[11px]">
+              <p className="text-xs font-medium mt-2 text-muted-foreground">
                 Founder · {SITE.holdingName}
               </p>
             </div>
@@ -262,7 +262,7 @@ function BusinessExplorer() {
       <div id="business-details" role="tabpanel" aria-label={business.name} className="flex flex-col">
         {/* The selected business's photo (set `image` in src/lib/site.ts). The dark frame stays put while each
             new image settles in from a slight zoom and blur, and the caption slides up after it. */}
-        <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-900 lg:aspect-auto lg:flex-1">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-ink lg:aspect-auto lg:flex-1">
           <div
             key={business.slug}
             className="explorer-image group absolute inset-0 isolate flex flex-col justify-between p-4 text-white sm:p-5"
@@ -276,7 +276,7 @@ function BusinessExplorer() {
               <StatusBadge status={business.status} onDark />
             </div>
             <div>
-              <p className="rise-in font-mono text-[10px] tracking-[0.25em] text-white/70 uppercase [--rise-delay:200ms] sm:text-[11px]">
+              <p className="text-xs font-medium rise-in text-white/70 [--rise-delay:200ms]">
                 {business.sector}
               </p>
               <p className="rise-in mt-1 text-xl font-light tracking-tight [--rise-delay:320ms] sm:text-2xl">

@@ -21,7 +21,9 @@ export function MonoLink({
   );
 }
 
-// Tiny monospace section label used above headings, e.g. "OUR BUSINESSES".
+// Small section label used above headings on the home page; matches Eyebrow.
 export function MonoLabel({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <p className={cn("font-mono text-[10px] tracking-[0.25em] uppercase opacity-60", className)}>{children}</p>;
+  return (
+    <p className={cn("text-[13px] font-medium opacity-70", className)}>{children}</p>
+  );
 }

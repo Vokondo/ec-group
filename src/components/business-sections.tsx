@@ -433,7 +433,7 @@ function ContactSection({ business, label, variant }: SectionProps & { variant: 
         <dl className="mt-8 grid gap-6 border-t pt-6 sm:grid-cols-2 lg:grid-cols-4">
           {contactItems(business).map(({ label, value, href }) => (
             <div key={label}>
-              <dt className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">{label}</dt>
+              <dt className="text-xs font-medium text-muted-foreground">{label}</dt>
               <dd className="mt-1 text-sm">
                 <ContactValue value={value} href={href} />
               </dd>
@@ -462,7 +462,7 @@ function ContactSection({ business, label, variant }: SectionProps & { variant: 
             <div>
               <dt
                 className={cn(
-                  "font-mono text-[10px] tracking-[0.2em] uppercase",
+                  "text-xs font-medium",
                   dark ? "text-white/50" : "text-muted-foreground",
                 )}
               >
@@ -645,7 +645,7 @@ function NoteSection({ business }: { business: Business }) {
   return (
     <figure className="mx-auto max-w-3xl text-center">
       <blockquote className="text-2xl leading-snug font-light tracking-tight sm:text-4xl">“{business.note.quote}”</blockquote>
-      <figcaption className="mt-6 font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">{business.note.by}</figcaption>
+      <figcaption className="text-xs font-medium mt-6 text-muted-foreground">{business.note.by}</figcaption>
     </figure>
   );
 }

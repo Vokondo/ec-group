@@ -47,7 +47,7 @@ export function ImagePlaceholder({ variant = "center", slot }: { variant?: Place
     <div
       aria-hidden
       className={cn(
-        "absolute inset-0 -z-20 flex bg-neutral-800 bg-[linear-gradient(135deg,rgb(255_255_255/0.04)_25%,transparent_25%,transparent_50%,rgb(255_255_255/0.04)_50%,rgb(255_255_255/0.04)_75%,transparent_75%)] bg-[length:24px_24px]",
+        "absolute inset-0 -z-20 flex bg-ink bg-[linear-gradient(135deg,rgb(255_255_255/0.04)_25%,transparent_25%,transparent_50%,rgb(255_255_255/0.04)_50%,rgb(255_255_255/0.04)_75%,transparent_75%)] bg-[length:24px_24px]",
         variant === "corner" ? "items-end justify-end p-5" : variant === "top" ? "items-start justify-end px-5 pt-6" : "items-center justify-center",
       )}
     >

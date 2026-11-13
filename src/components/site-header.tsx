@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router";
-import { MailIcon, MenuIcon, MessageCircleIcon, PhoneIcon, SearchIcon, ShoppingBagIcon, XIcon } from "lucide-react";
+import { MailIcon, MenuIcon, MessageCircleIcon, MoonIcon, PhoneIcon, SearchIcon, ShoppingBagIcon, SunIcon, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS, SITE } from "@/lib/site";
 import { buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { monoButtonClass } from "@/lib/mono-button";
 import { useCart } from "@/components/cart-provider";
+import { useTheme } from "@/lib/theme";
 
 // The header and the mobile menu both list Home.
 const MENU_LINKS = [{ to: "/", label: "Home" }, ...NAV_LINKS];
@@ -26,10 +27,13 @@ export function SiteHeader() {
   const { count, setOpen } = useCart();
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggle: toggleTheme } = useTheme();
+  const themeLabel = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+  const ThemeIcon = theme === "dark" ? SunIcon : MoonIcon;
   const isActive = (to: string) => (to === "/" ? pathname === "/" : pathname.startsWith(to));
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-white text-foreground">
+    <header className="sticky top-0 z-40 border-b bg-card text-foreground">
       <div>
         <div className="mx-auto grid h-16 max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-3 px-3 sm:h-20 sm:px-6 lg:px-8">
           <div className="flex items-center gap-0.5">
@@ -51,6 +55,9 @@ export function SiteHeader() {
 
           <div className="flex items-center justify-end gap-1.5">
             <HeaderSearch className="hidden md:flex" />
+            <button type="button" onClick={toggleTheme} aria-label={themeLabel} title={themeLabel} className={iconButton}>
+              <ThemeIcon />
+            </button>
             <button
               type="button"
               onClick={() => setOpen(true)}
@@ -74,7 +81,7 @@ export function SiteHeader() {
               to={link.to}
               end={link.to === "/"}
               className={cn(
-                "px-3 py-2 font-mono text-[11px] tracking-[0.18em] uppercase transition-colors lg:px-4",
+                "px-3 py-2 text-xs font-semibold tracking-[0.08em] uppercase transition-colors lg:px-4",
                 isActive(link.to) ? "text-foreground" : "text-muted-foreground hover:text-foreground",
               )}
             >
@@ -128,6 +135,14 @@ export function SiteHeader() {
                   <Icon className="size-4" />
                 </a>
               ))}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={themeLabel}
+                className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "ml-auto rounded-full text-white/70 hover:bg-white/10 hover:text-white")}
+              >
+                <ThemeIcon className="size-4" />
+              </button>
             </div>
             <SheetClose render={<Link to="/contact?topic=partnership" />} nativeButton={false} className={monoButtonClass("solid", "w-full")}>
               Partner with us

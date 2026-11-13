@@ -36,7 +36,7 @@ export default function BusinessDetailPage() {
         />
         <Container className="relative pt-12 pb-12 sm:pt-16 sm:pb-20 lg:pt-24 lg:pb-28">
           <StatusBadge status={business.status} onDark />
-          <p className="mt-6 font-mono text-[10px] tracking-[0.25em] text-white/70 uppercase sm:text-[11px]">{business.sector}</p>
+          <p className="text-xs font-medium mt-6 text-white/70">{business.sector}</p>
           <h1 className="mt-2 text-3xl font-light tracking-tight sm:text-5xl lg:text-6xl">{business.name}</h1>
           <p className="mt-4 max-w-2xl text-base text-white/80 sm:mt-5 sm:text-lg">{business.summary}</p>
           <div className="mt-8 flex flex-wrap gap-3">

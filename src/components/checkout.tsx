@@ -142,7 +142,7 @@ function Stepper({ current, onStep }: { current: Step; onStep: (s: Step) => void
               </span>
               <span
                 className={cn(
-                  "font-mono text-[10px] tracking-[0.2em] uppercase sm:text-[11px]",
+                  "text-xs font-medium",
                   active ? "text-foreground" : "text-muted-foreground",
                   !active && "max-sm:sr-only",
                 )}
@@ -205,7 +205,7 @@ function CartStep({
                       <PlusIcon className="size-3.5" />
                     </button>
                   </div>
-                  <button type="button" onClick={() => setQty(l.id, 0)} className="flex items-center gap-1.5 font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase hover:text-foreground">
+                  <button type="button" onClick={() => setQty(l.id, 0)} className="text-xs font-medium flex items-center gap-1.5 text-muted-foreground hover:text-foreground">
                     <Trash2Icon className="size-3.5" /> Remove
                   </button>
                 </div>
@@ -526,7 +526,7 @@ function Confirmation({ placed }: { placed: Placed }) {
             : "We'll check your Mobile Money payment and then confirm your order."}{" "}
           We'll contact you on {placed.details.phone} to arrange {placed.details.fulfilment === "delivery" ? "delivery" : "pickup"}.
         </p>
-        <p className="mt-6 font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">Order reference</p>
+        <p className="text-xs font-medium mt-6 text-muted-foreground">Order reference</p>
         <p className="mt-1 font-mono text-lg font-medium">{placed.reference}</p>
         {placed.warning && <p className="mt-4 rounded-xl bg-destructive/10 p-3 text-sm text-destructive">{placed.warning}</p>}
       </div>

@@ -7,8 +7,8 @@ import { ProductImage } from "@/components/shop/product-image";
 import { useShop } from "@/components/shop/use-shop";
 
 const actionClass =
-  "inline-flex min-h-8 items-center justify-center rounded-md px-2 py-1.5 text-center font-mono text-[9px] font-medium tracking-[0.15em] whitespace-nowrap uppercase sm:min-h-10 sm:py-2 sm:text-[11px]";
-const primaryAction = cn(actionClass, "bg-black text-white hover:bg-neutral-800");
+  "text-xs font-medium sm:text-sm inline-flex min-h-8 items-center justify-center rounded-md px-2 py-1.5 text-center whitespace-nowrap sm:min-h-10 sm:py-2";
+const primaryAction = cn(actionClass, "bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-white/85");
 const iconAction = "size-8 px-0 transition-colors hover:bg-green-400 hover:text-black focus-visible:bg-green-400 focus-visible:text-black sm:size-11";
 
 export function ProductCard({ offering, className }: { offering: Offering; className?: string }) {
@@ -19,7 +19,7 @@ export function ProductCard({ offering, className }: { offering: Offering; class
 
   return (
     // Taller on phones so the photo keeps its space next to the text.
-    <article className={cn("flex aspect-[4/5] w-full min-w-0 flex-col rounded-md border border-neutral-200 bg-white p-1.5 text-neutral-950 sm:aspect-square sm:p-2", className)}>
+    <article className={cn("flex aspect-[4/5] w-full min-w-0 flex-col rounded-md border border-neutral-200 bg-white p-1.5 dark:bg-card text-neutral-950 sm:aspect-square sm:p-2", className)}>
       <Link to={offeringPath(offering)} className="block min-h-0 flex-1 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2" aria-label={offering.name}>
         <ProductImage src={offeringImage(offering)} alt="" zoom={false} className="h-full rounded-sm bg-neutral-100" />
       </Link>

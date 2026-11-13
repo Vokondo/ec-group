@@ -10,7 +10,7 @@ export function FounderPortrait({ className }: { className?: string }) {
       {SITE.founderImage ? (
         <CoverImage src={SITE.founderImage} alt={SITE.founderName} overlay="from-transparent" />
       ) : (
-        <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-neutral-800 to-neutral-900 text-sm text-neutral-500">
+        <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-ink to-black text-sm text-neutral-500">
           Founder portrait
         </div>
       )}

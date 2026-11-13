@@ -20,7 +20,7 @@ function CopyRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-4 border-t border-white/10 py-4 first:border-t-0 first:pt-0">
       <div className="min-w-0">
-        <p className="font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase">{label}</p>
+        <p className="text-xs font-medium text-white/50">{label}</p>
         <p className="mt-1 text-base font-medium break-words sm:text-lg">{value}</p>
       </div>
       <button

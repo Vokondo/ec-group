@@ -12,8 +12,8 @@ import { useShop } from "@/components/shop/use-shop";
 import { OfferingCarousel } from "@/components/service-catalog";
 import NotFoundPage from "@/pages/not-found";
 
-const ACTION = "inline-flex h-9 items-center justify-center rounded-[3px] px-3 text-center font-mono text-[10px] tracking-[0.18em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 sm:px-4 sm:text-[11px]";
-const PRIMARY = cn(ACTION, "bg-black text-white hover:bg-green-400 hover:text-black focus-visible:bg-green-400 focus-visible:text-black");
+const ACTION = "text-sm font-medium inline-flex h-10 items-center justify-center rounded-md px-4 text-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 sm:px-4";
+const PRIMARY = cn(ACTION, "bg-black text-white dark:bg-white dark:text-black hover:bg-green-400 hover:text-black focus-visible:bg-green-400 focus-visible:text-black");
 const SECONDARY = cn(ACTION, "border border-neutral-300 hover:bg-neutral-100");
 const TEXT_LINK = "underline decoration-neutral-300 underline-offset-4 hover:decoration-current";
 
@@ -39,7 +39,7 @@ export default function OfferingPage() {
     <>
       <div aria-hidden="true" className="h-20 bg-ink sm:h-24" />
 
-      <article className="bg-white pb-12 text-neutral-950 sm:pb-16 lg:pb-20">
+      <article className="bg-white pb-12 text-neutral-950 sm:pb-16 lg:pb-20 dark:bg-background">
         <Container>
           <nav aria-label="Breadcrumb" className="border-b border-neutral-200 py-4 text-xs leading-relaxed text-neutral-600 sm:py-5 sm:text-sm">
             <ol className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
@@ -57,7 +57,7 @@ export default function OfferingPage() {
 
           <div className="mt-6 grid items-start gap-6 sm:mt-8 md:grid-cols-[minmax(0,1.12fr)_minmax(0,1fr)] md:grid-rows-[auto_1fr] md:gap-x-8 md:gap-y-10 lg:mt-10 lg:gap-x-14 lg:gap-y-12 xl:gap-x-20">
             <header className="w-full min-w-0 max-w-md md:col-start-2 md:row-start-1">
-              <p className="font-mono text-[10px] tracking-[0.2em] text-neutral-600 uppercase sm:text-[11px]">{offering.category}</p>
+              <p className="text-xs font-medium text-neutral-600">{offering.category}</p>
               <h1 className="mt-2 text-[1.875rem] leading-[1.08] font-light tracking-tight text-pretty wrap-break-word lg:text-[2.125rem]">
                 {offering.name}
               </h1>
@@ -117,7 +117,7 @@ export default function OfferingPage() {
 
             <div className="w-full min-w-0 max-w-md md:col-start-2 md:row-start-2">
               <section aria-labelledby="offering-description">
-                <h2 id="offering-description" className="border-b border-neutral-300 pb-2 font-mono text-[10px] tracking-[0.2em] uppercase sm:text-[11px]">Description</h2>
+                <h2 id="offering-description" className="text-xs font-medium border-b border-neutral-300 pb-2">Description</h2>
                 {offering.subtitle && <p className="mt-3 text-sm font-light tracking-tight">{offering.subtitle}</p>}
                 <p className="mt-2 text-sm leading-relaxed whitespace-pre-line text-neutral-700 sm:text-[15px]">{offering.description}</p>
               </section>

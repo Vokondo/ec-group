@@ -6,9 +6,11 @@ export function Container({ className, children }: { className?: string; childre
   return <div className={cn("mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8", className)}>{children}</div>;
 }
 
+// Small sentence-case section label, quieter than the heading it introduces.
 export function Eyebrow({ children, className }: { children: React.ReactNode; className?: string }) {
-  // Same monospace label as the home page.
-  return <p className={cn("font-mono text-[10px] tracking-[0.25em] uppercase opacity-60 sm:text-[11px]", className)}>{children}</p>;
+  return (
+    <p className={cn("text-[13px] font-medium opacity-70", className)}>{children}</p>
+  );
 }
 
 // Two-column heading used throughout, mirroring the reference layout:
@@ -44,7 +46,7 @@ export function SectionHeading({
       </div>
       {(intro || actions) && (
         <div className="lg:max-w-md lg:justify-self-end">
-          {intro && <p className="text-sm text-muted-foreground">{intro}</p>}
+          {intro && <p className="text-muted-foreground">{intro}</p>}
           {actions && <div className="mt-4 flex flex-wrap gap-3">{actions}</div>}
         </div>
       )}
