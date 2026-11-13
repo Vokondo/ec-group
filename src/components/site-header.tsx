@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import { MenuIcon, ShoppingBagIcon, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -20,18 +20,15 @@ const MENU_LINKS = [{ to: "/", label: "Home" }, ...NAV_LINKS];
 export function SiteHeader() {
   const { count, setOpen } = useCart();
   const { pathname } = useLocation();
-  const headerRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  // "light" when the content behind the bar is light, so the bar's text turns dark.
-  const onLight = useBackdropIsLight(headerRef, pathname);
   // Past the hero, the bar flows into a round menu button at the right.
   const collapsed = usePastHero(pathname);
-  const overlayHover = onLight ? "hover:bg-black/10 hover:text-ink" : "hover:bg-white/10 hover:text-white";
+  const overlayHover = "hover:bg-white/10 hover:text-white";
 
   return (
-    // The glass itself never changes while scrolling (switching blur mid-scroll made the bar
-    // flicker at the top of the page); only the text colour follows what is behind it.
-    <header ref={headerRef} className="pointer-events-none fixed inset-x-0 top-0 z-40 w-full px-3 pt-3 sm:px-6 sm:pt-4">
+    // One fixed look everywhere: smoked frosted glass with white text, readable over both dark
+    // photos and light sections, so nothing about the glass changes while the page scrolls.
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-40 w-full px-3 pt-3 sm:px-6 sm:pt-4">
       {/* Past the hero the bar folds into a circle at the right. The glass never changes size:
           it is clipped down instead, which avoids re-laying out and re-blurring it every frame. */}
       <div className="relative mx-auto h-14 max-w-6xl">
@@ -47,10 +44,9 @@ export function SiteHeader() {
         <div
           style={{ clipPath: collapsed ? "inset(0 0 0 calc(100% - 3.5rem) round 9999px)" : "inset(0 0 0 0 round 9999px)" }}
           className={cn(
-            "pointer-events-auto absolute inset-0 isolate overflow-hidden rounded-full bg-white/10 ring-1 ring-inset backdrop-blur-xl backdrop-saturate-[1.8] transition-[clip-path,color] will-change-[clip-path]",
+            "pointer-events-auto absolute inset-0 isolate overflow-hidden rounded-full bg-neutral-900/45 text-white ring-1 ring-white/20 ring-inset backdrop-blur-xl backdrop-saturate-[1.8] transition-[clip-path] will-change-[clip-path]",
             flow,
             glassEdge,
-            onLight ? "text-ink ring-black/10" : "text-white ring-white/25",
           )}
         >
           {/* Liquid sheen: a soft light falling from the top edge */}
@@ -78,11 +74,7 @@ export function SiteHeader() {
                   className={({ isActive }) =>
                     cn(
                       "rounded-full px-3.5 py-1.5 text-sm font-light transition-colors",
-                      onLight
-                        ? isActive
-                          ? "bg-black/10 text-ink"
-                          : "text-ink/80 hover:bg-black/5 hover:text-ink"
-                        : isActive
+                      isActive
                         ? "bg-white/20 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3)]"
                         : "text-white/75 hover:bg-white/10 hover:text-white",
                     )
@@ -109,12 +101,7 @@ export function SiteHeader() {
               </button>
               <Link
                 to="/contact?topic=partnership"
-                className={cn(
-                  "hidden h-10 items-center rounded-full px-5 text-sm font-medium transition-colors sm:inline-flex",
-                  onLight
-                    ? "bg-ink text-white hover:bg-ink/85"
-                    : "bg-white/90 text-ink shadow-[inset_0_1px_0_rgb(255_255_255),0_4px_14px_-4px_rgb(0_0_0/0.3)] hover:bg-white",
-                )}
+                className="hidden h-10 items-center rounded-full bg-white/90 px-5 text-sm font-medium text-ink shadow-[inset_0_1px_0_rgb(255_255_255),0_4px_14px_-4px_rgb(0_0_0/0.3)] transition-colors hover:bg-white sm:inline-flex"
               >
                 Partner with us
               </Link>
@@ -137,9 +124,8 @@ export function SiteHeader() {
             tabIndex={collapsed ? 0 : -1}
             aria-hidden={!collapsed}
             className={cn(
-              "absolute inset-y-0 right-0 grid w-14 place-items-center rounded-full ring-1 ring-inset transition-opacity",
+              "absolute inset-y-0 right-0 grid w-14 place-items-center rounded-full ring-1 ring-white/20 ring-inset transition-opacity",
               glassEdge,
-              onLight ? "ring-black/10" : "ring-white/25",
               collapsed ? "opacity-100 delay-300 duration-300" : "pointer-events-none opacity-0 duration-150",
             )}
           >
@@ -216,54 +202,4 @@ function usePastHero(pathname: string) {
     };
   }, [pathname]);
   return past;
-}
-
-// Watches what sits behind the header while the page scrolls and reports whether it is light.
-function useBackdropIsLight(headerRef: React.RefObject<HTMLElement | null>, pathname: string) {
-  const [onLight, setOnLight] = useState(false);
-  useEffect(() => {
-    const check = () => {
-      const header = headerRef.current;
-      if (!header) return;
-      const rect = header.getBoundingClientRect();
-      const layers = document
-        .elementsFromPoint(window.innerWidth / 2, rect.top + rect.height / 2)
-        .filter((el) => !header.contains(el));
-      const light = isLightBackdrop(layers);
-      setOnLight((prev) => (prev === light ? prev : light));
-    };
-    check();
-    // Check again once the new page has rendered, and on every scroll or resize.
-    const timer = window.setTimeout(check, 150);
-    window.addEventListener("scroll", check, { passive: true });
-    window.addEventListener("resize", check);
-    return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener("scroll", check);
-      window.removeEventListener("resize", check);
-    };
-  }, [headerRef, pathname]);
-  return onLight;
-}
-
-// Goes through the layers under the bar from front to back and judges the first one that paints:
-// photos count as dark; gradients and photo overlays are judged by the text colour they set.
-function isLightBackdrop(layers: Element[]) {
-  for (const el of layers) {
-    if (el instanceof HTMLImageElement || el instanceof HTMLVideoElement) return false;
-    const style = getComputedStyle(el);
-    if (style.backgroundImage !== "none") return parseColor(style.color).l < 0.7;
-    const bg = parseColor(style.backgroundColor);
-    if (bg.a > 0.5) return bg.l > 0.6;
-  }
-  return true;
-}
-
-// Rough lightness (0 to 1) and alpha of a computed CSS colour in rgb(), oklch() or oklab() form.
-function parseColor(color: string) {
-  if (color === "transparent") return { l: 0, a: 0 };
-  const nums = color.match(/[\d.]+%?/g)?.map((n) => (n.endsWith("%") ? parseFloat(n) / 100 : parseFloat(n))) ?? [];
-  if (color.startsWith("okl")) return { l: nums[0] ?? 0, a: color.includes("/") ? (nums[3] ?? 1) : 1 };
-  const [r = 0, g = 0, b = 0, a = 1] = nums;
-  return { l: (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255, a };
 }
