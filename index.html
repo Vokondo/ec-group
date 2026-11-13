@@ -7,11 +7,9 @@
     <title>Enock Chanimbe</title>
     <meta name="description" content="The official home of Enock Chanimbe and CHANIMBE GROUP, bringing together the group's businesses, initiatives and opportunities." />
     <script>
-      // Apply the saved light/dark choice (or the device setting) before the page draws.
+      // Light by default; apply a saved dark choice before the page draws.
       try {
-        var theme = localStorage.getItem("theme");
-        if (theme === "dark" || (!theme && matchMedia("(prefers-color-scheme: dark)").matches))
-          document.documentElement.classList.add("dark");
+        if (localStorage.getItem("theme") === "dark") document.documentElement.classList.add("dark");
       } catch (e) {}
     </script>
   </head>

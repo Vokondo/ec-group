@@ -1,4 +1,4 @@
-import { CheckIcon, ChevronDownIcon, ClockIcon, InfoIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
+import { ChevronDownIcon, ClockIcon, InfoIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CATALOG, SITE, toOffer, type Business } from "@/lib/site";
 import { media, mediaPath } from "@/lib/media";
@@ -58,6 +58,11 @@ function Story({ business, className }: { business: Business; className?: string
     </div>
   );
 }
+
+// List marker: a small solid square, used instead of tick icons.
+const Bullet = ({ className }: { className?: string }) => (
+  <span aria-hidden className={cn("size-1.5 shrink-0 bg-current", className)} />
+);
 
 const OffersNote = ({ business }: { business: Business }) =>
   business.status === "proposed" && !business.donation ? (
@@ -222,9 +227,9 @@ function OffersSection({ business, label, variant }: SectionProps & { variant: "
     <div>
       <Eyebrow>{label}</Eyebrow>
       <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {offers.map((o) => (
+        {offers.map((o, i) => (
           <li key={o.title} className="flex gap-3 rounded-xl border p-4 text-sm">
-            <CheckIcon className="mt-0.5 size-4 shrink-0" />
+            <span className="font-mono text-[11px] text-muted-foreground tabular-nums">{String(i + 1).padStart(2, "0")}</span>
             {o.title}
           </li>
         ))}
@@ -241,7 +246,7 @@ function AvailableList({ business, onDark }: { business: Business; onDark?: bool
     <ul className="space-y-2 text-sm">
       {business.available.map((a) => (
         <li key={a} className="flex gap-2">
-          <span className={cn("mt-1.5 size-1.5 shrink-0 rounded-full", onDark ? "bg-white" : "bg-foreground")} />
+          <Bullet className={cn("mt-1.5", onDark ? "bg-white" : "bg-foreground")} />
           {a}
         </li>
       ))}
@@ -502,7 +507,7 @@ function SchoolsSection({ business, label }: SectionProps) {
               <ul className="mt-3 space-y-2 text-sm">
                 {school.programmes.map((p) => (
                   <li key={p} className="flex gap-3">
-                    <CheckIcon className="mt-0.5 size-4 shrink-0" />
+                    <Bullet className="mt-[0.45rem]" />
                     {p}
                   </li>
                 ))}
@@ -529,7 +534,7 @@ function SynergySection({ business, label }: SectionProps) {
         <ul className="space-y-3">
           {business.synergy.points.map((p) => (
             <li key={p} className="flex gap-3 rounded-2xl border border-white/15 p-4 text-sm sm:text-base">
-              <CheckIcon className="mt-0.5 size-4 shrink-0" />
+              <Bullet className="mt-[0.45rem] sm:mt-2" />
               {p}
             </li>
           ))}
@@ -630,7 +635,7 @@ function ChecklistSection({ business, label }: SectionProps) {
       <ul className="grid gap-x-8 sm:grid-cols-2">
         {business.checklist.items.map((item) => (
           <li key={item} className="flex gap-3 border-b py-4 text-base sm:text-lg">
-            <CheckIcon className="mt-1 size-4 shrink-0" />
+            <Bullet className="mt-2 sm:mt-2.5" />
             {item}
           </li>
         ))}

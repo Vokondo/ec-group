@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-// Light or dark mode. The choice is remembered in this browser; until one is made the site follows
-// the device setting. index.html applies it before the page draws, so it never flashes.
+// Light or dark mode. The site is light by default; a visitor's choice is remembered in this browser
+// and index.html applies it before the page draws, so it never flashes.
 export type Theme = "light" | "dark";
 
 const STORAGE_KEY = "theme";
