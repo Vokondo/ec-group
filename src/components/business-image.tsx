@@ -30,7 +30,7 @@ export function CoverImage({
           src={withBase(src)}
           alt={alt}
           loading="lazy"
-          className="absolute inset-0 -z-20 size-full object-cover transition duration-700 group-hover:scale-105"
+          className="absolute inset-0 -z-20 size-full object-cover"
         />
       ) : (
         <ImagePlaceholder variant={variant} slot={slot} />

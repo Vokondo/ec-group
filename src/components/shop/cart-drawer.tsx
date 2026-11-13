@@ -51,7 +51,7 @@ export function CartDrawer() {
                 return (
                   <li key={l.id} className="flex gap-4 py-5">
                     <Link to={o ? offeringPath(o) : "/service-center"} onClick={close} className="shrink-0">
-                      <ProductImage src={offeringImage(o)} alt={l.name} zoom={false} className="size-24 rounded-xl sm:size-28" />
+                      <ProductImage src={offeringImage(o)} alt={l.name} zoom={false} className="size-24 rounded-lg sm:size-28" />
                     </Link>
                     <div className="flex min-w-0 flex-1 flex-col">
                       <div className="flex items-start justify-between gap-3">
@@ -91,7 +91,7 @@ export function CartDrawer() {
               <ul className="mt-4 flex snap-x gap-3 overflow-x-auto scroll-px-5 px-5 pb-1 [scrollbar-width:none] sm:scroll-px-6 sm:px-6">
                 {suggestions.map((o) => (
                   <li key={o.id} className="flex w-80 shrink-0 snap-start gap-3 rounded-2xl bg-muted/70 p-3">
-                    <ProductImage src={offeringImage(o)} alt={o.name} zoom={false} className="size-20 shrink-0 rounded-xl bg-card" />
+                    <ProductImage src={offeringImage(o)} alt={o.name} zoom={false} className="size-20 shrink-0 rounded-lg bg-card" />
                     <div className="flex min-w-0 flex-1 flex-col">
                       <div className="flex items-start justify-between gap-2">
                         <p className="truncate text-sm font-medium">{o.name}</p>
@@ -123,7 +123,7 @@ export function CartDrawer() {
               </div>
               <p className="text-xl font-medium">{formatPrice(total)}</p>
             </div>
-            <SheetClose render={<Link to="/service-center/checkout" />} nativeButton={false} className={pillClass("solid", "lg", "w-full rounded-xl")}>
+            <SheetClose render={<Link to="/service-center/checkout" />} nativeButton={false} className={pillClass("solid", "lg", "w-full rounded-lg")}>
               Checkout securely <span aria-hidden className="size-1.5 rounded-full bg-background" />
             </SheetClose>
           </div>

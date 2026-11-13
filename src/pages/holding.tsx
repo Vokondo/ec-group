@@ -64,11 +64,11 @@ export default function HoldingPage() {
 
       <section className="bg-muted/60 py-12 sm:py-20">
         <Container className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-3xl bg-card p-6 text-card-foreground sm:p-8">
+          <div className="rounded-2xl bg-card p-6 text-card-foreground sm:p-8">
             <Eyebrow>Vision</Eyebrow>
             <p className="mt-3 text-lg font-light tracking-tight sm:mt-4 sm:text-xl">A diversified Ghanaian group that creates lasting value for its customers, its people and the communities it serves.</p>
           </div>
-          <div className="rounded-3xl bg-ink p-6 text-white sm:p-8">
+          <div className="rounded-2xl bg-ink p-6 text-white sm:p-8">
             <Eyebrow>Mission</Eyebrow>
             <p className="mt-3 text-lg font-light tracking-tight sm:mt-4 sm:text-xl">To build and support businesses that deliver quality, widen access to essential services and give back.</p>
           </div>
@@ -116,7 +116,7 @@ export default function HoldingPage() {
           />
           <ul className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
             {SHARED_SUPPORT.map((item) => (
-              <li key={item.title} className="rounded-2xl bg-muted/60 p-6">
+              <li key={item.title} className="border-t border-foreground/80 pt-5">
                 <h3 className="font-medium">{item.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{item.text}</p>
               </li>
@@ -139,7 +139,7 @@ export default function HoldingPage() {
           </div>
           <ul className="grid gap-3 sm:grid-cols-2">
             {STRATEGIC_AREAS.map((area) => (
-              <li key={area} className="rounded-xl border border-white/15 p-4 text-sm">
+              <li key={area} className="rounded-lg border border-white/15 p-4 text-sm">
                 {area}
               </li>
             ))}

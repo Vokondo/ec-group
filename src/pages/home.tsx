@@ -35,7 +35,7 @@ const FOUNDER_BIO =
 const cardContainer = "max-w-[88rem]";
 
 // White card surface floating on the pale page, like the reference's cards.
-const whiteCard = "rounded-2xl bg-card text-card-foreground shadow-[0_20px_50px_-25px_oklch(0.3_0_0/0.25)] ring-1 ring-foreground/5";
+const whiteCard = "rounded-2xl border border-foreground/10 bg-card text-card-foreground";
 
 export default function HomePage() {
   usePageTitle();
@@ -60,7 +60,7 @@ export default function HomePage() {
 
       {/* The Shop: dark image card with a link list */}
       <Container className={cn(cardContainer, "mt-8 sm:mt-14")}>
-        <div className="relative isolate grid min-h-[28rem] items-center gap-10 overflow-hidden rounded-2xl p-7 pb-14 text-white ring-1 ring-white/10 sm:min-h-[36rem] sm:rounded-3xl sm:p-14 lg:min-h-[42rem] lg:grid-cols-2 lg:gap-20 lg:p-24">
+        <div className="relative isolate grid min-h-[28rem] items-center gap-10 overflow-hidden rounded-2xl p-7 pb-14 text-white ring-1 ring-white/10 sm:min-h-[36rem] sm:p-14 lg:min-h-[42rem] lg:grid-cols-2 lg:gap-20 lg:p-24">
           <CoverImage src={SERVICE_IMAGE} alt="" overlay="from-black/85 via-black/60 to-black/70" variant="corner" />
           <div>
             <MonoLabel>The Shop</MonoLabel>
@@ -90,7 +90,7 @@ export default function HomePage() {
 
       {/* Founder card: portrait on the left, details on the right */}
       <Container className={cn(cardContainer, "mt-8 sm:mt-14")}>
-        <div className={cn(whiteCard, "grid overflow-hidden sm:rounded-3xl lg:min-h-[42rem] lg:grid-cols-[1.1fr_1fr]")}>
+        <div className={cn(whiteCard, "grid overflow-hidden lg:min-h-[42rem] lg:grid-cols-[1.1fr_1fr]")}>
           <FounderPortrait className="aspect-[4/3] lg:aspect-auto" />
           {/* Name at the top, bio and actions at the bottom, as in the reference's text cards */}
           <div className="flex flex-col justify-between gap-12 p-7 sm:p-12 lg:p-14">
@@ -200,7 +200,7 @@ function BusinessExplorer() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setPaused(false)}
-      className={cn(whiteCard, "grid gap-10 p-6 sm:rounded-3xl sm:p-14 lg:min-h-[38rem] lg:grid-cols-2 lg:gap-24 lg:p-24")}
+      className={cn(whiteCard, "grid gap-10 p-6 sm:p-14 lg:min-h-[38rem] lg:grid-cols-2 lg:gap-24 lg:p-24")}
     >
       <ul role="tablist" aria-label="Businesses" className="self-center">
         {BUSINESSES.map((b) => {
@@ -241,7 +241,7 @@ function BusinessExplorer() {
       <div id="business-details" role="tabpanel" aria-label={business.name} className="flex flex-col">
         {/* The selected business's photo (set `image` in src/lib/site.ts). The dark frame stays put while each
             new image settles in from a slight zoom and blur, and the caption slides up after it. */}
-        <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-ink lg:aspect-auto lg:flex-1">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-ink lg:aspect-auto lg:flex-1">
           <div
             key={business.slug}
             className="explorer-image group absolute inset-0 isolate flex flex-col justify-between p-4 text-white sm:p-5"

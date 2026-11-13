@@ -84,7 +84,7 @@ export function ServiceCatalog() {
   return (
     <div ref={top} className="scroll-mt-20 md:scroll-mt-36">
       {/* Title and search, as one bar */}
-      <div className="flex flex-col gap-4 rounded-3xl border bg-card p-4 sm:flex-row sm:items-center sm:justify-between sm:rounded-full sm:py-3 sm:pr-3 sm:pl-6">
+      <div className="flex flex-col gap-4 rounded-2xl border bg-card p-4 sm:flex-row sm:items-center sm:justify-between sm:rounded-full sm:py-3 sm:pr-3 sm:pl-6">
         <h2 className="text-xl font-medium tracking-tight sm:text-2xl">Find what you need</h2>
         <form
           role="search"
@@ -120,7 +120,7 @@ export function ServiceCatalog() {
                     onClick={() => update({ kind: value })}
                     aria-pressed={active}
                     className={cn(
-                      "flex w-full items-center gap-3 rounded-full border px-4 py-2 text-left text-sm transition lg:rounded-xl lg:border-transparent lg:px-3",
+                      "flex w-full items-center gap-3 rounded-full border px-4 py-2 text-left text-sm transition lg:rounded-lg lg:border-transparent lg:px-3",
                       active ? "border-foreground bg-foreground text-background lg:border-transparent lg:bg-card lg:text-foreground lg:shadow-sm" : "bg-card hover:bg-muted lg:bg-transparent",
                     )}
                   >
@@ -166,7 +166,7 @@ export function ServiceCatalog() {
                     onClick={() => update({ business: b.slug })}
                     aria-pressed={active}
                     className={cn(
-                      "w-full rounded-xl px-3 py-2 text-left text-sm transition",
+                      "w-full rounded-lg px-3 py-2 text-left text-sm transition",
                       active ? "bg-card font-medium shadow-sm" : "text-muted-foreground hover:bg-muted hover:text-foreground",
                     )}
                   >
@@ -196,7 +196,7 @@ export function ServiceCatalog() {
           </div>
 
           {results.length === 0 ? (
-            <div className="mt-4 rounded-3xl border border-dashed p-12 text-center text-sm text-muted-foreground">
+            <div className="mt-4 rounded-2xl border border-dashed p-12 text-center text-sm text-muted-foreground">
               Nothing matches yet.{" "}
               <Link to="/service-center/interest" className="font-medium text-foreground underline underline-offset-4">
                 Tell us what you're looking for

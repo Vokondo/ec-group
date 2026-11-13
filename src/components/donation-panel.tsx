@@ -48,7 +48,7 @@ export function DonationPanel({ donation }: { donation: Donation }) {
           <p className="mt-6 inline-block rounded-full bg-white/10 px-4 py-2 font-mono text-xs tracking-wider">{donation.hashtag}</p>
         </div>
 
-        <div className="h-fit rounded-3xl border border-white/15 bg-white/5 p-6 sm:p-8">
+        <div className="h-fit rounded-2xl border border-white/15 bg-white/5 p-6 sm:p-8">
           <div className="flex items-center gap-3">
             <span className="grid size-10 place-items-center rounded-full bg-white text-ink">
               <SmartphoneIcon className="size-5" />

@@ -34,7 +34,7 @@ export default function AboutPage() {
 
       <section className="bg-card text-card-foreground py-12 sm:py-20">
         <Container className="grid gap-8 lg:gap-12 lg:grid-cols-[2fr_3fr]">
-          <FounderPortrait className="aspect-[4/3] rounded-3xl lg:aspect-square" />
+          <FounderPortrait className="aspect-[4/3] rounded-2xl lg:aspect-square" />
           <div>
             <Eyebrow>Biography</Eyebrow>
             <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">An entrepreneur from the Central Region</h2>
@@ -107,7 +107,7 @@ export default function AboutPage() {
           <ul className="grid gap-3 sm:grid-cols-2">
             {BUSINESSES.map((b) => (
               <li key={b.slug}>
-                <Link to={`/businesses/${b.slug}`} className="block rounded-xl border border-white/15 p-4 transition hover:bg-white/5">
+                <Link to={`/businesses/${b.slug}`} className="block rounded-lg border border-white/15 p-4 transition hover:bg-white/5">
                   <p className="text-xs text-white/50">{b.sector}</p>
                   <p className="font-medium">{b.name}</p>
                 </Link>

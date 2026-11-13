@@ -77,7 +77,7 @@ const OffersNote = ({ business }: { business: Business }) =>
 
 function WhySection({ business, label }: SectionProps) {
   return (
-    <div className="grid gap-6 rounded-3xl bg-muted/60 p-6 sm:p-10 lg:grid-cols-2 lg:gap-12 lg:p-14">
+    <div className="grid gap-6 rounded-2xl bg-muted/60 p-6 sm:p-10 lg:grid-cols-2 lg:gap-12 lg:p-14">
       <div>
         <Eyebrow>{label}</Eyebrow>
         <p className="mt-3 text-lg font-light tracking-tight sm:text-2xl">{business.why}</p>
@@ -180,7 +180,7 @@ function OffersSection({ business, label, variant }: SectionProps & { variant: "
                 overlay="from-transparent to-transparent"
                 variant="compact"
               />
-              <div className="absolute inset-x-2.5 bottom-2.5 rounded-xl bg-white p-3 text-ink shadow-sm">
+              <div className="absolute inset-x-2.5 bottom-2.5 rounded-lg bg-white p-3 text-ink shadow-sm">
                 <span className="grid size-5 place-items-center rounded-full bg-ink text-[10px] font-medium text-white">{i + 1}</span>
                 <p className="mt-3 text-sm leading-snug font-light">{o.title}</p>
               </div>
@@ -227,7 +227,7 @@ function OffersSection({ business, label, variant }: SectionProps & { variant: "
       <Eyebrow>{label}</Eyebrow>
       <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {offers.map((o) => (
-          <li key={o.title} className="flex gap-3 rounded-xl border p-4 text-sm">
+          <li key={o.title} className="flex gap-3 rounded-lg border p-4 text-sm">
             <Bullet className="mt-1.5" />
             {o.title}
           </li>
@@ -256,7 +256,7 @@ function AvailableList({ business, onDark }: { business: Business; onDark?: bool
 function AudienceSection({ business, label, variant }: SectionProps & { variant: "aside" | "banner" }) {
   if (variant === "banner")
     return (
-      <div className="grid gap-8 rounded-3xl bg-ink p-6 text-white sm:p-10 lg:grid-cols-2 lg:gap-12 lg:p-14">
+      <div className="grid gap-8 rounded-2xl bg-ink p-6 text-white sm:p-10 lg:grid-cols-2 lg:gap-12 lg:p-14">
         <div>
           <Eyebrow>{label}</Eyebrow>
           <p className="mt-3 text-lg font-light tracking-tight sm:text-2xl">{business.audience}</p>
@@ -281,7 +281,7 @@ function AudienceSection({ business, label, variant }: SectionProps & { variant:
         <Eyebrow>{label}</Eyebrow>
         <p className="mt-3 text-lg font-light tracking-tight sm:text-2xl">{business.audience}</p>
       </div>
-      <aside className="h-fit rounded-3xl bg-muted/60 p-6">
+      <aside className="h-fit rounded-2xl bg-muted/60 p-6">
         <h2 className="font-medium">Available now</h2>
         <div className="mt-4">
           <AvailableList business={business} />
@@ -340,7 +340,7 @@ function StepsSection({ business, label, variant }: SectionProps & { variant: "c
       <h2 className={titleClass}>{label}</h2>
       <ol className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3">
         {business.steps.map((step, i) => (
-          <li key={step.title} className="rounded-2xl bg-card p-6 ring-1 ring-foreground/5">
+          <li key={step.title} className="border-t border-foreground/80 pt-5">
             <span className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground">0{i + 1}</span>
             <h3 className="mt-3 font-medium">{step.title}</h3>
             <p className="mt-2 text-sm text-muted-foreground">{step.text}</p>
@@ -422,7 +422,7 @@ function ContactSection({ business, label, variant }: SectionProps & { variant: 
 
   if (variant === "strip")
     return (
-      <div className="rounded-3xl bg-card p-6 ring-1 ring-foreground/5 sm:p-8">
+      <div className="rounded-2xl bg-card p-6 ring-1 ring-foreground/5 sm:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <h2 className="text-xl font-light tracking-tight sm:text-3xl">{label}</h2>
@@ -445,7 +445,7 @@ function ContactSection({ business, label, variant }: SectionProps & { variant: 
   return (
     <div
       className={cn(
-        "grid gap-8 rounded-3xl p-6 sm:p-10 lg:grid-cols-[1fr_1.4fr] lg:p-14",
+        "grid gap-8 rounded-2xl p-6 sm:p-10 lg:grid-cols-[1fr_1.4fr] lg:p-14",
         dark ? "bg-ink text-white" : "bg-muted/60",
       )}
     >
@@ -491,7 +491,7 @@ function SchoolsSection({ business, label }: SectionProps) {
         />
         <div className="mt-8 grid gap-4 sm:mt-12 lg:grid-cols-3">
           {schools.map((school, i) => (
-            <article key={school.name} className="flex flex-col rounded-3xl border bg-card p-6 text-card-foreground sm:p-8">
+            <article key={school.name} className="flex flex-col rounded-2xl border bg-card p-6 text-card-foreground sm:p-8">
               <Eyebrow>School {String(i + 1).padStart(2, "0")}</Eyebrow>
               <h3 className="mt-3 text-lg font-medium tracking-tight sm:text-xl">{school.name}</h3>
               <p className="mt-2 text-lg font-light tracking-tight sm:text-2xl">{school.tagline}</p>
@@ -588,7 +588,7 @@ function PillarsSection({ business, label, variant }: SectionProps & { variant: 
   const { heading, items } = business.pillars;
   const dark = variant === "dark";
   return (
-    <div className={cn(dark && "rounded-3xl bg-ink p-6 text-white sm:p-10 lg:p-14")}>
+    <div className={cn(dark && "rounded-2xl bg-ink p-6 text-white sm:p-10 lg:p-14")}>
       <Eyebrow>{label}</Eyebrow>
       <h2 className={headingClass}>{heading}</h2>
       <ul className={cn("mt-8 grid gap-6 sm:grid-cols-2", items.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3")}>
@@ -612,7 +612,7 @@ function SegmentsSection({ business, label }: SectionProps) {
       <h2 className={headingClass}>{business.segments.heading}</h2>
       <ul className="mt-8 grid gap-3 sm:grid-cols-2">
         {business.segments.items.map((item) => (
-          <li key={item.title} className="rounded-2xl bg-muted/60 p-6 sm:p-8">
+          <li key={item.title} className="border-t border-foreground/80 pt-5">
             <h3 className="text-lg font-light tracking-tight sm:text-2xl">{item.title}</h3>
             <p className="mt-2 text-sm text-muted-foreground sm:text-base">{item.text}</p>
           </li>
@@ -659,7 +659,7 @@ function FeatureSection({ business, label, variant }: SectionProps & { variant: 
   const { heading, text, image, cta } = business.feature;
   return (
     <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-14">
-      <div className={cn("relative isolate aspect-[4/3] overflow-hidden rounded-3xl", variant === "right" && "lg:order-2")}>
+      <div className={cn("relative isolate aspect-[4/3] overflow-hidden rounded-2xl", variant === "right" && "lg:order-2")}>
         <CoverImage src={image} slot={mediaPath(business.slug, "feature")} alt="" overlay="from-transparent to-transparent" />
       </div>
       <div>
@@ -679,7 +679,7 @@ function FeatureSection({ business, label, variant }: SectionProps & { variant: 
 function NoticeSection({ business, label }: SectionProps) {
   if (!business.notice) return null;
   return (
-    <div className="flex gap-4 rounded-3xl border border-foreground/15 p-6 sm:p-8">
+    <div className="flex gap-4 rounded-2xl border border-foreground/15 p-6 sm:p-8">
       <InfoIcon className="mt-1 size-5 shrink-0" />
       <div>
         <Eyebrow>{label}</Eyebrow>
@@ -698,7 +698,7 @@ function ActionsSection({ business, label }: SectionProps) {
       <h2 className={headingClass}>{business.actions.heading}</h2>
       <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {business.actions.items.map((item) => (
-          <li key={item.title} className="flex flex-col rounded-2xl bg-muted/60 p-6">
+          <li key={item.title} className="flex flex-col border-t border-foreground/80 pt-5">
             <h3 className="text-lg font-medium">{item.title}</h3>
             <p className="mt-2 mb-6 text-sm text-muted-foreground">{item.text}</p>
             <MonoLink to={item.cta.to} variant="outline-light" className="mt-auto self-start">

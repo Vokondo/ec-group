@@ -66,7 +66,7 @@ export function Checkout() {
 
   if (lines.length === 0) {
     return (
-      <div className="mx-auto max-w-xl rounded-3xl border border-dashed p-12 text-center">
+      <div className="mx-auto max-w-xl rounded-2xl border border-dashed p-12 text-center">
         <ShoppingBagIcon className="mx-auto size-10 text-muted-foreground" />
         <h2 className="mt-4 text-lg font-medium">Your cart is empty</h2>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -174,13 +174,13 @@ function CartStep({
   return (
     <section>
       <h2 className="text-xl font-light tracking-tight sm:text-2xl">Review your cart</h2>
-      <ul className="mt-5 divide-y rounded-3xl border bg-card px-4 sm:px-6">
+      <ul className="mt-5 divide-y rounded-2xl border bg-card px-4 sm:px-6">
         {lines.map((l) => {
           const o = findOffering(l.id);
           return (
             <li key={l.id} className="flex gap-4 py-5">
               <Link to={o ? offeringPath(o) : "/service-center"} className="shrink-0">
-                <ProductImage src={offeringImage(o)} alt={l.name} zoom={false} className="size-20 rounded-xl sm:size-24" />
+                <ProductImage src={offeringImage(o)} alt={l.name} zoom={false} className="size-20 rounded-lg sm:size-24" />
               </Link>
               <div className="flex min-w-0 flex-1 flex-col">
                 <div className="flex items-start justify-between gap-3">
@@ -517,7 +517,7 @@ function Confirmation({ placed }: { placed: Placed }) {
   const paid = placed.method === "paystack";
   return (
     <div className="mx-auto max-w-2xl">
-      <div className="rounded-3xl border bg-card p-6 text-center sm:p-10">
+      <div className="rounded-2xl border bg-card p-6 text-center sm:p-10">
         {paid ? <CheckCircle2Icon className="mx-auto size-12" /> : <ClockIcon className="mx-auto size-12" />}
         <h2 className="mt-4 text-2xl font-light tracking-tight">{paid ? "Thank you, your order is placed" : "Order received"}</h2>
         <p className="mt-3 text-sm text-muted-foreground">
@@ -528,10 +528,10 @@ function Confirmation({ placed }: { placed: Placed }) {
         </p>
         <p className="text-xs font-medium mt-6 text-muted-foreground">Order reference</p>
         <p className="mt-1 font-mono text-lg font-medium">{placed.reference}</p>
-        {placed.warning && <p className="mt-4 rounded-xl bg-destructive/10 p-3 text-sm text-destructive">{placed.warning}</p>}
+        {placed.warning && <p className="mt-4 rounded-lg bg-destructive/10 p-3 text-sm text-destructive">{placed.warning}</p>}
       </div>
 
-      <div className="mt-6 rounded-3xl border bg-card p-6">
+      <div className="mt-6 rounded-2xl border bg-card p-6">
         <h3 className="flex items-center gap-2 font-medium">
           <PackageIcon className="size-4" /> Order summary
         </h3>

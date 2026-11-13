@@ -12,7 +12,7 @@ export function BusinessTile({ business, className, large }: { business: Busines
     <Link
       to={`/businesses/${business.slug}`}
       className={cn(
-        "group relative isolate flex min-h-44 flex-col justify-between overflow-hidden rounded-2xl p-4 sm:min-h-56 sm:p-5 text-white shadow-sm ring-1 ring-white/10 transition hover:shadow-xl hover:ring-white/25",
+        "group relative isolate flex min-h-44 flex-col justify-between overflow-hidden rounded-2xl p-4 sm:min-h-56 sm:p-5 text-white ring-1 ring-transparent transition hover:ring-foreground/20",
         className,
       )}
     >
