@@ -17,23 +17,6 @@ const HERO_IMAGE: string | undefined = "/images/home/hero.jpg";
 // Custom-generated homepage artwork for the unified Service Center.
 const SERVICE_IMAGE = "/images/home/service-center.jpg";
 
-// Homepage-only African-context stock photography from Pexels (free to use).
-// Keeping the overrides here prevents them from changing the individual business pages.
-const HOME_BUSINESS_IMAGES: Partial<Record<string, string>> = {
-  university:
-    "https://images.pexels.com/photos/33920052/pexels-photo-33920052.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  "green-foods": "/images/home/green-foods.jpg",
-  "barbering-shop":
-    "https://images.pexels.com/photos/7697319/pexels-photo-7697319.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  bank:
-    "https://images.pexels.com/photos/32103473/pexels-photo-32103473.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  cosmetics:
-    "https://images.pexels.com/photos/34476770/pexels-photo-34476770.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  foundation:
-    "https://images.pexels.com/photos/28593054/pexels-photo-28593054.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  "bicycle-run": "/images/businesses/bicycle-run.jpg",
-};
-
 const countOf = (...kinds: OfferingKind[]) => CATALOG.filter((o) => kinds.includes(o.kind)).length;
 
 const SERVICE_LINKS = [
@@ -66,7 +49,7 @@ export default function HomePage() {
         <Container>
           <MonoLabel>Our businesses</MonoLabel>
           <h2 className="mx-auto mt-4 max-w-xl text-2xl leading-tight font-light tracking-tight text-black sm:text-4xl dark:text-white">
-            Eight ventures, each a part of something bigger.
+            Eight businesses and initiatives under one group.
           </h2>
         </Container>
       </section>
@@ -145,17 +128,13 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* CTA band: black gradient with a soft spotlight behind the heading and a thin light line along the top */}
-      <section className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,oklch(0.11_0_0),oklch(0.05_0_0)_60%,var(--ink))] py-24 text-center text-white sm:py-36">
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-          {/* Spotlight behind the heading */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_55%_at_50%_42%,oklch(0.42_0_0/0.55),transparent_70%)]" />
-          {/* Thin light line along the top edge */}
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-          <div className="absolute inset-x-[20%] top-0 h-24 bg-[radial-gradient(ellipse_50%_100%_at_50%_0%,rgb(255_255_255/0.10),transparent)]" />
-        </div>
+      {/* Closing band: a plain black band with a direct invitation */}
+      <section className="bg-black py-20 text-center text-white sm:py-28">
         <Container>
-          <h2 className="text-3xl font-light tracking-tight sm:text-5xl">Ready to get started?</h2>
+          <h2 className="mx-auto max-w-2xl text-3xl font-light tracking-tight sm:text-5xl">Have an idea for working with us?</h2>
+          <p className="mx-auto mt-4 max-w-xl text-white/70">
+            Partnerships, stockists, sponsorship or simply a question: tell us what you have in mind and we will get back to you.
+          </p>
           <div className="mt-6 flex justify-center gap-2 sm:mt-8 sm:gap-3">
             <MonoLink to="/contact" variant="outline-dark">
               Contact us
@@ -268,7 +247,7 @@ function BusinessExplorer() {
             className="explorer-image group absolute inset-0 isolate flex flex-col justify-between p-4 text-white sm:p-5"
           >
             <CoverImage
-              src={media(business.slug, "cover") ?? HOME_BUSINESS_IMAGES[business.slug] ?? business.image}
+              src={media(business.slug, "cover") ?? business.image}
               alt={business.name}
               overlay="from-black/70 via-transparent to-black/25"
             />

@@ -80,6 +80,7 @@ placeholder shows the file name it is waiting for.
 | File | Where it shows |
 |---|---|
 | `cover.jpg` | Page banner, business tiles and the home page |
+| `statement.jpg` | Full-width photo behind the large statement line |
 | `gallery-1.jpg` | Photo gallery, tile 1 |
 | `gallery-2.jpg` | Photo gallery, tile 2 |
 | `gallery-3.jpg` | Photo gallery, tile 3 |

@@ -89,8 +89,9 @@ export default function OfferingPage() {
                 src={current?.src}
                 alt={current?.label ? `${offering.name}, ${current.label}` : offering.name}
                 zoom={false}
+                fit="contain"
                 eager
-                className="aspect-[4/3] rounded-md bg-neutral-100 md:aspect-square"
+                className="aspect-square rounded-md bg-neutral-100"
               />
               {photos.length > 1 && (
                 <ul aria-label="Product photos" className="mt-3 flex flex-wrap gap-2">
@@ -106,7 +107,7 @@ export default function OfferingPage() {
                           index === photo ? "border-neutral-950" : "border-neutral-200 hover:border-neutral-500",
                         )}
                       >
-                        <ProductImage src={src} alt="" zoom={false} className="aspect-square rounded-sm" />
+                        <ProductImage src={src} alt="" zoom={false} className="aspect-square rounded-sm md:[&_img]:object-contain md:[&_img]:p-2" />
                         {label && <span className="block truncate px-1 py-0.5 text-xs text-neutral-600">{label}</span>}
                       </button>
                     </li>

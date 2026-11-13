@@ -109,12 +109,10 @@ export const BUSINESSES: Business[] = [
     available: ["Expressions of interest from students and educators"],
     cta: { label: "Express interest", to: "/service-center/interest?business=university" },
     secondaryCta: { label: "Contact us", to: "/contact" },
-    image: "/images/businesses/university.jpg",
-    statement: "Learn by doing. Graduate with a portfolio, not just a certificate.",
+    statement: "Students learn by making real work, and leave with a portfolio to show for it.",
     stats: [
       { value: "3", label: "Schools, each linked to industry" },
       { value: "16", label: "Programme areas, from skilled arts to AI" },
-      { value: "1", label: "Goal: a career or a business for every graduate" },
     ],
     notice: {
       heading: "Admissions are not yet open",
@@ -218,7 +216,6 @@ export const BUSINESSES: Business[] = [
     feature: {
       heading: "The people behind the produce",
       text: "Green Foods is being built with local growers, not around them. Fair prices, steady orders and careful handling mean better food for you and a better living for the farmers who grow it.",
-      image: "/images/offerings/gf-distribution.jpg",
       cta: { label: "Partner with us", to: "/contact?topic=green-foods" },
     },
     story: [
@@ -228,13 +225,12 @@ export const BUSINESSES: Business[] = [
     offers: [
       "Fresh produce boxes",
       "Healthy pantry staples",
-      { title: "Bulk supply for retailers and offices", image: "/images/offerings/gf-distribution.jpg" },
+      "Bulk supply for retailers and offices",
     ],
     audience: "Households, health conscious shoppers, shops, restaurants and offices.",
     available: ["Pre-order interest for produce boxes", "Distributor and retailer enquiries"],
     cta: { label: "Register interest", to: "/service-center/interest?business=green-foods" },
     secondaryCta: { label: "Stock Green Foods", to: "/contact?topic=green-foods" },
-    image: "/images/home/green-foods.jpg",
     steps: [
       { title: "Register interest", text: "Let us know you would like a produce box or pantry staples." },
       { title: "Confirm your order", text: "At launch we confirm what is in each box, the price and the delivery day." },
@@ -261,7 +257,6 @@ export const BUSINESSES: Business[] = [
     feature: {
       heading: "Visit the shop",
       text: "We are setting up in the Central Region of Ghana: clean chairs, sharp tools and a team that respects your time. The full address and opening hours will be shared before we open.",
-      image: "/images/businesses/barbering-shop.jpg",
       cta: { label: "Book an appointment", to: "/service-center/booking?business=barbering-shop" },
     },
     story: [
@@ -269,15 +264,14 @@ export const BUSINESSES: Business[] = [
       "We are bringing the craft of traditional barbering together with modern styles, clean tools and a booking system that respects your time.",
     ],
     offers: [
-      { title: "Haircuts and fades", image: "/images/offerings/bb-haircut.jpg" },
-      { title: "Beard trims, shaping and hot towel shaves", image: "/images/offerings/bb-beard.jpg" },
+      "Haircuts and fades",
+      "Beard trims, shaping and hot towel shaves",
       "Kids' cuts",
       "Appointments and walk-ins",
     ],
     audience: "Men and boys who want consistent, quality grooming without the wait.",
     available: ["Request an appointment online", "Walk-ins when chairs are free, once open"],
     cta: { label: "Book an appointment", to: "/service-center/booking?business=barbering-shop" },
-    image: "/images/businesses/barbering-shop.jpg",
     steps: [
       { title: "Book online", text: "Choose a service and a time that suits you." },
       { title: "We confirm", text: "We contact you to confirm your appointment." },
@@ -328,7 +322,6 @@ export const BUSINESSES: Business[] = [
     available: ["No banking services are offered at this time", "Registering interest for future updates"],
     cta: { label: "Register interest", to: "/service-center/interest?business=bank" },
     secondaryCta: { label: "Contact us", to: "/contact" },
-    image: "/images/businesses/bank.jpg",
     steps: [
       { title: "Register interest", text: "Leave your details to receive updates." },
       { title: "Follow our progress", text: "We share updates as the authorization process advances." },
@@ -348,7 +341,7 @@ export const BUSINESSES: Business[] = [
     status: "proposed",
     summary: "A beauty and skincare brand made for everyday self care.",
     why: "Good skincare should be simple, effective and suited to our climate and skin types.",
-    statement: "Simple routines. Honest ingredients. Made for our skin and our climate.",
+    statement: "Skincare made for our skin and our climate, with ingredients we are happy to explain.",
     story: [
       "Skincare should be simple, effective and made for the skin and climate it is used in. Too often, people pay more for products that were never designed with them in mind.",
       "Degree Cosmetics is being created to offer a focused range of everyday essentials, with clear ingredients, honest claims and quality you can feel.",
@@ -377,9 +370,9 @@ export const BUSINESSES: Business[] = [
     status: "proposed",
     summary: "The group's clothing line, bringing everyday style under the Enock Chanimbe name.",
     why: "To create quality, distinctive clothing that people are proud to wear.",
-    statement: "Well made. Worn with pride.",
+    statement: "Clothes we are proud to put our name on.",
     note: {
-      quote: "Every piece should feel personal: the fit, the fabric and the finish. That is the standard behind the name.",
+      quote: "Before a piece carries the Enock Chanimbe name, we check the fit, the fabric and the finish ourselves.",
       by: "The Enock Chanimbe line",
     },
     story: [
@@ -424,7 +417,6 @@ export const BUSINESSES: Business[] = [
     stats: [
       { value: "1 Cedi", label: "is all it takes to start giving" },
       { value: "20 years", label: "our goal to end schools under trees in Ghana" },
-      { value: "1 school", label: "at a time, starting in the communities we know" },
     ],
     pillars: {
       heading: "Why a classroom changes everything",
@@ -484,7 +476,7 @@ export const BUSINESSES: Business[] = [
     status: "proposed",
     summary: "A cycling community bringing people together for group rides, fitness and fun.",
     why: "Cycling keeps people healthy, connects neighbourhoods and is open to every fitness level.",
-    statement: "One community. Every pace welcome.",
+    statement: "Bring a bike and ride at your own pace. We will ride with you.",
     checklist: {
       heading: "Why ride with us",
       items: [
@@ -499,7 +491,6 @@ export const BUSINESSES: Business[] = [
     feature: {
       heading: "Where we ride",
       text: "Rides start across the Central Region of Ghana, with routes chosen for safety and scenery. The meeting point, distance and pace are shared before every ride.",
-      image: "/images/businesses/bicycle-run.jpg",
       cta: { label: "Join the next ride", to: "/service-center/interest?business=bicycle-run" },
     },
     story: [
@@ -507,8 +498,8 @@ export const BUSINESSES: Business[] = [
       "Through regular community rides, fun events and group sessions, we want to grow a friendly cycling community that keeps people moving and brings neighbourhoods together.",
     ],
     offers: [
-      { title: "Monthly community rides", image: "/images/offerings/br-rides.jpg" },
-      { title: "Charity and fun ride events", image: "/images/offerings/br-events.jpg" },
+      "Monthly community rides",
+      "Charity and fun ride events",
       "Beginner friendly routes",
       "Corporate and group rides",
     ],
@@ -516,7 +507,6 @@ export const BUSINESSES: Business[] = [
     available: ["Sign up for the next community ride", "Enquire about group and corporate rides"],
     cta: { label: "Join the next ride", to: "/service-center/interest?business=bicycle-run" },
     secondaryCta: { label: "Group rides", to: "/contact?topic=bicycle-run" },
-    image: "/images/businesses/bicycle-run.jpg",
     steps: [
       { title: "Sign up", text: "Register for the next community ride." },
       { title: "Get ride details", text: "We share the date, route and meeting point." },
@@ -590,28 +580,37 @@ export const KIND_LABELS: Record<OfferingKind, string> = {
 };
 
 export const CATALOG: Offering[] = [
-  { id: "uni-media", business: "university", kind: "programme", name: "School of Media, Communication, Creative & Skilled Arts", description: "Where talent becomes a career: skilled arts, digital marketing, journalism, film, design, fashion, music and performing arts.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-programmes.jpg" },
-  { id: "uni-science", business: "university", kind: "programme", name: "School of Pure Science & Technology", description: "Science that solves real problems: computing, AI, cybersecurity, pure sciences, biomedical science and engineering technology.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-programmes.jpg" },
-  { id: "uni-green", business: "university", kind: "programme", name: "School of Agriculture, Sanitation & Recycling", description: "Feeding the nation, cleaning the future: agribusiness, food science, sanitation, recycling, water and renewable energy.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-programmes.jpg" },
-  { id: "uni-faculty", business: "university", kind: "programme", name: "Teach with us", description: "For educators and industry practitioners who would like to teach, mentor or collaborate with Chanimbe University.", category: "Education", price: null, status: "proposed", image: "/images/offerings/uni-faculty.jpg" },
-  { id: "gf-products", business: "green-foods", kind: "product", name: "Green Foods product range", subtitle: "Nutritious everyday foods", description: "Fresh produce boxes and healthy pantry staples for everyday households. Register interest to hear when the range launches.", category: "Food", price: 25, status: "proposed", sample: true },
-  { id: "gf-distribution", business: "green-foods", kind: "service", name: "Wholesale and distribution", description: "Bulk supply for shops, restaurants and offices, and partnerships with distributors who want to stock Green Foods.", category: "Food", price: null, status: "proposed", image: "/images/offerings/gf-distribution.jpg" },
-  { id: "bb-haircut", business: "barbering-shop", kind: "service", name: "Haircut & styling", description: "Classic and modern cuts, fades and line ups at Degree Barber 1942. Request an appointment.", category: "Grooming", price: null, status: "proposed", image: "/images/offerings/bb-haircut.jpg" },
-  { id: "bb-beard", business: "barbering-shop", kind: "service", name: "Beard trim & shave", description: "Beard shaping, trims and hot towel shaves at Degree Barber 1942.", category: "Grooming", price: null, status: "proposed", image: "/images/offerings/bb-beard.jpg" },
-  { id: "bank-interest", business: "bank", kind: "service", name: "Future financial services", description: "Register interest only. No banking services are offered at this time.", category: "Finance", price: null, status: "proposed", image: "/images/offerings/bank-interest.jpg" },
-  { id: "cos-skincare", business: "cosmetics", kind: "product", name: "Skincare collection", subtitle: "Everyday skincare essentials", description: "Cleanser, moisturiser and sunscreen made for everyday use and our climate, from Degree Cosmetics.", category: "Beauty", price: 85, status: "proposed", sample: true },
-  { id: "cos-personal-care", business: "cosmetics", kind: "product", name: "Personal care range", subtitle: "Personal care essentials", description: "Body lotions and oils for soft, healthy skin, from Degree Cosmetics.", category: "Beauty", price: 40, status: "proposed", sample: true },
-  { id: "fd-schools", business: "foundation", kind: "programme", name: "1 Cedi for Schools Under Trees", description: "Help end schools under trees in Ghana. Donate via Mobile Money to Chanimbe Africa Foundation LBG.", category: "Community", price: null, status: "proposed" },
-  { id: "fd-volunteer", business: "foundation", kind: "programme", name: "Volunteer programme", description: "Give your time and skills to Chanimbe Africa Foundation's outreach and school projects.", category: "Community", price: null, status: "proposed" },
-  { id: "fd-partner", business: "foundation", kind: "programme", name: "Community partnerships", description: "For schools, companies and community groups who want to partner with Chanimbe Africa Foundation on building and reforming schools.", category: "Community", price: null, status: "proposed" },
-  { id: "br-rides", business: "bicycle-run", kind: "event", name: "Community rides", description: "Free monthly group rides with Pedal with Enock, paced for all levels. Register to hear about the next date.", category: "Wellness", price: null, status: "proposed", image: "/images/offerings/br-rides.jpg" },
-  { id: "br-events", business: "bicycle-run", kind: "event", name: "Charity and fun rides", description: "Themed rides with Pedal with Enock that raise funds for community causes, with dates announced in advance.", category: "Wellness", price: null, status: "proposed", image: "/images/offerings/br-events.jpg" },
-  { id: "ec-collection", business: "enock-chanimbe", kind: "product", name: "First collection", subtitle: "Everyday wear", description: "The first Enock Chanimbe clothing collection. Join the launch list to see it first.", category: "Fashion", price: null, status: "proposed" },
-  { id: "ec-custom", business: "enock-chanimbe", kind: "service", name: "Custom and group orders", description: "Branded or custom pieces for teams, events, churches and organisations.", category: "Fashion", price: null, status: "proposed" },
+  { id: "bb-minoxidil", business: "barbering-shop", kind: "product", name: "Kirkland Minoxidil", description: "Kirkland Signature Minoxidil topical solution, 5%.", category: "Grooming", price: 100, status: "available" },
+  { id: "bb-winning-star", business: "barbering-shop", kind: "product", name: "Winning Star Hair Clipper", description: "Winning Star ST-5640 hair clipper in a metallic finish with a digital display.", category: "Grooming", price: 200, status: "available" },
+  { id: "ec-unlimited", business: "enock-chanimbe", kind: "product", name: "Unlimited T-shirt", description: "White crew-neck T-shirt with a black and red Unlimited graphic.", category: "Fashion", price: 100, status: "available" },
+  { id: "ec-logo-tee", business: "enock-chanimbe", kind: "product", name: "EC Logo T-shirt", description: "White crew-neck T-shirt with the black circular EC logo on the chest.", category: "Fashion", price: 100, status: "available" },
+  { id: "ec-stay-weird", business: "enock-chanimbe", kind: "product", name: "Stay Weird T-shirt", description: "Black T-shirt with a small white chest graphic and a large Stay Weird print on the back.", category: "Fashion", price: 100, status: "available" },
+  { id: "ec-portrait-hoodie", business: "enock-chanimbe", kind: "product", name: "Portrait Graphic Hoodie", description: "Black pullover hoodie with a kangaroo pocket and a monochrome portrait graphic on the back.", category: "Fashion", price: 100, status: "available" },
+  { id: "ec-olive-hoodie", business: "enock-chanimbe", kind: "product", name: "Olive Graphic Hoodie", description: "Olive pullover hoodie with a character graphic on the front and a kangaroo pocket.", category: "Fashion", price: 100, status: "available" },
+  { id: "ec-loaded", business: "enock-chanimbe", kind: "product", name: "Loaded Graphic T-shirt", description: "Off-white T-shirt with an oversized illustrated character wearing a Loaded bucket hat.", category: "Fashion", price: 100, status: "available" },
+  { id: "ec-usa-graphic", business: "enock-chanimbe", kind: "product", name: "USA Graphic T-shirt", description: "Black T-shirt with a large illustrated portrait and grey USA beanie graphic.", category: "Fashion", price: 100, status: "available" },
+  { id: "ec-spider-man", business: "enock-chanimbe", kind: "product", name: "Spider-Man Graphic T-shirt", description: "White T-shirt with red Spider-Man lettering and a large character graphic.", category: "Fashion", price: 100, status: "available" },
+  { id: "ec-blue-star", business: "enock-chanimbe", kind: "product", name: "Blue Star Graphic T-shirt", description: "White T-shirt with a blue masked portrait on the front and a blue star graphic on the back.", category: "Fashion", price: 100, status: "available" },
+  { id: "br-triban-bike", business: "bicycle-run", kind: "product", name: "Triban Bicycle", description: "White Triban bicycle with drop handlebars, black wheels and mudguards.", category: "Cycling", price: 300, status: "available" },
+  { id: "cos-body-wash", business: "cosmetics", kind: "product", name: "Degree Body Wash", description: "Degree Cosmetics body wash in the white bottle with the red and white Fresh Skin label.", category: "Beauty", price: 65, status: "available" },
 ];
 
 // Product photos added as src/media/<business-slug>/<offering-id>.jpg replace the defaults above.
-for (const o of CATALOG) o.image = media(o.business, o.id) ?? o.image;
+for (const o of CATALOG) {
+  o.image = media(o.business, o.id) ?? o.image;
+  const hasApparelViews = o.business === "enock-chanimbe" && o.name.includes("T-shirt") && !!media(o.business, `${o.id}-detail`);
+  const views = [
+    { slot: "angle", label: hasApparelViews ? "Model, front" : "Alternate view" },
+    { slot: "detail", label: hasApparelViews ? "Model, alternate angle" : "Detail" },
+  ].flatMap(({ slot, label }) => {
+    const src = media(o.business, `${o.id}-${slot}`);
+    return src ? [{ src, label }] : [];
+  });
+  if (views.length) o.gallery = [
+    ...(o.gallery ?? (o.image ? [{ src: o.image, label: hasApparelViews ? "3D garment overview" : "Overview" }] : [])),
+    ...views,
+  ];
+}
 
 // Mobile Money payment details shown at checkout. Replace with the confirmed account.
 export const PAYMENT = {

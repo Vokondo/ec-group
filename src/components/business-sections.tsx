@@ -552,7 +552,13 @@ function StatementSection({ business, variant }: { business: Business; variant: 
   if (variant === "image")
     return (
       <section className="relative isolate flex min-h-80 items-center overflow-hidden py-20 text-center text-white sm:min-h-[28rem]">
-        <CoverImage src={business.image} slot={mediaPath(business.slug, "cover")} alt="" overlay="from-black/70 via-black/50 to-black/60" />
+        {/* Its own photo (statement.jpg), so it doesn't repeat the banner just above; falls back to the cover */}
+        <CoverImage
+          src={media(business.slug, "statement") ?? business.image}
+          slot={mediaPath(business.slug, "statement")}
+          alt=""
+          overlay="from-black/70 via-black/50 to-black/60"
+        />
         <Container>
           <p className="mx-auto max-w-3xl text-3xl leading-tight font-light tracking-tight sm:text-5xl">{business.statement}</p>
         </Container>
@@ -572,7 +578,7 @@ function StatsSection({ business, label }: SectionProps) {
   return (
     <div>
       <Eyebrow>{label}</Eyebrow>
-      <dl className="mt-6 grid gap-6 border-t pt-6 sm:grid-cols-3 sm:gap-8">
+      <dl className={cn("mt-6 grid gap-6 border-t pt-6 sm:gap-8", business.stats.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3")}>
         {business.stats.map((stat) => (
           <div key={stat.label}>
             <dt className="text-4xl font-light tracking-tight sm:text-5xl">{stat.value}</dt>
