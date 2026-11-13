@@ -14,6 +14,7 @@ placeholder shows the file name it is waiting for.
 | File | Where it shows |
 |---|---|
 | `cover.jpg` | Page banner, business tiles and the home page |
+| `logo.png` | Logo on the page banner and business tiles (transparent PNG works best) |
 | `gallery-1.jpg` | Photo gallery, tile 1 |
 | `gallery-2.jpg` | Photo gallery, tile 2 |
 | `gallery-3.jpg` | Photo gallery, tile 3 |
@@ -22,11 +23,12 @@ placeholder shows the file name it is waiting for.
 | `uni-green.jpg` | Service Center product photo: School of Agriculture, Sanitation & Recycling |
 | `uni-faculty.jpg` | Service Center product photo: Teach with us |
 
-## Green Foods  (`src/media/green-foods/`)
+## Chanimbe Foods  (`src/media/green-foods/`)
 
 | File | Where it shows |
 |---|---|
 | `cover.jpg` | Page banner, business tiles and the home page |
+| `logo.png` | Logo on the page banner and business tiles (transparent PNG works best) |
 | `gallery-1.jpg` | Photo gallery, tile 1 |
 | `gallery-2.jpg` | Photo gallery, tile 2 |
 | `gallery-3.jpg` | Photo gallery, tile 3 |
@@ -34,7 +36,7 @@ placeholder shows the file name it is waiting for.
 | `offer-2.jpg` | Offer card 2 |
 | `offer-3.jpg` | Offer card 3 |
 | `feature.jpg` | Photo beside the feature text |
-| `gf-products.jpg` | Service Center product photo: Green Foods product range |
+| `gf-products.jpg` | Service Center product photo: Chanimbe Foods product range |
 | `gf-distribution.jpg` | Service Center product photo: Wholesale and distribution |
 
 ## Degree Barber 1942  (`src/media/barbering-shop/`)
@@ -42,6 +44,7 @@ placeholder shows the file name it is waiting for.
 | File | Where it shows |
 |---|---|
 | `cover.jpg` | Page banner, business tiles and the home page |
+| `logo.png` | Logo on the page banner and business tiles (transparent PNG works best) |
 | `gallery-1.jpg` | Photo gallery, tile 1 |
 | `gallery-2.jpg` | Photo gallery, tile 2 |
 | `gallery-3.jpg` | Photo gallery, tile 3 |
@@ -56,11 +59,12 @@ placeholder shows the file name it is waiting for.
 | `bb-haircut.jpg` | Service Center product photo: Haircut & styling |
 | `bb-beard.jpg` | Service Center product photo: Beard trim & shave |
 
-## Bank  (`src/media/bank/`)
+## Chanimbe African Bank  (`src/media/bank/`)
 
 | File | Where it shows |
 |---|---|
 | `cover.jpg` | Page banner, business tiles and the home page |
+| `logo.png` | Logo on the page banner and business tiles (transparent PNG works best) |
 | `gallery-1.jpg` | Photo gallery, tile 1 |
 | `bank-interest.jpg` | Service Center product photo: Future financial services |
 
@@ -69,6 +73,7 @@ placeholder shows the file name it is waiting for.
 | File | Where it shows |
 |---|---|
 | `cover.jpg` | Page banner, business tiles and the home page |
+| `logo.png` | Logo on the page banner and business tiles (transparent PNG works best) |
 | `gallery-1.jpg` | Photo gallery, tile 1 |
 | `gallery-2.jpg` | Photo gallery, tile 2 |
 | `gallery-3.jpg` | Photo gallery, tile 3 |
@@ -80,6 +85,7 @@ placeholder shows the file name it is waiting for.
 | File | Where it shows |
 |---|---|
 | `cover.jpg` | Page banner, business tiles and the home page |
+| `logo.png` | Logo on the page banner and business tiles (transparent PNG works best) |
 | `statement.jpg` | Full-width photo behind the large statement line |
 | `gallery-1.jpg` | Photo gallery, tile 1 |
 | `gallery-2.jpg` | Photo gallery, tile 2 |
@@ -92,6 +98,7 @@ placeholder shows the file name it is waiting for.
 | File | Where it shows |
 |---|---|
 | `cover.jpg` | Page banner, business tiles and the home page |
+| `logo.png` | Logo on the page banner and business tiles (transparent PNG works best) |
 | `project-1.jpg` | Project gallery, photo 1 |
 | `project-2.jpg` | Project gallery, photo 2 |
 | `project-3.jpg` | Project gallery, photo 3 |
@@ -106,6 +113,7 @@ placeholder shows the file name it is waiting for.
 | File | Where it shows |
 |---|---|
 | `cover.jpg` | Page banner, business tiles and the home page |
+| `logo.png` | Logo on the page banner and business tiles (transparent PNG works best) |
 | `gallery-1.jpg` | Photo gallery, tile 1 |
 | `gallery-2.jpg` | Photo gallery, tile 2 |
 | `gallery-3.jpg` | Photo gallery, tile 3 |

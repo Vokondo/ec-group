@@ -2,9 +2,12 @@ import { Link } from "react-router";
 import { cn } from "@/lib/utils";
 import type { Business } from "@/lib/site";
 import { CoverImage } from "@/components/business-image";
+import { BrandMark } from "@/components/brand-mark";
+import { media } from "@/lib/media";
 import { StatusBadge } from "@/components/shared";
 
 export function BusinessTile({ business, className, large }: { business: Business; className?: string; large?: boolean }) {
+  const logo = media(business.slug, "logo");
   return (
     <Link
       to={`/businesses/${business.slug}`}
@@ -14,8 +17,9 @@ export function BusinessTile({ business, className, large }: { business: Busines
       )}
     >
       <CoverImage src={business.image} alt={business.name} variant={large ? "center" : "compact"} />
-      <div className="relative flex items-start">
+      <div className="relative flex items-start justify-between gap-3">
         <StatusBadge status={business.status} onDark />
+        {logo && <BrandMark src={logo} alt={`${business.name} logo`} className="h-9 px-2 py-1.5 sm:h-10" />}
       </div>
       <div className="relative">
         <p className="text-[11px] font-medium tracking-wider text-white/70 uppercase">{business.sector}</p>

@@ -3,6 +3,7 @@ import { BUSINESSES, SITE } from "@/lib/site";
 import { usePageTitle } from "@/lib/use-page-title";
 import { MonoLink } from "@/components/mono-link";
 import { BusinessTile } from "@/components/business-visual";
+import { BrandMark } from "@/components/brand-mark";
 import { Container, Eyebrow, PageHero, SectionHeading } from "@/components/shared";
 
 // What the holding company provides to every business in the group.
@@ -29,6 +30,7 @@ export default function HoldingPage() {
   return (
     <>
       <PageHero
+        logo={<BrandMark src="/brand/chanimbe-group.png" alt={`${SITE.holdingName} logo`} className="h-14 sm:h-16" />}
         eyebrow="Holding Company"
         title={SITE.holdingName}
         intro={`The central organization that brings together the businesses and initiatives founded by ${SITE.founderName}.`}

@@ -5,7 +5,7 @@ Business page photos are free stock photos from [Pexels](https://www.pexels.com)
 They were chosen to show modern, aspirational Ghana first (Accra, Kumasi, Winneba, Ho) and Africa more widely.
 Replace any of them by saving your own photo with the same file name (see README.md).
 
-| File | Pexels photo |
+| File | Source |
 |---|---|
 | `university/cover.jpg` | [17192486](https://www.pexels.com/photo/17192486/) |
 | `university/gallery-1.jpg` | [30575961](https://www.pexels.com/photo/30575961/) |
@@ -54,8 +54,8 @@ Replace any of them by saving your own photo with the same file name (see README
 | `enock-chanimbe/gallery-3.jpg` | [27869061](https://www.pexels.com/photo/27869061/) |
 | `enock-chanimbe/ec-collection.jpg` | [19218038](https://www.pexels.com/photo/19218038/) |
 | `enock-chanimbe/ec-custom.jpg` | [9849641](https://www.pexels.com/photo/9849641/) |
-| `foundation/cover.jpg` | [9424263](https://www.pexels.com/photo/9424263/) |
-| `foundation/project-1.jpg` | [20191067](https://www.pexels.com/photo/20191067/) |
+| `foundation/cover.jpg` | Chanimbe Africa Foundation (own photo) |
+| `foundation/project-1.jpg` | Chanimbe Africa Foundation (own photo) |
 | `foundation/project-2.jpg` | [3766706](https://www.pexels.com/photo/3766706/) |
 | `foundation/project-3.jpg` | [27546304](https://www.pexels.com/photo/27546304/) |
 | `foundation/project-4.jpg` | [37623445](https://www.pexels.com/photo/37623445/) |
@@ -74,3 +74,5 @@ Replace any of them by saving your own photo with the same file name (see README
 | `bicycle-run/br-rides.jpg` | [4295443](https://www.pexels.com/photo/4295443/) |
 | `bicycle-run/br-events.jpg` | [15523795](https://www.pexels.com/photo/15523795/) |
 | `enock-chanimbe/statement.jpg` | [36990987](https://www.pexels.com/photo/36990987/) |
+
+Business logos (`logo.png` in each folder, and `public/brand/chanimbe-group.png`) are the businesses' own artwork.

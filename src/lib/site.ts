@@ -14,7 +14,7 @@ export const SITE = {
   description:
     "The official home of Enock Chanimbe and CHANIMBE GROUP, bringing together the group's businesses, initiatives and opportunities.",
   contactEmail: "hello@enockchanimbe.com",
-  contactPhone: "+233 24 039 8035",
+  contactPhone: "+233 24 039 9035",
   address: "Central Region, Ghana",
 };
 
@@ -51,6 +51,7 @@ export type Business = {
   // Opening hours, once known. Shown as "To be announced" until set.
   hours?: string;
   // Optional content for the page sections each business uses (see lib/business-layouts.ts).
+  tagline?: string; // The brand line from the business's logo, shown under its name
   statement?: string; // A short, bold line shown large on its own
   stats?: { value: string; label: string }[]; // Only facts or stated goals, never invented results
   pillars?: { heading: string; items: { title: string; text: string }[] };
@@ -191,7 +192,8 @@ export const BUSINESSES: Business[] = [
   },
   {
     slug: "green-foods",
-    name: "Green Foods",
+    name: "Chanimbe Foods",
+    tagline: "Aduane pa fie",
     sector: "Food & Nutrition",
     status: "proposed",
     summary: "Fresh, nutritious food products sourced with care for everyday households.",
@@ -210,17 +212,17 @@ export const BUSINESSES: Business[] = [
         { title: "Households", text: "A weekly box of seasonal fruit and vegetables, plus healthy staples for the pantry." },
         { title: "Offices", text: "Fresh fruit and healthy snacks that keep teams going through the day." },
         { title: "Shops and restaurants", text: "Reliable bulk supply of fresh produce, delivered on a schedule that suits you." },
-        { title: "Distributors", text: "Partner with us to bring Green Foods to more communities." },
+        { title: "Distributors", text: "Partner with us to bring Chanimbe Foods to more communities." },
       ],
     },
     feature: {
       heading: "The people behind the produce",
-      text: "Green Foods is being built with local growers, not around them. Fair prices, steady orders and careful handling mean better food for you and a better living for the farmers who grow it.",
+      text: "Chanimbe Foods is being built with local growers, not around them. Fair prices, steady orders and careful handling mean better food for you and a better living for the farmers who grow it.",
       cta: { label: "Partner with us", to: "/contact?topic=green-foods" },
     },
     story: [
       "Eating well should not depend on where you live or how much time you have. Many households still struggle to find fresh, trustworthy produce at fair prices.",
-      "Green Foods is being established to close that gap by working with local growers, handling food with care and delivering it simply, so that healthy choices become the easy choices.",
+      "Chanimbe Foods is being established to close that gap by working with local growers, handling food with care and delivering it simply, so that healthy choices become the easy choices.",
     ],
     offers: [
       "Fresh produce boxes",
@@ -230,63 +232,66 @@ export const BUSINESSES: Business[] = [
     audience: "Households, health conscious shoppers, shops, restaurants and offices.",
     available: ["Pre-order interest for produce boxes", "Distributor and retailer enquiries"],
     cta: { label: "Register interest", to: "/service-center/interest?business=green-foods" },
-    secondaryCta: { label: "Stock Green Foods", to: "/contact?topic=green-foods" },
+    secondaryCta: { label: "Stock Chanimbe Foods", to: "/contact?topic=green-foods" },
     steps: [
       { title: "Register interest", text: "Let us know you would like a produce box or pantry staples." },
       { title: "Confirm your order", text: "At launch we confirm what is in each box, the price and the delivery day." },
       { title: "Enjoy fresh food", text: "Receive fresh, carefully sourced food at your door." },
     ],
     faqs: [
-      { q: "When will produce boxes be available?", a: "Green Foods is in development. Register interest and we will let you know as soon as boxes launch." },
+      { q: "When will produce boxes be available?", a: "Chanimbe Foods is in development. Register interest and we will let you know as soon as boxes launch." },
       { q: "Do you deliver?", a: "Delivery areas within the Central Region will be confirmed at launch." },
-      { q: "Can my shop stock Green Foods?", a: "Yes. Wholesale and retail enquiries are welcome through the contact page." },
+      { q: "Can my shop stock Chanimbe Foods?", a: "Yes. Wholesale and retail enquiries are welcome through the contact page." },
       { q: "Are your products certified?", a: "Packaged products will be registered with the relevant authorities before they are sold." },
     ],
   },
   {
     slug: "barbering-shop",
     name: "Degree Barber 1942",
+    tagline: "The mobile barbershop",
     sector: "Grooming & Personal Care",
     status: "proposed",
-    summary: "A modern barbershop for sharp cuts, clean shaves and a relaxed, on-time experience.",
+    summary: "Sharp cuts and clean shaves, in our chair or at your door: a barbershop that also comes to you.",
     why: "Great grooming should be dependable: book a time, get seen on time, leave looking your best.",
     note: {
       quote: "A good cut should never cost you your afternoon. Book a time, we keep it, and you leave looking your best.",
       by: "The Degree Barber 1942 promise",
     },
     feature: {
-      heading: "Visit the shop",
-      text: "We are setting up in the Central Region of Ghana: clean chairs, sharp tools and a team that respects your time. The full address and opening hours will be shared before we open.",
+      heading: "In our chair or at your door",
+      text: "Come to the shop in the Central Region, or book a mobile visit and we will bring the chair, clean tools and the same standard to your home, office or event. The shop's address and opening hours will be shared before we open.",
       cta: { label: "Book an appointment", to: "/service-center/booking?business=barbering-shop" },
     },
     story: [
       "A good barber is part of a man's routine and part of his confidence. Degree Barber 1942 is built on the idea that every cut should be precise, every visit should start on time and every client should feel welcome.",
-      "We are bringing the craft of traditional barbering together with modern styles, clean tools and a booking system that respects your time.",
+      "We are bringing the craft of traditional barbering together with modern styles, clean tools and a booking system that respects your time. And because life is busy, Degree Barber 1942 is also a mobile barbershop: we bring the same standard to your home, office or event.",
     ],
     offers: [
       "Haircuts and fades",
       "Beard trims, shaping and hot towel shaves",
       "Kids' cuts",
-      "Appointments and walk-ins",
+      "Mobile visits: home, office and events",
     ],
     audience: "Men and boys who want consistent, quality grooming without the wait.",
-    available: ["Request an appointment online", "Walk-ins when chairs are free, once open"],
+    available: ["Request an appointment online", "Book a home, office or event visit", "Walk-ins when chairs are free, once the shop opens"],
     cta: { label: "Book an appointment", to: "/service-center/booking?business=barbering-shop" },
     steps: [
       { title: "Book online", text: "Choose a service and a time that suits you." },
       { title: "We confirm", text: "We contact you to confirm your appointment." },
-      { title: "Visit and relax", text: "Arrive, take a seat and leave looking sharp." },
+      { title: "Sit back", text: "In our chair or wherever we meet you, relax and leave looking sharp." },
     ],
     faqs: [
       { q: "Do I need an appointment?", a: "Appointments are recommended so you are seen on time, but walk-ins are welcome when chairs are free." },
       { q: "How much does a haircut cost?", a: "Prices will be published before opening." },
-      { q: "Where are you located?", a: "Central Region, Ghana. The full address will be shared at opening." },
+      { q: "Do you come to me?", a: "Yes. Degree Barber 1942 is also a mobile barbershop. Book a home, office or event visit and we will confirm the time and place." },
+      { q: "Where is the shop?", a: "Central Region, Ghana. The full address will be shared at opening." },
       { q: "Do you cut children's hair?", a: "Yes. Kids' cuts are part of our services." },
     ],
   },
   {
     slug: "bank",
-    name: "Bank",
+    name: "Chanimbe African Bank",
+    tagline: "Sika fie",
     sector: "Financial Services",
     status: "proposed",
     summary: "A proposed financial institution aiming to serve individuals, businesses and economic development.",
@@ -311,7 +316,7 @@ export const BUSINESSES: Business[] = [
       ],
     },
     story: [
-      "Small businesses and households across the region need better access to savings, credit and everyday financial services. The Bank is being planned to help meet that need and to support local enterprise.",
+      "Small businesses and households across the region need better access to savings, credit and everyday financial services. Chanimbe African Bank is being planned to help meet that need and to support local enterprise.",
       "It will only offer services once every required regulatory authorization has been obtained. Until then, this page shares our intentions and progress, and nothing more.",
     ],
     offers: [
@@ -328,7 +333,7 @@ export const BUSINESSES: Business[] = [
       { title: "Hear first", text: "Registered contacts are notified if and when services become available." },
     ],
     faqs: [
-      { q: "Can I open an account?", a: "No. The Bank is a proposed financial institution and does not offer accounts or accept deposits." },
+      { q: "Can I open an account?", a: "No. Chanimbe African Bank is a proposed financial institution and does not offer accounts or accept deposits." },
       { q: "When will services be available?", a: "Only after all required regulatory authorizations have been obtained. We will not give a date before then." },
       { q: "Can I send money to the Bank?", a: "No. The Bank does not accept funds from the public. Never send money to anyone claiming to collect deposits on its behalf." },
       { q: "How can I partner with the Bank?", a: "Potential partners can get in touch through the contact page." },
@@ -399,6 +404,7 @@ export const BUSINESSES: Business[] = [
   {
     slug: "foundation",
     name: "Chanimbe Africa Foundation",
+    tagline: "Turning dreams into reality",
     sector: "Social Impact",
     status: "proposed",
     summary:
@@ -472,6 +478,7 @@ export const BUSINESSES: Business[] = [
   {
     slug: "bicycle-run",
     name: "Pedal with Enock",
+    tagline: "Turn miles into mindset",
     sector: "Cycling & Wellness",
     status: "proposed",
     summary: "A cycling community bringing people together for group rides, fitness and fun.",
