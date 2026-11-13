@@ -68,7 +68,7 @@ export function PageHero({
       {/* Dark halftone background, pattern on the right; a light fade keeps the left-aligned text legible */}
       <img src={pageHeroBg} alt="" aria-hidden className="absolute inset-0 size-full object-cover object-right" />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
-      <Container className="relative pt-28 pb-12 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24">
+      <Container className="relative pt-12 pb-12 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24">
         {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
         <h1 className="max-w-3xl text-3xl font-light tracking-tight sm:text-4xl lg:text-5xl">{title}</h1>
         {intro && <p className="mt-4 max-w-2xl text-sm text-white/70 sm:mt-5 sm:text-base">{intro}</p>}

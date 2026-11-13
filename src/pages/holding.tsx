@@ -5,10 +5,19 @@ import { MonoLink } from "@/components/mono-link";
 import { BusinessTile } from "@/components/business-visual";
 import { Container, Eyebrow, PageHero, SectionHeading } from "@/components/shared";
 
+// What the holding company provides to every business in the group.
+const SHARED_SUPPORT = [
+  { title: "Strategy and leadership", text: "Each venture gets clear goals, experienced guidance and regular reviews as it moves from idea to operation." },
+  { title: "Brand and marketing", text: "A shared brand, one website and joint campaigns help every business reach customers from day one." },
+  { title: "Governance and compliance", text: "Registration, licensing and sound financial practice are put in place before products or services launch." },
+  { title: "One front door", text: "The Service Center gives customers a single place to shop, book, register interest and get support across the group." },
+];
+
 const STRATEGIC_AREAS = [
   "Education and skills development",
   "Food security and nutrition",
   "Personal care and consumer goods",
+  "Fashion and apparel",
   "Financial inclusion",
   "Community development",
   "Health, fitness and wellness",
@@ -39,7 +48,10 @@ export default function HoldingPage() {
               sectors. It provides shared leadership, strategy and resources so that each venture can focus on serving
               its customers.
             </p>
-            <p>[Corporate background: year of incorporation, registration details and key milestones.]</p>
+            <p>
+              Each business keeps its own identity and focus, while the group provides a shared brand, standards and
+              support, and a single place for customers to reach every venture.
+            </p>
             <p>
               Most of our businesses are in their early stages. For now, our focus is to introduce each venture, build
               awareness and lay the foundations for full operations.
@@ -52,11 +64,11 @@ export default function HoldingPage() {
         <Container className="grid gap-4 md:grid-cols-2">
           <div className="rounded-3xl bg-card p-6 text-card-foreground sm:p-8">
             <Eyebrow>Vision</Eyebrow>
-            <p className="mt-3 text-lg font-light tracking-tight sm:mt-4 sm:text-xl">[A diversified group that creates lasting value for its customers, people and communities.]</p>
+            <p className="mt-3 text-lg font-light tracking-tight sm:mt-4 sm:text-xl">A diversified Ghanaian group that creates lasting value for its customers, its people and the communities it serves.</p>
           </div>
           <div className="rounded-3xl bg-ink p-6 text-white sm:p-8">
             <Eyebrow>Mission</Eyebrow>
-            <p className="mt-3 text-lg font-light tracking-tight sm:mt-4 sm:text-xl">[To build and support businesses that deliver quality, widen access and give back.]</p>
+            <p className="mt-3 text-lg font-light tracking-tight sm:mt-4 sm:text-xl">To build and support businesses that deliver quality, widen access to essential services and give back.</p>
           </div>
         </Container>
       </section>
@@ -65,7 +77,7 @@ export default function HoldingPage() {
         <Container>
           <SectionHeading
             eyebrow="Business portfolio"
-            title="Seven businesses and initiatives"
+            title="Eight businesses and initiatives"
             intro="Each entity has its own page describing what it is, why it is being established, what it intends to offer and how you can engage today."
           />
           {/* Bento: the first business fills a 2×2 block beside a 2×2 of four more; the rest share the
@@ -90,6 +102,25 @@ export default function HoldingPage() {
               );
             })}
           </div>
+        </Container>
+      </section>
+
+      <section className="border-t bg-card py-12 text-card-foreground sm:py-20">
+        <Container>
+          <SectionHeading
+            eyebrow="How the group works"
+            title="Shared strength, separate focus"
+            intro="Every business in the group stands on the same foundations, so each one can spend its energy on its customers."
+          />
+          <ol className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
+            {SHARED_SUPPORT.map((item, i) => (
+              <li key={item.title} className="rounded-2xl bg-muted/60 p-6">
+                <span className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground">0{i + 1}</span>
+                <h3 className="mt-3 font-medium">{item.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{item.text}</p>
+              </li>
+            ))}
+          </ol>
         </Container>
       </section>
 

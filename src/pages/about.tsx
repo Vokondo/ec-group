@@ -5,12 +5,13 @@ import { MonoLink } from "@/components/mono-link";
 import { FounderPortrait } from "@/components/founder-portrait";
 import { Container, Eyebrow, PageHero, SectionHeading } from "@/components/shared";
 
-// Placeholder copy throughout: replace with the founder's confirmed biography.
+// General copy that makes no factual claims (dates, degrees, awards). Enrich it with the
+// founder's confirmed biography and milestones when they are available.
 const JOURNEY = [
-  { period: "[Year]", title: "Early career", text: "[Professional background, education and formative experience.]" },
-  { period: "[Year]", title: "First venture", text: "[The first business founded and what it taught.]" },
-  { period: "[Year]", title: `Founding ${SITE.holdingName}`, text: "[Why a holding company was formed to bring the ventures together.]" },
-  { period: "Today", title: "Building seven ventures", text: "Developing businesses and initiatives across education, food, grooming, finance, beauty, social impact and wellness." },
+  { period: "The idea", title: "Seeing the gaps", text: "Noticing everyday needs in education, food, grooming, beauty and finance that people deserved better answers to." },
+  { period: "First steps", title: "Starting small", text: "Turning those ideas into businesses one at a time, testing what works and learning from the people they serve." },
+  { period: "Together", title: `Forming ${SITE.holdingName}`, text: "Bringing the ventures under one holding company so they can share standards, support and a common purpose." },
+  { period: "Today", title: "Building eight ventures", text: "Developing businesses and initiatives across education, food, grooming, finance, beauty, fashion, social impact and wellness." },
 ];
 
 const PRINCIPLES = [
@@ -28,7 +29,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="The Founder"
         title={SITE.founderName}
-        intro="Entrepreneur and founder of the group, building a portfolio of businesses and initiatives that connect enterprise with community."
+        intro="Entrepreneur and founder of CHANIMBE GROUP, building businesses and initiatives in Ghana that connect enterprise with community."
       />
 
       <section className="bg-card text-card-foreground py-12 sm:py-20">
@@ -36,12 +37,19 @@ export default function AboutPage() {
           <FounderPortrait className="aspect-[4/3] rounded-3xl lg:aspect-[4/5]" />
           <div>
             <Eyebrow>Biography</Eyebrow>
-            <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">A personal and professional story</h2>
+            <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">Building with purpose</h2>
             <div className="mt-4 space-y-3 text-sm text-muted-foreground sm:mt-6 sm:space-y-4 sm:text-base">
-              <p>[Personal and professional biography: background, education, career highlights and the experiences that shaped an entrepreneurial path.]</p>
-              <p>[Achievements and recognition: key milestones, awards and notable contributions.]</p>
               <p>
-                Today, {SITE.founderName} leads {SITE.holdingName}, the holding company that brings together seven
+                {SITE.founderName} is an entrepreneur based in the Central Region of Ghana, whose work starts from a
+                simple belief: the best businesses solve everyday problems for real people, and they grow stronger when the
+                communities around them grow too.
+              </p>
+              <p>
+                That belief runs through every venture in the group, from practical education and healthy food to
+                grooming, skincare, fashion, cycling and a foundation working to end schools under trees in Ghana.
+              </p>
+              <p>
+                Today, {SITE.founderName} leads {SITE.holdingName}, the holding company that brings together eight
                 businesses and initiatives under one vision.
               </p>
             </div>
@@ -51,7 +59,7 @@ export default function AboutPage() {
 
       <section className="bg-muted/60 py-12 sm:py-20">
         <Container>
-          <SectionHeading eyebrow="Entrepreneurial journey" title="From first venture to a group of seven" />
+          <SectionHeading eyebrow="Entrepreneurial journey" title="From one idea to a group of eight" />
           <ol className="mt-8 sm:mt-12 grid gap-6 md:grid-cols-4">
             {JOURNEY.map((step) => (
               <li key={step.title} className="border-t-2 border-foreground pt-5">
@@ -69,7 +77,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Vision, mission & principles"
             title="What guides the work"
-            intro="Vision: [the founder's long-term vision]. Mission: [how that vision is pursued day to day]."
+            intro="Vision: a Ghana where quality education, healthy food and good services are within everyone's reach. Mission: to build businesses that meet those needs honestly and give back to the communities they serve."
           />
           <div className="mt-8 sm:mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {PRINCIPLES.map((p) => (
@@ -88,8 +96,9 @@ export default function AboutPage() {
             <Eyebrow>Leadership & community</Eyebrow>
             <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">Business interests and areas of involvement</h2>
             <p className="mt-5 text-white/70">
-              [Leadership roles, board positions and community contributions.] Each of the businesses listed here is
-              part of {SITE.holdingName} and reflects an area the founder is committed to.
+              Beyond business, {SITE.founderName} is committed to education and community development, most visibly
+              through Chanimbe Africa Foundation. Each of the businesses listed here is part of {SITE.holdingName} and
+              reflects an area the founder is committed to.
             </p>
             <MonoLink to="/holding" className="mt-8">
               About the holding company

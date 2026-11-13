@@ -18,7 +18,7 @@ export default function ServiceCenterPage() {
       <PageHero
         eyebrow="Unified Service Center"
         title="Every offering in one place"
-        intro="Shop products, book appointments, explore programmes and register interest across all seven businesses."
+        intro="Shop products, book appointments, explore programmes and register interest across all eight businesses and initiatives."
       />
 
       <section className="py-10 sm:py-16">

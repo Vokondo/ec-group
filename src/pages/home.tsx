@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { cn } from "@/lib/utils";
+import { media } from "@/lib/media";
 import { BUSINESSES, CATALOG, SITE, type OfferingKind } from "@/lib/site";
 import { usePageTitle } from "@/lib/use-page-title";
 import { CoverImage } from "@/components/business-image";
@@ -41,12 +42,11 @@ const SERVICE_LINKS = [
   { label: "Programmes & opportunities", to: "/service-center?kind=programme", count: countOf("programme", "event") },
 ];
 
-// Founder card bio (placeholder copy until the founder's own words are confirmed).
+// Founder card bio. General copy: replace with the founder's own words when available.
 const FOUNDER_BIO =
-  `An entrepreneur building a portfolio of businesses across education, enterprise and community impact. ` +
-  `Every venture is shaped by ${SITE.founderName}'s long-term vision, and ${SITE.holdingName} brings education, food, ` +
-  `grooming, finance, beauty, social impact and wellness under one roof. Through the Foundation and the Bicycle Run, ` +
-  `the group gives back to the communities that make it possible.`;
+  `An entrepreneur based in the Central Region of Ghana, building businesses that solve everyday problems for real people. ` +
+  `${SITE.holdingName} brings education, food, grooming, finance, beauty, fashion, social impact and wellness under one roof, ` +
+  `and through Chanimbe Africa Foundation and Pedal with Enock, the group gives back to the communities that make it possible.`;
 
 // Home-page cards sit in a wider container than the rest of the site, like the reference's near-full-width cards.
 const cardContainer = "max-w-[88rem]";
@@ -66,7 +66,7 @@ export default function HomePage() {
         <Container>
           <MonoLabel>Our businesses</MonoLabel>
           <h2 className="mx-auto mt-4 max-w-xl text-2xl leading-tight font-light tracking-tight text-black sm:text-4xl">
-            Seven ventures are each a part of something bigger.
+            Eight ventures, each a part of something bigger.
           </h2>
         </Container>
       </section>
@@ -170,9 +170,9 @@ export default function HomePage() {
 
 function Hero() {
   return (
-    <section className="relative isolate flex min-h-[80vh] items-end overflow-hidden text-white sm:min-h-[85vh]">
+    <section className="relative isolate flex min-h-[70vh] items-end overflow-hidden text-white sm:min-h-[75vh]">
       <CoverImage src={HERO_IMAGE} alt="" overlay="from-ink via-ink/50 to-ink/70" variant="top" />
-      <Container className="grid gap-6 pt-28 pb-10 sm:pb-14 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-16 lg:pb-16">
+      <Container className="grid gap-6 pt-16 pb-10 sm:pb-14 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-16 lg:pb-16">
         <h1 className="text-[2.6rem] leading-[1] font-light tracking-tight sm:text-6xl lg:text-7xl">
           Building a group
           <br />
@@ -182,8 +182,8 @@ function Hero() {
         </h1>
         <div className="max-w-sm lg:justify-self-end">
           <p className="text-sm text-white/70">
-            Education, food, grooming, finance, beauty, community and wellness: the businesses and initiatives of{" "}
-            {SITE.founderName}, gathered in one place.
+            Education, food, grooming, finance, beauty, fashion, community and wellness: the businesses and initiatives
+            of {SITE.founderName}, gathered in one place.
           </p>
           <MonoLink to="/businesses" variant="outline-dark" className="mt-5">
             Explore the group
@@ -194,7 +194,7 @@ function Hero() {
   );
 }
 
-// White card listing the seven businesses; selecting one shows its details on the right.
+// White card listing the businesses; selecting one shows its details on the right.
 // How long each business stays selected before the explorer moves on.
 const ROTATE_MS = 5000;
 
@@ -268,7 +268,7 @@ function BusinessExplorer() {
             className="explorer-image group absolute inset-0 isolate flex flex-col justify-between p-4 text-white sm:p-5"
           >
             <CoverImage
-              src={HOME_BUSINESS_IMAGES[business.slug] ?? business.image}
+              src={media(business.slug, "cover") ?? HOME_BUSINESS_IMAGES[business.slug] ?? business.image}
               alt={business.name}
               overlay="from-black/70 via-transparent to-black/25"
             />

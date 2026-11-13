@@ -10,7 +10,7 @@ export default function BusinessesPage() {
       <PageHero
         eyebrow="Business portfolio"
         title="Our businesses and initiatives"
-        intro="Seven entities, each with its own purpose. Most are in development: each page explains what is available now and how to register interest in what is coming."
+        intro="Eight businesses and initiatives, each with its own purpose. Most are in development: each page explains why it is being established, what is available now and how to register interest in what is coming."
       />
       <section className="py-12 sm:py-20">
         <Container>

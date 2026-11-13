@@ -82,7 +82,7 @@ export function ServiceCatalog() {
   ];
 
   return (
-    <div ref={top} className="scroll-mt-24">
+    <div ref={top} className="scroll-mt-20 md:scroll-mt-36">
       {/* Title and search, as one bar */}
       <div className="flex flex-col gap-4 rounded-3xl border bg-card p-4 sm:flex-row sm:items-center sm:justify-between sm:rounded-full sm:py-3 sm:pr-3 sm:pl-6">
         <h2 className="text-xl font-medium tracking-tight sm:text-2xl">Find what you need</h2>
@@ -108,7 +108,7 @@ export function ServiceCatalog() {
 
       <div className="mt-6 grid gap-8 lg:mt-10 lg:grid-cols-[13.5rem_1fr] lg:gap-10">
         {/* Categories: a sidebar on large screens, scrollable chips on small ones */}
-        <aside className="min-w-0 lg:sticky lg:top-24 lg:h-fit">
+        <aside className="min-w-0 lg:sticky lg:top-36 lg:h-fit">
           <h3 className="text-sm font-semibold max-lg:sr-only">Category</h3>
           <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 lg:mx-0 lg:mt-3 lg:flex-col lg:gap-0.5 lg:overflow-visible lg:px-0">
             {kinds.map(({ value, label, count, Icon }) => {

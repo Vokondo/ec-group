@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CheckIcon, CopyIcon, MailIcon, SmartphoneIcon } from "lucide-react";
 import type { Donation } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { mediaPath } from "@/lib/media";
 import { CoverImage } from "@/components/business-image";
 import { Container, Eyebrow, SectionHeading } from "@/components/shared";
 
@@ -37,7 +38,7 @@ function CopyRow({ label, value }: { label: string; value: string }) {
 // Flagship project and Mobile Money donation details (set `donation` on a business in src/lib/site.ts).
 export function DonationPanel({ donation }: { donation: Donation }) {
   return (
-    <section id="donate" className="scroll-mt-20 bg-ink py-12 text-white sm:py-20">
+    <section id="donate" className="scroll-mt-16 md:scroll-mt-32 bg-ink py-12 text-white sm:py-20">
       <Container className="grid gap-8 lg:grid-cols-2 lg:gap-12">
         <div>
           <Eyebrow>Big project</Eyebrow>
@@ -80,7 +81,7 @@ export function DonationPanel({ donation }: { donation: Donation }) {
 }
 
 // "About the project" text followed by a photo gallery; renders nothing if neither is set.
-export function ProjectStory({ donation }: { donation: Donation }) {
+export function ProjectStory({ donation, folder }: { donation: Donation; folder?: string }) {
   const { about, gallery } = donation;
   if (!about?.length && !gallery?.length) return null;
   return (
@@ -115,6 +116,7 @@ export function ProjectStory({ donation }: { donation: Donation }) {
                 >
                   <CoverImage
                     src={item.image}
+                    slot={folder && mediaPath(folder, `project-${i + 1}`)}
                     alt={item.caption ?? `${donation.project} photo ${i + 1}`}
                     overlay={item.caption ? "from-black/70 via-transparent to-transparent" : "from-transparent to-transparent"}
                     variant={i === 0 ? "center" : "compact"}

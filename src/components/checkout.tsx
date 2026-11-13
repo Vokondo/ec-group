@@ -92,7 +92,7 @@ export function Checkout() {
   };
 
   return (
-    <div ref={top} className="scroll-mt-24">
+    <div ref={top} className="scroll-mt-20 md:scroll-mt-36">
       <Stepper current={step} onStep={go} />
 
       {/* grid-cols-1 / min-w-0 stop long product names from widening the column on phones */}
@@ -580,7 +580,7 @@ function Summary({
 }) {
   const count = lines.reduce((n, l) => n + l.qty, 0);
   return (
-    <aside aria-labelledby="checkout-summary-title" className="h-fit min-w-0 rounded-lg border bg-card p-5 sm:p-6 lg:sticky lg:top-24">
+    <aside aria-labelledby="checkout-summary-title" className="h-fit min-w-0 rounded-lg border bg-card p-5 sm:p-6 lg:sticky lg:top-36">
       <div className="flex items-baseline justify-between gap-3 border-b pb-4">
         <h2 id="checkout-summary-title" className="text-lg font-semibold tracking-tight">Order summary</h2>
         {editable && (

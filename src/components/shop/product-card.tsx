@@ -1,7 +1,7 @@
 import { Link } from "react-router";
-import { ShoppingCartIcon } from "lucide-react";
+import { ClipboardPenIcon, ShoppingCartIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { formatPrice, getBusiness, type Offering } from "@/lib/site";
+import { formatPrice, type Offering } from "@/lib/site";
 import { isPurchasable, offeringAction, offeringImage, offeringPath } from "@/lib/shop";
 import { ProductImage } from "@/components/shop/product-image";
 import { useShop } from "@/components/shop/use-shop";
@@ -9,11 +9,13 @@ import { useShop } from "@/components/shop/use-shop";
 const actionClass =
   "inline-flex min-h-8 items-center justify-center rounded-md px-2 py-1.5 text-center font-mono text-[9px] font-medium tracking-[0.15em] whitespace-nowrap uppercase sm:min-h-10 sm:py-2 sm:text-[11px]";
 const primaryAction = cn(actionClass, "bg-black text-white hover:bg-neutral-800");
+const iconAction = "size-8 px-0 transition-colors hover:bg-green-400 hover:text-black focus-visible:bg-green-400 focus-visible:text-black sm:size-11";
 
 export function ProductCard({ offering, className }: { offering: Offering; className?: string }) {
   const { buyNow } = useShop();
   const purchasable = isPurchasable(offering);
   const action = offeringAction(offering);
+  const isBooking = action.label === "Book appointment";
 
   return (
     // Taller on phones so the photo keeps its space next to the text.
@@ -28,12 +30,9 @@ export function ProductCard({ offering, className }: { offering: Offering; class
             {offering.name}
           </Link>
         </h3>
-        <p className="mt-0.5 truncate font-mono text-[8px] tracking-[0.15em] text-neutral-600 uppercase sm:mt-1 sm:text-[10px]">
-          {getBusiness(offering.business)?.name}
-        </p>
       </div>
 
-      <div className="flex items-end justify-between gap-1 px-1 pt-1.5 pb-0.5 sm:flex-wrap sm:px-2 sm:pt-2 sm:pb-1">
+      <div className="mt-1.5 flex items-end justify-between gap-1 border-t border-neutral-200 px-1 pt-1.5 pb-0.5 sm:mt-2 sm:flex-wrap sm:px-2 sm:pt-2 sm:pb-1">
         <div className="min-w-0">
           {offering.price !== null && <p className="text-sm font-light tracking-tight tabular-nums sm:text-xl">{formatPrice(offering.price)}</p>}
           {offering.sample && <p className="text-[10px] text-neutral-600 sm:text-xs">Sample price</p>}
@@ -44,13 +43,17 @@ export function ProductCard({ offering, className }: { offering: Offering; class
             type="button"
             onClick={() => buyNow(offering)}
             aria-label={`Buy ${offering.name} now`}
-            className={cn(primaryAction, "ml-auto size-8 shrink-0 px-0 sm:size-11")}
+            className={cn(primaryAction, "ml-auto shrink-0", iconAction)}
           >
             <ShoppingCartIcon aria-hidden="true" className="size-4 sm:size-5" />
           </button>
         ) : (
-          <Link to={action.to} className={cn(primaryAction, "ml-auto shrink-0")}>
-            {action.label === "Book appointment" ? "Book" : "Register"}
+          <Link
+            to={action.to}
+            aria-label={isBooking ? undefined : `Register for ${offering.name}`}
+            className={cn(primaryAction, "ml-auto shrink-0", !isBooking && iconAction)}
+          >
+            {isBooking ? "Book" : <ClipboardPenIcon aria-hidden="true" className="size-4 sm:size-5" />}
           </Link>
         )}
       </div>

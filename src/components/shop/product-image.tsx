@@ -1,7 +1,6 @@
 import { ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const withBase = (src: string) => (src.startsWith("/") ? import.meta.env.BASE_URL + src.slice(1) : src);
+import { withBase } from "@/lib/media";
 
 // Soft grey product frame with the photo filling it, or a light placeholder until one is set.
 export function ProductImage({
