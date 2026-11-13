@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { ChevronRightIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BUSINESSES, CATALOG, SITE, type OfferingKind } from "@/lib/site";
 import { usePageTitle } from "@/lib/use-page-title";
@@ -99,9 +98,6 @@ export default function HomePage() {
                     {link.label}
                     <span className="ml-2 font-mono text-[11px] tracking-widest text-white/50 sm:text-xs">{link.count}</span>
                   </span>
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full border border-white/40 sm:size-10 transition group-hover:border-brand group-hover:bg-brand group-hover:text-brand-foreground">
-                    <ChevronRightIcon className="size-4 sm:size-5" />
-                  </span>
                 </Link>
               </li>
             ))}
@@ -143,7 +139,7 @@ export default function HomePage() {
           <p className="mx-auto max-w-md text-lg leading-snug font-light sm:text-2xl">
             Where long-term vision meets real community impact.
           </p>
-          <MonoLink to="/service-center/interest" variant="pill" arrow={false} className="mt-6 sm:mt-8">
+          <MonoLink to="/service-center/interest" variant="pill" className="mt-6 sm:mt-8">
             Register interest
           </MonoLink>
         </Container>
@@ -257,14 +253,6 @@ function BusinessExplorer() {
                   />
                 )}
                 <span className={cn("transition-transform duration-500 ease-out", selected && "translate-x-1.5")}>{b.name}</span>
-                <span
-                  className={cn(
-                    "grid size-6 shrink-0 place-items-center rounded-full border transition-all duration-500 ease-out sm:size-7",
-                    selected ? "scale-110 border-foreground bg-foreground text-background" : "border-foreground/25 text-foreground/40",
-                  )}
-                >
-                  <ChevronRightIcon className={cn("size-3.5 transition-transform duration-500 sm:size-4", selected && "translate-x-px")} />
-                </span>
               </button>
             </li>
           );

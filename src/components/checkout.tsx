@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router";
 import {
-  ArrowLeftIcon,
   CheckCircle2Icon,
   CheckIcon,
   ClockIcon,
@@ -12,9 +11,7 @@ import {
   PlusIcon,
   ShoppingBagIcon,
   SmartphoneIcon,
-  StoreIcon,
   Trash2Icon,
-  TruckIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CATALOG, PAYMENT, formatPrice } from "@/lib/site";
@@ -109,7 +106,7 @@ export function Checkout() {
             <PaymentStep details={details} lines={lines} total={total} onBack={() => go("details")} onPlaced={onPlaced} />
           )}
         </div>
-        <Summary lines={lines} total={total} details={step === "payment" ? details : undefined} editable={step !== "cart"} onEdit={go} />
+        <Summary lines={lines} total={total} details={step === "payment" ? details : undefined} fulfilment={step === "details" ? details.fulfilment : undefined} editable={step !== "cart"} onEdit={go} />
       </div>
     </div>
   );
@@ -255,10 +252,10 @@ function DetailsStep({
         e.preventDefault();
         onNext();
       }}
-      className="space-y-8"
+      className="space-y-7 rounded-lg border bg-card p-5 sm:p-8"
     >
       <section>
-        <h2 className="text-xl font-light tracking-tight sm:text-2xl">Your details</h2>
+        <h2 className="text-xl font-semibold tracking-tight">Contact details</h2>
         <div className="mt-5 grid gap-5 sm:grid-cols-2">
           <div className="space-y-2 sm:col-span-2">
             <Label htmlFor="name">Full name *</Label>
@@ -281,32 +278,36 @@ function DetailsStep({
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">Email *</Label>
-            <Input id="email" type="email" required autoComplete="email" value={details.email} onChange={set("email")} />
-            <p className="text-xs text-muted-foreground">Your receipt is sent here.</p>
+            <Input id="email" type="email" required autoComplete="email" aria-describedby="checkout-receipt" value={details.email} onChange={set("email")} />
+            <p id="checkout-receipt" className="text-xs text-muted-foreground">We’ll send your receipt to this address.</p>
           </div>
         </div>
       </section>
 
-      <section>
-        <h2 className="text-lg font-medium">Delivery or pickup</h2>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <Choice
-            name="fulfilment"
-            checked={details.fulfilment === "delivery"}
-            onSelect={() => onChange({ ...details, fulfilment: "delivery" })}
-            icon={<TruckIcon className="size-5" />}
-            title="Delivery"
-            text="We'll call to agree a delivery time and any delivery fee."
-          />
-          <Choice
-            name="fulfilment"
-            checked={details.fulfilment === "pickup"}
-            onSelect={() => onChange({ ...details, fulfilment: "pickup" })}
-            icon={<StoreIcon className="size-5" />}
-            title="Pickup"
-            text="Collect your order. We'll send the pickup details."
-          />
-        </div>
+      <section className="border-t pt-6">
+        <fieldset>
+          <legend className="text-lg font-semibold">Delivery or pickup</legend>
+          <div className="mt-3 divide-y rounded-md border">
+            {(["delivery", "pickup"] as const).map((method) => (
+              <label key={method} className="flex cursor-pointer items-center gap-3 px-4 py-3 text-sm font-medium">
+                <input
+                  type="radio"
+                  name="fulfilment"
+                  value={method}
+                  checked={details.fulfilment === method}
+                  onChange={() => onChange({ ...details, fulfilment: method })}
+                  className="size-4 accent-brand"
+                />
+                {method === "delivery" ? "Delivery" : "Pickup"}
+              </label>
+            ))}
+          </div>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {details.fulfilment === "delivery"
+              ? "We’ll call to confirm the delivery time and any fee."
+              : "We’ll send you the pickup details."}
+          </p>
+        </fieldset>
         {details.fulfilment === "delivery" && (
           <div className="mt-5 space-y-2">
             <Label htmlFor="address">Delivery address *</Label>
@@ -322,16 +323,16 @@ function DetailsStep({
           </div>
         )}
         <div className="mt-5 space-y-2">
-          <Label htmlFor="notes">Order notes</Label>
-          <Textarea id="notes" rows={2} placeholder="Anything we should know (optional)" value={details.notes} onChange={set("notes")} />
+          <Label htmlFor="notes">Order notes <span className="font-normal text-muted-foreground">(optional)</span></Label>
+          <Textarea id="notes" rows={2} value={details.notes} onChange={set("notes")} />
         </div>
       </section>
 
-      <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
-        <button type="button" onClick={onBack} className={pillClass("outline", "lg", "")}>
-          <ArrowLeftIcon className="size-3.5" /> Back to cart
+      <div className="flex flex-col-reverse gap-3 border-t pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <button type="button" onClick={onBack} className="inline-flex min-h-11 items-center justify-center gap-2 text-sm underline-offset-4 hover:underline">
+          Back to cart
         </button>
-        <button type="submit" className={pillClass("solid", "lg", "")}>
+        <button type="submit" className="min-h-11 rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground hover:bg-primary/90">
           Continue to payment
         </button>
       </div>
@@ -504,7 +505,7 @@ function PaymentStep({
       )}
 
       <button type="button" onClick={onBack} disabled={busy} className={pillClass("outline", "lg", "mt-6")}>
-        <ArrowLeftIcon className="size-3.5" /> Back to details
+        Back to details
       </button>
     </section>
   );
@@ -566,58 +567,60 @@ function Summary({
   lines,
   total,
   details,
+  fulfilment,
   editable,
   onEdit,
 }: {
   lines: CartLine[];
   total: number;
   details?: Details;
+  fulfilment?: Fulfilment;
   editable: boolean;
   onEdit: (s: Step) => void;
 }) {
   const count = lines.reduce((n, l) => n + l.qty, 0);
   return (
-    <aside className="h-fit min-w-0 space-y-5 rounded-3xl border bg-card p-6 lg:sticky lg:top-24">
-      <div className="flex items-center justify-between">
-        <h2 className="font-medium">Order summary</h2>
+    <aside aria-labelledby="checkout-summary-title" className="h-fit min-w-0 rounded-lg border bg-card p-5 sm:p-6 lg:sticky lg:top-24">
+      <div className="flex items-baseline justify-between gap-3 border-b pb-4">
+        <h2 id="checkout-summary-title" className="text-lg font-semibold tracking-tight">Order summary</h2>
         {editable && (
-          <button type="button" onClick={() => onEdit("cart")} className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+          <button type="button" onClick={() => onEdit("cart")} className="shrink-0 text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground">
             Edit cart
           </button>
         )}
       </div>
-      <ul className="space-y-3 text-sm">
+      <ul className="divide-y text-sm">
         {lines.map((l) => (
-          <li key={l.id} className="flex items-center gap-3">
-            <span className="relative shrink-0">
-              <ProductImage src={offeringImage(findOffering(l.id))} alt="" zoom={false} className="size-12 rounded-lg bg-card" />
-              <span className="absolute -top-1.5 -right-1.5 grid size-5 place-items-center rounded-full bg-foreground text-[10px] font-medium text-background">
-                {l.qty}
-              </span>
-            </span>
-            <span className="min-w-0 flex-1 truncate">{l.name}</span>
-            <span>{formatPrice(l.qty * l.price)}</span>
+          <li key={l.id} className="flex items-start gap-3 py-4">
+            <ProductImage src={offeringImage(findOffering(l.id))} alt="" zoom={false} className="size-12 shrink-0 rounded-md bg-card" />
+            <div className="min-w-0 flex-1">
+              <p className="font-medium break-words">{l.name}</p>
+              <p className="mt-1 text-xs text-muted-foreground">Qty {l.qty}</p>
+            </div>
+            <span className="shrink-0 font-medium tabular-nums">{formatPrice(l.qty * l.price)}</span>
           </li>
         ))}
       </ul>
-      <div className="space-y-1 border-t pt-4 text-sm">
-        <div className="flex justify-between text-muted-foreground">
+      <div className="space-y-2 border-t pt-4 text-sm tabular-nums">
+        <div className="flex justify-between gap-3 text-muted-foreground">
           <span>
             Subtotal ({count} {count === 1 ? "item" : "items"})
           </span>
           <span>{formatPrice(total)}</span>
         </div>
-        <div className="flex justify-between text-muted-foreground">
-          <span>Delivery</span>
-          <span>Agreed by phone</span>
-        </div>
-        <div className="flex justify-between pt-2 text-base font-medium text-foreground">
+        {(fulfilment ?? details?.fulfilment) !== "pickup" && (
+          <div className="flex justify-between gap-3 text-muted-foreground">
+            <span>Delivery</span>
+            <span>Agreed by phone</span>
+          </div>
+        )}
+        <div className="mt-4 flex justify-between gap-3 border-t pt-4 text-lg font-semibold text-foreground">
           <span>Total</span>
           <span>{formatPrice(total)}</span>
         </div>
       </div>
       {details && (
-        <div className="space-y-1 border-t pt-4 text-sm">
+        <div className="mt-5 space-y-1 border-t pt-4 text-sm wrap-break-word">
           <div className="flex items-center justify-between">
             <p className="font-medium">{details.fulfilment === "delivery" ? "Deliver to" : "Pickup by"}</p>
             <button type="button" onClick={() => onEdit("details")} className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">

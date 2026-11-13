@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import { ArrowUpRightIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Business } from "@/lib/site";
 import { CoverImage } from "@/components/business-image";
@@ -15,11 +14,8 @@ export function BusinessTile({ business, className, large }: { business: Busines
       )}
     >
       <CoverImage src={business.image} alt={business.name} variant={large ? "center" : "compact"} />
-      <div className="relative flex items-start justify-between">
+      <div className="relative flex items-start">
         <StatusBadge status={business.status} onDark />
-        <span className="grid size-9 place-items-center rounded-full bg-white/15 backdrop-blur transition group-hover:bg-white group-hover:text-ink">
-          <ArrowUpRightIcon className="size-4" />
-        </span>
       </div>
       <div className="relative">
         <p className="text-[11px] font-medium tracking-wider text-white/70 uppercase">{business.sector}</p>

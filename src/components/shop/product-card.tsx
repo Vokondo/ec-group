@@ -1,64 +1,57 @@
 import { Link } from "react-router";
+import { ShoppingCartIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { KIND_LABELS, formatPrice, getBusiness, type Offering } from "@/lib/site";
-import { isPurchasable, offeringAction, offeringImage, offeringPath, pillClass } from "@/lib/shop";
+import { formatPrice, getBusiness, type Offering } from "@/lib/site";
+import { isPurchasable, offeringAction, offeringImage, offeringPath } from "@/lib/shop";
 import { ProductImage } from "@/components/shop/product-image";
 import { useShop } from "@/components/shop/use-shop";
 
+const actionClass =
+  "inline-flex min-h-8 items-center justify-center rounded-md px-2 py-1.5 text-center font-mono text-[9px] font-medium tracking-[0.15em] whitespace-nowrap uppercase sm:min-h-10 sm:py-2 sm:text-[11px]";
+const primaryAction = cn(actionClass, "bg-black text-white hover:bg-neutral-800");
+
 export function ProductCard({ offering, className }: { offering: Offering; className?: string }) {
-  const { addToCart, buyNow, inCart } = useShop();
-  const business = getBusiness(offering.business)!;
+  const { buyNow } = useShop();
   const purchasable = isPurchasable(offering);
   const action = offeringAction(offering);
 
   return (
-    <article className={cn("group flex min-w-0 flex-col", className)}>
-      <Link to={offeringPath(offering)} className="relative block" aria-label={offering.name}>
-        <ProductImage src={offeringImage(offering)} alt={offering.name} className="aspect-[4/3.4]" />
-        <span className="absolute top-3 right-3 rounded-full bg-card/90 px-2.5 py-1 text-[11px] font-medium text-foreground shadow-sm backdrop-blur">
-          {KIND_LABELS[offering.kind].replace(/s$/, "")}
-        </span>
-        {offering.status !== "available" && !offering.sample && (
-          <span className="absolute top-3 left-3 rounded-full bg-black/55 px-2.5 py-1 text-[11px] text-white backdrop-blur">Coming soon</span>
-        )}
+    // Taller on phones so the photo keeps its space next to the text.
+    <article className={cn("flex aspect-[4/5] w-full min-w-0 flex-col rounded-md border border-neutral-200 bg-white p-1.5 text-neutral-950 sm:aspect-square sm:p-2", className)}>
+      <Link to={offeringPath(offering)} className="block min-h-0 flex-1 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2" aria-label={offering.name}>
+        <ProductImage src={offeringImage(offering)} alt="" zoom={false} className="h-full rounded-sm bg-neutral-100" />
       </Link>
 
-      <div className="mt-3 flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h3 className="truncate font-medium">
-            <Link to={offeringPath(offering)} className="hover:underline hover:underline-offset-4">
-              {offering.name}
-            </Link>
-          </h3>
-          <p className="mt-0.5 truncate text-xs text-muted-foreground">
-            {business.name}
-            {offering.sample && " · Sample price"}
-          </p>
-        </div>
-        <p className="shrink-0 font-semibold">
-          {offering.price !== null ? formatPrice(offering.price) : <span className="text-xs font-normal text-muted-foreground">Price TBC</span>}
+      <div className="px-1 pt-1.5 sm:px-2 sm:pt-2">
+        <h3 className="line-clamp-2 text-[13px] leading-snug font-light tracking-tight wrap-break-word sm:line-clamp-none sm:text-lg">
+          <Link to={offeringPath(offering)} className="hover:underline hover:underline-offset-4">
+            {offering.name}
+          </Link>
+        </h3>
+        <p className="mt-0.5 truncate font-mono text-[8px] tracking-[0.15em] text-neutral-600 uppercase sm:mt-1 sm:text-[10px]">
+          {getBusiness(offering.business)?.name}
         </p>
       </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-2">
+      <div className="flex items-end justify-between gap-1 px-1 pt-1.5 pb-0.5 sm:flex-wrap sm:px-2 sm:pt-2 sm:pb-1">
+        <div className="min-w-0">
+          {offering.price !== null && <p className="text-sm font-light tracking-tight tabular-nums sm:text-xl">{formatPrice(offering.price)}</p>}
+          {offering.sample && <p className="text-[10px] text-neutral-600 sm:text-xs">Sample price</p>}
+          {offering.status !== "available" && !offering.sample && <p className="text-[10px] text-neutral-600 sm:text-xs">Coming soon</p>}
+        </div>
         {purchasable ? (
-          <>
-            <button type="button" onClick={() => addToCart(offering)} className={pillClass("outline", "sm")}>
-              {inCart(offering) ? "Add another" : "Add to cart"}
-            </button>
-            <button type="button" onClick={() => buyNow(offering)} className={pillClass("solid", "sm")}>
-              Buy now
-            </button>
-          </>
+          <button
+            type="button"
+            onClick={() => buyNow(offering)}
+            aria-label={`Buy ${offering.name} now`}
+            className={cn(primaryAction, "ml-auto size-8 shrink-0 px-0 sm:size-11")}
+          >
+            <ShoppingCartIcon aria-hidden="true" className="size-4 sm:size-5" />
+          </button>
         ) : (
-          <>
-            <Link to={offeringPath(offering)} className={pillClass("outline", "sm")}>
-              Details
-            </Link>
-            <Link to={action.to} className={pillClass("solid", "sm")}>
-              {action.label === "Book appointment" ? "Book" : "Register"}
-            </Link>
-          </>
+          <Link to={action.to} className={cn(primaryAction, "ml-auto shrink-0")}>
+            {action.label === "Book appointment" ? "Book" : "Register"}
+          </Link>
         )}
       </div>
     </article>

@@ -21,7 +21,7 @@ import { OfferingCarousel } from "@/components/service-catalog";
 import NotFoundPage from "@/pages/not-found";
 
 // Large full-width buttons on the product page: warm accent for the main action, dark for the second.
-const BIG = "inline-flex h-13 w-full items-center justify-center gap-2 rounded-full font-mono text-[11px] font-medium tracking-[0.2em] uppercase sm:text-xs transition focus-visible:ring-3 focus-visible:ring-ring/50 outline-none sm:h-14";
+const BIG = "inline-flex h-11 w-full items-center justify-center gap-2 rounded-full font-mono text-[10px] font-medium tracking-[0.2em] uppercase sm:text-xs transition focus-visible:ring-3 focus-visible:ring-ring/50 outline-none sm:h-14";
 const BIG_WARM = cn(BIG, "bg-warm text-ink hover:bg-warm/85");
 const BIG_DARK = cn(BIG, "bg-foreground text-background hover:bg-foreground/85");
 
@@ -59,7 +59,7 @@ export default function OfferingPage() {
       {/* Dark band behind the fixed header, which is white-on-transparent until the page scrolls */}
       <div className="h-16 bg-ink" />
 
-      <section className="py-8 sm:py-12">
+      <section className="py-6 sm:py-12">
         <Container>
           <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
             <Link to="/service-center" className="hover:text-foreground">
@@ -73,12 +73,12 @@ export default function OfferingPage() {
             <span className="text-foreground">{offering.name}</span>
           </nav>
 
-          <div className="mt-6 grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-12">
+          <div className="mt-4 grid gap-5 sm:mt-6 sm:gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-12">
             {/* Gallery */}
             <div className="min-w-0">
-              <ProductImage src={current?.src} alt={offering.name} zoom={false} eager className="aspect-square rounded-3xl sm:aspect-[6/5]" />
+              <ProductImage src={current?.src} alt={offering.name} zoom={false} eager className="aspect-[4/3] rounded-2xl sm:aspect-[6/5] sm:rounded-3xl" />
               {photos.length > 1 && (
-                <ul className="mt-4 grid grid-cols-4 gap-3">
+                <ul className="mt-3 grid grid-cols-5 gap-2 sm:mt-4 sm:grid-cols-4 sm:gap-3">
                   {photos.map((p, i) => (
                     <li key={p.src}>
                       <button
@@ -93,11 +93,11 @@ export default function OfferingPage() {
                           alt=""
                           zoom={false}
                           className={cn(
-                            "aspect-square rounded-xl border-2 transition",
+                            "aspect-square rounded-lg border-2 transition sm:rounded-xl",
                             i === photo ? "border-foreground" : "border-transparent opacity-80 group-hover:opacity-100",
                           )}
                         />
-                        {p.label && <span className="mt-2 block truncate text-xs text-muted-foreground">{p.label}</span>}
+                        {p.label && <span className="mt-1.5 hidden truncate text-xs text-muted-foreground sm:block">{p.label}</span>}
                       </button>
                     </li>
                   ))}
@@ -113,14 +113,14 @@ export default function OfferingPage() {
                 </Link>{" "}
                 · {KIND_LABELS[offering.kind].replace(/s$/, "")}
               </p>
-              <h1 className="mt-3 text-3xl font-light tracking-tight sm:text-4xl lg:text-5xl">{offering.name}</h1>
-              <p className="mt-2 text-base text-muted-foreground sm:text-lg">{offering.subtitle ?? offering.category}</p>
+              <h1 className="mt-2 text-2xl font-light tracking-tight sm:mt-3 sm:text-4xl lg:text-5xl">{offering.name}</h1>
+              <p className="mt-1 text-sm text-muted-foreground sm:mt-2 sm:text-lg">{offering.subtitle ?? offering.category}</p>
 
               {rating && (
-                <p className="mt-4 flex items-center gap-3 text-sm">
+                <p className="mt-3 flex items-center gap-3 text-xs sm:mt-4 sm:text-sm">
                   <span className="flex items-center gap-0.5" aria-label={`Rated ${rating.score} out of 5`}>
                     {Array.from({ length: 5 }, (_, i) => (
-                      <StarIcon key={i} className={cn("size-4", i < Math.round(rating.score) ? "fill-warm text-warm" : "text-muted-foreground/40")} />
+                      <StarIcon key={i} className={cn("size-3.5 sm:size-4", i < Math.round(rating.score) ? "fill-warm text-warm" : "text-muted-foreground/40")} />
                     ))}
                   </span>
                   <span className="font-medium">{rating.score.toFixed(1)}</span>
@@ -131,24 +131,24 @@ export default function OfferingPage() {
                 </p>
               )}
 
-              <div className="mt-6">
-                {saving > 0 && <p className="text-base text-muted-foreground line-through">{formatPrice(compareAtPrice!)}</p>}
+              <div className="mt-4 sm:mt-6">
+                {saving > 0 && <p className="text-sm text-muted-foreground line-through sm:text-base">{formatPrice(compareAtPrice!)}</p>}
                 <div className="flex flex-wrap items-center gap-3">
-                  <p className="text-3xl font-light tracking-tight sm:text-4xl">
-                    {price !== null ? formatPrice(price) : <span className="text-2xl text-muted-foreground">Price to be confirmed</span>}
+                  <p className="text-2xl font-light tracking-tight sm:text-4xl">
+                    {price !== null ? formatPrice(price) : <span className="text-lg text-muted-foreground sm:text-2xl">Price to be confirmed</span>}
                   </p>
                   {saving > 0 && (
                     <span className="rounded-full bg-warm/20 px-3 py-1 font-mono text-[10px] tracking-[0.15em] uppercase sm:text-[11px]">Save {formatPrice(saving)}</span>
                   )}
                 </div>
-                <p className="mt-2 text-xs text-muted-foreground">
+                <p className="mt-1 text-xs text-muted-foreground sm:mt-2">
                   {offering.status === "available" ? "Available now" : offering.sample ? "Sample price for testing" : "Coming soon"}
                 </p>
               </div>
 
-              <p className="mt-6 max-w-prose text-sm text-muted-foreground sm:text-base">{offering.description}</p>
+              <p className="mt-4 max-w-prose text-[13px] leading-relaxed text-muted-foreground sm:mt-6 sm:text-base">{offering.description}</p>
 
-              <div className="mt-8 space-y-3">
+              <div className="mt-5 space-y-2 sm:mt-8 sm:space-y-3">
                 {purchasable ? (
                   <>
                     <button type="button" onClick={() => addToCart(offering)} className={BIG_WARM}>
@@ -168,15 +168,15 @@ export default function OfferingPage() {
                     </Link>
                   </>
                 )}
-                <p className="pt-1 text-center text-sm text-muted-foreground">
+                <p className="pt-1 text-center text-xs text-muted-foreground sm:text-sm">
                   {purchasable ? "Delivery or pickup, arranged after you order" : "We'll contact you to confirm the details"}
                 </p>
               </div>
 
-              <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-4 rounded-2xl bg-muted/70 p-5 text-sm">
+              <ul className="mt-5 grid grid-cols-2 gap-x-3 gap-y-3 rounded-2xl bg-muted/70 p-4 text-xs sm:mt-6 sm:gap-x-4 sm:gap-y-4 sm:p-5 sm:text-sm">
                 {trust.map(({ Icon, label, to }) => (
-                  <li key={label} className="flex items-center gap-2.5">
-                    <Icon className="size-4 shrink-0" />
+                  <li key={label} className="flex items-center gap-2 sm:gap-2.5">
+                    <Icon className="size-3.5 shrink-0 sm:size-4" />
                     {to ? (
                       <Link to={to} className="hover:underline hover:underline-offset-4">
                         {label}

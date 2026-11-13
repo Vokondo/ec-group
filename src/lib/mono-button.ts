@@ -2,8 +2,8 @@ import { cn } from "@/lib/utils";
 
 // Styles for the small, square-cornered monospace buttons used across the site.
 const VARIANTS = {
-  // Steel blue for primary actions, as in the reference.
-  solid: "border-brand bg-brand text-brand-foreground hover:bg-brand/85",
+  // Black for primary actions; the faint light border keeps it visible on dark photos and panels.
+  solid: "border-white/20 bg-brand text-brand-foreground hover:bg-brand/80",
   "outline-dark": "border-white/40 text-white hover:border-white/70 hover:bg-white/10",
   "outline-light": "border-foreground/25 bg-white/50 text-foreground backdrop-blur-md hover:border-foreground/50 hover:bg-white/70",
   pill: "rounded-full border-white/70 bg-white/60 px-6 text-ink shadow-sm backdrop-blur-md hover:bg-white/80 sm:px-8",

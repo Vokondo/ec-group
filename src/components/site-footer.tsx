@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import { ArrowRightIcon } from "lucide-react";
 import { BUSINESSES, SITE } from "@/lib/site";
 
 const YEAR = new Date().getFullYear();
@@ -55,9 +54,9 @@ export function SiteFooter() {
           </p>
           <Link
             to="/service-center/interest"
-            className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-brand-foreground transition hover:bg-brand/85"
+            className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 ring-1 ring-white/20 text-sm font-medium text-brand-foreground transition hover:bg-brand/85"
           >
-            Register interest <ArrowRightIcon className="size-4" />
+            Register interest
           </Link>
           <div className="mt-6 space-y-1 text-sm text-white/60">
             <p>{SITE.contactEmail}</p>

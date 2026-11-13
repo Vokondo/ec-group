@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import { MenuIcon, ShoppingBagIcon, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -17,19 +17,21 @@ const MENU_LINKS = [{ to: "/", label: "Home" }, ...NAV_LINKS];
 
 export function SiteHeader() {
   const { count, setOpen } = useCart();
-  const overlayHover = "hover:bg-white/10 hover:text-white";
-  const scrolled = useScrolled(8);
   const { pathname } = useLocation();
+  const headerRef = useRef<HTMLElement>(null);
+  // "light" when the content behind the bar is light, so the bar's text turns dark.
+  const onLight = useBackdropIsLight(headerRef, pathname);
+  const overlayHover = onLight ? "hover:bg-black/10 hover:text-ink" : "hover:bg-white/10 hover:text-white";
 
   return (
-    // A floating frosted-glass pill below the top edge: light frost over the dark hero, smoked
-    // frost once the page scrolls so white text stays readable over light sections.
-    <header className="fixed inset-x-0 top-0 z-40 w-full px-3 pt-3 text-white sm:px-6 sm:pt-4">
+    // The glass itself never changes while scrolling (switching blur mid-scroll made the bar
+    // flicker at the top of the page); only the text colour follows what is behind it.
+    <header ref={headerRef} className="fixed inset-x-0 top-0 z-40 w-full px-3 pt-3 sm:px-6 sm:pt-4">
       <div
         className={cn(
-          "relative isolate mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto] items-center gap-4 rounded-full pr-2 pl-5 ring-1 backdrop-blur-2xl backdrop-saturate-[1.8] transition-[background-color,box-shadow] duration-300 sm:pl-6 lg:grid-cols-[1fr_auto_1fr]",
+          "relative isolate mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto] items-center gap-4 rounded-full bg-white/10 pr-2 pl-5 ring-1 backdrop-blur-xl backdrop-saturate-[1.8] transition-colors duration-300 motion-reduce:transition-none sm:pl-6 lg:grid-cols-[1fr_auto_1fr]",
           glassEdge,
-          scrolled ? "bg-neutral-900/55 ring-white/15" : "bg-white/10 ring-white/25",
+          onLight ? "text-ink ring-black/10" : "text-white ring-white/25",
         )}
       >
         {/* Liquid sheen: a soft light falling from the top edge */}
@@ -49,7 +51,11 @@ export function SiteHeader() {
               className={({ isActive }) =>
                 cn(
                   "rounded-full px-3.5 py-1.5 text-sm font-light transition-colors",
-                  isActive
+                  onLight
+                    ? isActive
+                      ? "bg-black/10 text-ink"
+                      : "text-ink/80 hover:bg-black/5 hover:text-ink"
+                    : isActive
                     ? "bg-white/20 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3)]"
                     : "text-white/75 hover:bg-white/10 hover:text-white",
                 )
@@ -76,7 +82,12 @@ export function SiteHeader() {
           </button>
           <Link
             to="/contact?topic=partnership"
-            className="hidden h-10 items-center rounded-full bg-white/90 px-5 text-sm font-medium text-ink shadow-[inset_0_1px_0_rgb(255_255_255),0_4px_14px_-4px_rgb(0_0_0/0.3)] transition-colors hover:bg-white sm:inline-flex"
+            className={cn(
+              "hidden h-10 items-center rounded-full px-5 text-sm font-medium transition-colors sm:inline-flex",
+              onLight
+                ? "bg-ink text-white hover:bg-ink/85"
+                : "bg-white/90 text-ink shadow-[inset_0_1px_0_rgb(255_255_255),0_4px_14px_-4px_rgb(0_0_0/0.3)] hover:bg-white",
+            )}
           >
             Partner with us
           </Link>
@@ -95,7 +106,7 @@ export function SiteHeader() {
             >
               <div className="flex h-16 shrink-0 items-center justify-between px-4 sm:px-6">
                 <SheetTitle className="text-[13px] font-light tracking-wide text-white sm:text-sm">{SITE.siteName}</SheetTitle>
-                <SheetClose className={cn(buttonVariants({ variant: "ghost", size: "icon" }), overlayHover)} aria-label="Close menu">
+                <SheetClose className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "hover:bg-white/10 hover:text-white")} aria-label="Close menu">
                   <XIcon />
                 </SheetClose>
               </div>
@@ -135,14 +146,52 @@ export function SiteHeader() {
   );
 }
 
-// True once the page has scrolled past `threshold` pixels.
-function useScrolled(threshold: number) {
-  const [scrolled, setScrolled] = useState(false);
+// Watches what sits behind the header while the page scrolls and reports whether it is light.
+function useBackdropIsLight(headerRef: React.RefObject<HTMLElement | null>, pathname: string) {
+  const [onLight, setOnLight] = useState(false);
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > threshold);
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
-  }, [threshold]);
-  return scrolled;
+    const check = () => {
+      const header = headerRef.current;
+      if (!header) return;
+      const rect = header.getBoundingClientRect();
+      const layers = document
+        .elementsFromPoint(window.innerWidth / 2, rect.top + rect.height / 2)
+        .filter((el) => !header.contains(el));
+      const light = isLightBackdrop(layers);
+      setOnLight((prev) => (prev === light ? prev : light));
+    };
+    check();
+    // Check again once the new page has rendered, and on every scroll or resize.
+    const timer = window.setTimeout(check, 150);
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+  }, [headerRef, pathname]);
+  return onLight;
+}
+
+// Goes through the layers under the bar from front to back and judges the first one that paints:
+// photos count as dark; gradients and photo overlays are judged by the text colour they set.
+function isLightBackdrop(layers: Element[]) {
+  for (const el of layers) {
+    if (el instanceof HTMLImageElement || el instanceof HTMLVideoElement) return false;
+    const style = getComputedStyle(el);
+    if (style.backgroundImage !== "none") return parseColor(style.color).l < 0.7;
+    const bg = parseColor(style.backgroundColor);
+    if (bg.a > 0.5) return bg.l > 0.6;
+  }
+  return true;
+}
+
+// Rough lightness (0 to 1) and alpha of a computed CSS colour in rgb(), oklch() or oklab() form.
+function parseColor(color: string) {
+  if (color === "transparent") return { l: 0, a: 0 };
+  const nums = color.match(/[\d.]+%?/g)?.map((n) => (n.endsWith("%") ? parseFloat(n) / 100 : parseFloat(n))) ?? [];
+  if (color.startsWith("okl")) return { l: nums[0] ?? 0, a: color.includes("/") ? (nums[3] ?? 1) : 1 };
+  const [r = 0, g = 0, b = 0, a = 1] = nums;
+  return { l: (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255, a };
 }

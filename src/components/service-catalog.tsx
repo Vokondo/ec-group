@@ -204,7 +204,7 @@ export function ServiceCatalog() {
               .
             </div>
           ) : (
-            <div className="mt-4 grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-5 sm:gap-y-10 xl:grid-cols-3">
               {visible.map((o) => (
                 <ProductCard key={o.id} offering={o} />
               ))}
@@ -222,7 +222,7 @@ function Pagination({ page, pages, onPage }: { page: number; pages: number; onPa
   return (
     <nav aria-label="Pages" className="mt-12 flex items-center justify-between gap-4 border-t pt-6">
       <button type="button" disabled={page === 1} onClick={() => onPage(page - 1)} className={pillClass("ghost", "sm")}>
-        <ArrowLeftIcon /> Previous
+        Previous
       </button>
       <ol className="flex items-center gap-1">
         {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
@@ -242,7 +242,7 @@ function Pagination({ page, pages, onPage }: { page: number; pages: number; onPa
         ))}
       </ol>
       <button type="button" disabled={page === pages} onClick={() => onPage(page + 1)} className={pillClass("ghost", "sm")}>
-        Next <ArrowRightIcon />
+        Next
       </button>
     </nav>
   );
@@ -268,10 +268,10 @@ export function OfferingCarousel({ title, offerings }: { title: string; offering
       </div>
       <ul
         ref={track}
-        className="-mx-4 mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:-mx-8 lg:scroll-px-8 lg:px-8"
+        className="-mx-4 mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto sm:gap-5 scroll-px-4 px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:-mx-8 lg:scroll-px-8 lg:px-8"
       >
         {offerings.map((o) => (
-          <li key={o.id} className="w-[78%] shrink-0 snap-start sm:w-[45%] lg:w-[calc((100%-3.75rem)/4)]">
+          <li key={o.id} className="w-[calc((100%-0.75rem)/2)] shrink-0 snap-start sm:w-[45%] lg:w-[calc((100%-3.75rem)/4)]">
             <ProductCard offering={o} />
           </li>
         ))}
