@@ -39,11 +39,11 @@ type Tone = "card" | "page";
 
 type SectionProps = { business: Business; label: string };
 
-const headingClass = "mt-3 text-2xl font-light tracking-tight sm:text-3xl lg:text-4xl";
+const headingClass = "mt-3 text-xl font-light tracking-tight sm:text-3xl lg:text-4xl";
 
 function Shell({ tone, children }: { tone: Tone; children: React.ReactNode }) {
   return (
-    <section className={cn("py-12 sm:py-20", tone === "card" && "bg-card text-card-foreground")}>
+    <section className={cn("py-10 sm:py-20", tone === "card" && "bg-card text-card-foreground")}>
       <Container>{children}</Container>
     </section>
   );
@@ -78,7 +78,7 @@ function WhySection({ business, label }: SectionProps) {
     <div className="grid gap-6 rounded-3xl bg-muted/60 p-6 sm:p-10 lg:grid-cols-2 lg:gap-12 lg:p-14">
       <div>
         <Eyebrow>{label}</Eyebrow>
-        <p className="mt-3 text-xl font-light tracking-tight sm:text-2xl">{business.why}</p>
+        <p className="mt-3 text-lg font-light tracking-tight sm:text-2xl">{business.why}</p>
       </div>
       <Story business={business} />
     </div>
@@ -260,7 +260,7 @@ function AudienceSection({ business, label, variant }: SectionProps & { variant:
       <div className="grid gap-8 rounded-3xl bg-ink p-6 text-white sm:p-10 lg:grid-cols-2 lg:gap-12 lg:p-14">
         <div>
           <Eyebrow>{label}</Eyebrow>
-          <p className="mt-3 text-xl font-light tracking-tight sm:text-2xl">{business.audience}</p>
+          <p className="mt-3 text-lg font-light tracking-tight sm:text-2xl">{business.audience}</p>
         </div>
         <div>
           <h2 className="font-medium">Available now</h2>
@@ -280,7 +280,7 @@ function AudienceSection({ business, label, variant }: SectionProps & { variant:
     <div className="grid gap-8 lg:grid-cols-3 lg:gap-12">
       <div className="lg:col-span-2">
         <Eyebrow>{label}</Eyebrow>
-        <p className="mt-3 text-xl font-light tracking-tight sm:text-2xl">{business.audience}</p>
+        <p className="mt-3 text-lg font-light tracking-tight sm:text-2xl">{business.audience}</p>
       </div>
       <aside className="h-fit rounded-3xl bg-muted/60 p-6">
         <h2 className="font-medium">Available now</h2>
@@ -329,7 +329,7 @@ function StepsSection({ business, label, variant }: SectionProps & { variant: "c
         <ol className="mt-8 grid gap-8 sm:mt-10 sm:grid-cols-3 sm:gap-6">
           {business.steps.map((step, i) => (
             <li key={step.title} className="border-t border-foreground pt-5">
-              <span className="text-5xl font-light tracking-tight sm:text-6xl">{i + 1}</span>
+              <span className="text-4xl font-light tracking-tight sm:text-6xl">{i + 1}</span>
               <h3 className="mt-4 font-medium">{step.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{step.text}</p>
             </li>
@@ -431,7 +431,7 @@ function ContactSection({ business, label, variant }: SectionProps & { variant: 
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <Eyebrow>{label}</Eyebrow>
-            <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">Get in touch with {business.name}</h2>
+            <h2 className="mt-3 text-xl font-light tracking-tight sm:text-3xl">Get in touch with {business.name}</h2>
           </div>
           <div className="[&>div]:mt-0">{buttons}</div>
         </div>
@@ -457,7 +457,7 @@ function ContactSection({ business, label, variant }: SectionProps & { variant: 
     >
       <div>
         <Eyebrow>{label}</Eyebrow>
-        <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">Get in touch with {business.name}</h2>
+        <h2 className="mt-3 text-xl font-light tracking-tight sm:text-3xl">Get in touch with {business.name}</h2>
         {buttons}
       </div>
       <dl className={cn("grid gap-6 sm:grid-cols-2", !dark && "content-start")}>
@@ -501,7 +501,7 @@ function SchoolsSection({ business, label }: SectionProps) {
             <article key={school.name} className="flex flex-col rounded-3xl border bg-card p-6 text-card-foreground sm:p-8">
               <Eyebrow>School {String(i + 1).padStart(2, "0")}</Eyebrow>
               <h3 className="mt-3 text-lg font-medium tracking-tight sm:text-xl">{school.name}</h3>
-              <p className="mt-2 text-xl font-light tracking-tight sm:text-2xl">{school.tagline}</p>
+              <p className="mt-2 text-lg font-light tracking-tight sm:text-2xl">{school.tagline}</p>
               <p className="mt-4 text-sm text-muted-foreground">{school.intro}</p>
               <Eyebrow className="mt-6">Programmes</Eyebrow>
               <ul className="mt-3 space-y-2 text-sm">
@@ -560,14 +560,14 @@ function StatementSection({ business, variant }: { business: Business; variant: 
           overlay="from-black/70 via-black/50 to-black/60"
         />
         <Container>
-          <p className="mx-auto max-w-3xl text-3xl leading-tight font-light tracking-tight sm:text-5xl">{business.statement}</p>
+          <p className="mx-auto max-w-3xl text-2xl leading-tight font-light tracking-tight sm:text-5xl">{business.statement}</p>
         </Container>
       </section>
     );
   return (
-    <section className="py-16 text-center sm:py-24">
+    <section className="pt-12 pb-4 text-center sm:py-24">
       <Container>
-        <p className="mx-auto max-w-3xl text-3xl leading-tight font-light tracking-tight sm:text-5xl">{business.statement}</p>
+        <p className="mx-auto max-w-3xl text-2xl leading-tight font-light tracking-tight sm:text-5xl">{business.statement}</p>
       </Container>
     </section>
   );
@@ -581,7 +581,7 @@ function StatsSection({ business, label }: SectionProps) {
       <dl className={cn("mt-6 grid gap-6 border-t pt-6 sm:gap-8", business.stats.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3")}>
         {business.stats.map((stat) => (
           <div key={stat.label}>
-            <dt className="text-4xl font-light tracking-tight sm:text-5xl">{stat.value}</dt>
+            <dt className="text-3xl font-light tracking-tight sm:text-5xl">{stat.value}</dt>
             <dd className="mt-2 text-sm text-muted-foreground">{stat.label}</dd>
           </div>
         ))}
@@ -621,7 +621,7 @@ function SegmentsSection({ business, label }: SectionProps) {
       <ul className="mt-8 grid gap-3 sm:grid-cols-2">
         {business.segments.items.map((item) => (
           <li key={item.title} className="rounded-2xl bg-muted/60 p-6 sm:p-8">
-            <h3 className="text-xl font-light tracking-tight sm:text-2xl">{item.title}</h3>
+            <h3 className="text-lg font-light tracking-tight sm:text-2xl">{item.title}</h3>
             <p className="mt-2 text-sm text-muted-foreground sm:text-base">{item.text}</p>
           </li>
         ))}
@@ -655,7 +655,7 @@ function NoteSection({ business }: { business: Business }) {
   if (!business.note) return null;
   return (
     <figure className="mx-auto max-w-3xl text-center">
-      <blockquote className="text-2xl leading-snug font-light tracking-tight sm:text-4xl">“{business.note.quote}”</blockquote>
+      <blockquote className="text-xl leading-snug font-light tracking-tight sm:text-4xl">“{business.note.quote}”</blockquote>
       <figcaption className="text-xs font-medium mt-6 text-muted-foreground">{business.note.by}</figcaption>
     </figure>
   );
@@ -691,7 +691,7 @@ function NoticeSection({ business, label }: SectionProps) {
       <InfoIcon className="mt-1 size-5 shrink-0" />
       <div>
         <Eyebrow>{label}</Eyebrow>
-        <h2 className="mt-2 text-xl font-light tracking-tight sm:text-2xl">{business.notice.heading}</h2>
+        <h2 className="mt-2 text-lg font-light tracking-tight sm:text-2xl">{business.notice.heading}</h2>
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground sm:text-base">{business.notice.text}</p>
       </div>
     </div>

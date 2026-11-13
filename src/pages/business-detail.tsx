@@ -37,7 +37,7 @@ export default function BusinessDetailPage() {
         <Container className="relative pt-12 pb-12 sm:pt-16 sm:pb-20 lg:pt-24 lg:pb-28">
           <StatusBadge status={business.status} onDark />
           <p className="text-xs font-medium mt-6 text-white/70">{business.sector}</p>
-          <h1 className="mt-2 text-3xl font-light tracking-tight sm:text-5xl lg:text-6xl">{business.name}</h1>
+          <h1 className="mt-2 text-[1.75rem] leading-tight font-light tracking-tight sm:text-5xl lg:text-6xl">{business.name}</h1>
           <p className="mt-4 max-w-2xl text-base text-white/80 sm:mt-5 sm:text-lg">{business.summary}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <MonoLink to={business.cta.to}>{business.cta.label}</MonoLink>
@@ -70,7 +70,7 @@ export default function BusinessDetailPage() {
 
       <section className="border-t py-12 sm:py-20">
         <Container>
-          <h2 className="text-xl font-light tracking-tight sm:text-2xl">More from the group</h2>
+          <h2 className="text-lg font-light tracking-tight sm:text-2xl">More from the group</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {others.map((b) => (
               <BusinessTile key={b.slug} business={b} />

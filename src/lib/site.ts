@@ -591,7 +591,7 @@ export const CATALOG: Offering[] = [
   { id: "ec-usa-graphic", business: "enock-chanimbe", kind: "product", name: "USA Graphic T-shirt", description: "Black T-shirt with a large illustrated portrait and grey USA beanie graphic.", category: "Fashion", price: 100, status: "available" },
   { id: "ec-spider-man", business: "enock-chanimbe", kind: "product", name: "Spider-Man Graphic T-shirt", description: "White T-shirt with red Spider-Man lettering and a large character graphic.", category: "Fashion", price: 100, status: "available" },
   { id: "ec-blue-star", business: "enock-chanimbe", kind: "product", name: "Blue Star Graphic T-shirt", description: "White T-shirt with a blue masked portrait on the front and a blue star graphic on the back.", category: "Fashion", price: 100, status: "available" },
-  { id: "br-triban-bike", business: "bicycle-run", kind: "product", name: "Triban Bicycle", description: "White Triban bicycle with drop handlebars, black wheels and mudguards.", category: "Cycling", price: 300, status: "available" },
+  { id: "br-triban-bike", business: "bicycle-run", kind: "product", name: "Triban Bicycle", description: "White Triban bicycle with drop handlebars, black wheels and mudguards.", category: "Cycling", price: 3000, status: "available" },
   { id: "cos-body-wash", business: "cosmetics", kind: "product", name: "Degree Body Wash", description: "Degree Cosmetics body wash in the white bottle with the red and white Fresh Skin label.", category: "Beauty", price: 65, status: "available" },
 ];
 

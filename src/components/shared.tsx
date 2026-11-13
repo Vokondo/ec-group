@@ -32,7 +32,7 @@ export function SectionHeading({
     return (
       <div className="mx-auto max-w-2xl text-center">
         {eyebrow && <Eyebrow className="mb-3">{eyebrow}</Eyebrow>}
-        <h2 className="text-2xl font-light tracking-tight sm:text-3xl lg:text-4xl">{title}</h2>
+        <h2 className="text-xl font-light tracking-tight sm:text-3xl lg:text-4xl">{title}</h2>
         {intro && <p className="mt-4 text-muted-foreground">{intro}</p>}
         {actions && <div className="mt-6 flex justify-center gap-3">{actions}</div>}
       </div>
@@ -42,7 +42,7 @@ export function SectionHeading({
     <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
       <div>
         {eyebrow && <Eyebrow className="mb-3">{eyebrow}</Eyebrow>}
-        <h2 className="max-w-lg text-2xl font-light tracking-tight sm:text-3xl lg:text-4xl">{title}</h2>
+        <h2 className="max-w-lg text-xl font-light tracking-tight sm:text-3xl lg:text-4xl">{title}</h2>
       </div>
       {(intro || actions) && (
         <div className="lg:max-w-md lg:justify-self-end">

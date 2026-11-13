@@ -42,7 +42,7 @@ export function DonationPanel({ donation }: { donation: Donation }) {
       <Container className="grid gap-8 lg:grid-cols-2 lg:gap-12">
         <div>
           <Eyebrow>Big project</Eyebrow>
-          <h2 className="mt-3 text-3xl font-light tracking-tight sm:text-4xl lg:text-5xl">{donation.project}</h2>
+          <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-4xl lg:text-5xl">{donation.project}</h2>
           <p className="mt-6 text-lg font-light text-white/80 sm:text-xl">{donation.intro}</p>
           <p className="mt-4 text-sm text-white/70 sm:text-base">{donation.appeal}</p>
           <p className="mt-6 inline-block rounded-full bg-white/10 px-4 py-2 font-mono text-xs tracking-wider">{donation.hashtag}</p>
@@ -91,7 +91,7 @@ export function ProjectStory({ donation, folder }: { donation: Donation; folder?
           <div className="grid gap-6 lg:grid-cols-3 lg:gap-12">
             <div>
               <Eyebrow>About the project</Eyebrow>
-              <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl lg:text-4xl">{donation.project}</h2>
+              <h2 className="mt-3 text-xl font-light tracking-tight sm:text-3xl lg:text-4xl">{donation.project}</h2>
             </div>
             <div className="space-y-4 text-base text-muted-foreground sm:text-lg lg:col-span-2">
               {about.map((para) => (
