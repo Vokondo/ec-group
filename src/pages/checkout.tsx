@@ -7,7 +7,7 @@ export default function CheckoutPage() {
   return (
     <>
       <PageHero
-        eyebrow="Service Center · Checkout"
+        eyebrow="The Shop · Checkout"
         title="Checkout"
         intro="Review your items, add your details and pay securely with Mobile Money or card."
       />

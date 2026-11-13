@@ -159,7 +159,7 @@ export function SiteHeader() {
   );
 }
 
-// Rounded search field that searches the Service Center.
+// Rounded search field that searches The Shop.
 function HeaderSearch({ className, dark, onSearch }: { className?: string; dark?: boolean; onSearch?: () => void }) {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");

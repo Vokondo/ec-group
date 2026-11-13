@@ -11,12 +11,12 @@ const RECOMMENDED = [...CATALOG]
   .slice(0, 8);
 
 export default function ServiceCenterPage() {
-  usePageTitle("Service Center");
+  usePageTitle("The Shop");
 
   return (
     <>
       <PageHero
-        eyebrow="Unified Service Center"
+        eyebrow="The Shop"
         title="Every offering in one place"
         intro="Shop products, book appointments, explore programmes and register interest across all eight businesses and initiatives."
       />

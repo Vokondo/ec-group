@@ -11,7 +11,7 @@ const SHARED_SUPPORT = [
   { title: "Strategy and leadership", text: "Each venture gets clear goals, experienced guidance and regular reviews as it moves from idea to operation." },
   { title: "Brand and marketing", text: "A shared brand, one website and joint campaigns help every business reach customers from day one." },
   { title: "Governance and compliance", text: "Registration, licensing and sound financial practice are put in place before products or services launch." },
-  { title: "One front door", text: "The Service Center gives customers a single place to shop, book, register interest and get support across the group." },
+  { title: "One front door", text: "The Shop gives customers a single place to shop, book, register interest and get support across the group." },
 ];
 
 const STRATEGIC_AREAS = [

@@ -97,7 +97,7 @@ export function ServiceCatalog() {
             value={query}
             onChange={(e) => update({ q: e.target.value })}
             placeholder="Search products, services, programmes…"
-            aria-label="Search the Service Center"
+            aria-label="Search The Shop"
             className="h-9 min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
           />
           <button type="submit" className={pillClass("solid", "sm", "h-9")}>

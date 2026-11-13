@@ -70,7 +70,7 @@ export function Checkout() {
         <ShoppingBagIcon className="mx-auto size-10 text-muted-foreground" />
         <h2 className="mt-4 text-lg font-medium">Your cart is empty</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Browse the Service Center and add products to your cart. For anything without a price yet, you can register
+          Browse The Shop and add products to your cart. For anything without a price yet, you can register
           interest.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
@@ -554,7 +554,7 @@ function Confirmation({ placed }: { placed: Placed }) {
 
       <div className="mt-8 flex justify-center">
         <Link to="/service-center" className={pillClass("solid", "lg", "")}>
-          Back to the Service Center
+          Back to The Shop
         </Link>
       </div>
     </div>

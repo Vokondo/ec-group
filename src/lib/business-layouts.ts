@@ -114,11 +114,10 @@ export const BUSINESS_LAYOUTS: Record<string, BusinessLayout> = {
     ],
     labels: { catalog: "The range", why: "Our philosophy", offers: "Coming to the range", steps: "Launch list" },
   },
-  // Like fashion label sites (Christie Brown): an editorial line over a photo, the categories and
-  // pieces, then the story behind the name.
+  // Like fashion label sites (Christie Brown): the categories and pieces first, then the story
+  // behind the name.
   "enock-chanimbe": {
     sections: [
-      { type: "statement", variant: "image" },
       { type: "offers", variant: "grid" },
       { type: "gallery", variant: "trio" },
       { type: "catalog" },

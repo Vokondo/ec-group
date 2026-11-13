@@ -73,6 +73,5 @@ Replace any of them by saving your own photo with the same file name (see README
 | `bicycle-run/feature.jpg` | [37794214](https://www.pexels.com/photo/37794214/) |
 | `bicycle-run/br-rides.jpg` | [4295443](https://www.pexels.com/photo/4295443/) |
 | `bicycle-run/br-events.jpg` | [15523795](https://www.pexels.com/photo/15523795/) |
-| `enock-chanimbe/statement.jpg` | [36990987](https://www.pexels.com/photo/36990987/) |
 
 Business logos (`logo.png` in each folder, and `public/brand/chanimbe-group.png`) are the businesses' own artwork.

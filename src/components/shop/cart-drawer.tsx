@@ -39,9 +39,9 @@ export function CartDrawer() {
             <div className="flex flex-1 flex-col items-center justify-center px-6 py-16 text-center">
               <ShoppingBagIcon className="size-10 text-muted-foreground" />
               <p className="mt-4 font-medium">Your cart is empty</p>
-              <p className="mt-1 text-sm text-muted-foreground">Add something from the Service Center.</p>
+              <p className="mt-1 text-sm text-muted-foreground">Add something from The Shop.</p>
               <SheetClose render={<Link to="/service-center" />} nativeButton={false} className={pillClass("solid", "md", "mt-6")}>
-                Browse the Service Center
+                Browse The Shop
               </SheetClose>
             </div>
           ) : (

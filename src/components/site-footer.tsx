@@ -19,7 +19,7 @@ const COLUMNS = [
     links: BUSINESSES.map((b) => ({ to: `/businesses/${b.slug}`, label: b.name })),
   },
   {
-    title: "Service Center",
+    title: "The Shop",
     links: [
       { to: "/service-center", label: "Browse offerings" },
       { to: "/service-center/booking", label: "Book an appointment" },

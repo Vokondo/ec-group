@@ -87,7 +87,7 @@ function WhySection({ business, label }: SectionProps) {
 
 /* Gallery */
 
-// Photos for a business: its offer and Service Center photos first (the cover photo is already
+// Photos for a business: its offer and shop photos first (the cover photo is already
 // in the banner), then the cover photo, padded with placeholders so every gallery is full.
 // Photos added as gallery-1, gallery-2 and so on take each tile first.
 function galleryImages(business: Business, count: number) {
@@ -270,7 +270,7 @@ function AudienceSection({ business, label, variant }: SectionProps & { variant:
           <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
             <MonoLink to={business.cta.to}>{business.cta.label}</MonoLink>
             <MonoLink to={`/service-center?business=${business.slug}`} variant="outline-dark">
-              View in Service Center
+              View in The Shop
             </MonoLink>
           </div>
         </div>
@@ -292,7 +292,7 @@ function AudienceSection({ business, label, variant }: SectionProps & { variant:
             {business.cta.label}
           </MonoLink>
           <MonoLink to={`/service-center?business=${business.slug}`} variant="outline-light" className="justify-between">
-            View in Service Center
+            View in The Shop
           </MonoLink>
         </div>
       </aside>
@@ -719,7 +719,7 @@ function ActionsSection({ business, label }: SectionProps) {
   );
 }
 
-// The business's Service Center items as product cards, like a shop's product grid.
+// The business's shop items as product cards, like a shop's product grid.
 function CatalogSection({ business, label }: SectionProps) {
   const items = CATALOG.filter((o) => o.business === business.slug);
   if (items.length === 0) return null;
@@ -731,7 +731,7 @@ function CatalogSection({ business, label }: SectionProps) {
           <h2 className={headingClass}>{business.name}</h2>
         </div>
         <MonoLink to={`/service-center?business=${business.slug}`} variant="outline-light">
-          View in Service Center
+          View in The Shop
         </MonoLink>
       </div>
       <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">

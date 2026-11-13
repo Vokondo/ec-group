@@ -10,7 +10,7 @@ export const SITE = {
   holdingName: "CHANIMBE GROUP",
   founderName: "Enock Chanimbe",
   // Founder portrait, e.g. "/images/founder.jpg" in public/. Shown on the home page and the Founder page.
-  founderImage: undefined as string | undefined,
+  founderImage: "/images/founder.jpg" as string | undefined,
   description:
     "The official home of Enock Chanimbe and CHANIMBE GROUP, bringing together the group's businesses, initiatives and opportunities.",
   contactEmail: "hello@enockchanimbe.com",
@@ -547,12 +547,12 @@ export const NAV_LINKS = [
   { to: "/about", label: "Founder" },
   { to: "/holding", label: "Holding Company" },
   { to: "/businesses", label: "Businesses" },
-  { to: "/service-center", label: "Service Center" },
+  { to: "/service-center", label: "The Shop" },
   { to: "/contact", label: "Contact" },
 ];
 
 // ---------------------------------------------------------------------------
-// Unified Service Center catalog
+// The Shop catalog
 // `price: null` means the price is not yet confirmed: the item shows "Register interest"
 // instead of "Add to cart". Set a price and status "available" to make a product purchasable.
 

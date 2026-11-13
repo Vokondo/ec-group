@@ -34,7 +34,7 @@ export default function AboutPage() {
 
       <section className="bg-card text-card-foreground py-12 sm:py-20">
         <Container className="grid gap-8 lg:gap-12 lg:grid-cols-[2fr_3fr]">
-          <FounderPortrait className="aspect-[4/3] rounded-3xl lg:aspect-[4/5]" />
+          <FounderPortrait className="aspect-[4/3] rounded-3xl lg:aspect-square" />
           <div>
             <Eyebrow>Biography</Eyebrow>
             <h2 className="mt-3 text-2xl font-light tracking-tight sm:text-3xl">Building with purpose</h2>

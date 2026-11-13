@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { CATALOG, getBusiness, type Offering } from "@/lib/site";
 
-// Rounded, high-contrast buttons used across the shop (Service Center, product pages, cart, checkout).
+// Rounded, high-contrast buttons used across The Shop (catalogue, product pages, cart, checkout).
 // "solid" is near-black in light mode and white in dark mode.
 const PILL = {
   solid: "bg-foreground text-background hover:bg-foreground/85",

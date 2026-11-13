@@ -43,7 +43,7 @@ export default function OfferingPage() {
         <Container>
           <nav aria-label="Breadcrumb" className="border-b border-neutral-200 py-4 text-xs leading-relaxed text-neutral-600 sm:py-5 sm:text-sm">
             <ol className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-              <li><Link to="/service-center" className={TEXT_LINK}>Service Center</Link></li>
+              <li><Link to="/service-center" className={TEXT_LINK}>The Shop</Link></li>
               <li className="flex min-w-0 items-baseline gap-2">
                 <ChevronRightIcon aria-hidden="true" className="relative top-0.5 size-3 shrink-0" />
                 <Link to={`/service-center?business=${business.slug}`} className={TEXT_LINK}>{business.name}</Link>

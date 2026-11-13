@@ -25,7 +25,7 @@ export function BookingPage() {
   return (
     <FormPage
       pageTitle="Book an appointment"
-      eyebrow="Service Center · Appointments"
+      eyebrow="The Shop · Appointments"
       title="Request an appointment"
       intro="Tell us when suits you and which service you need. We'll contact you to confirm availability."
       type="booking"
@@ -39,7 +39,7 @@ export function InterestPage() {
   return (
     <FormPage
       pageTitle="Register interest"
-      eyebrow="Service Center · Register interest"
+      eyebrow="The Shop · Register interest"
       title="Be the first to know"
       intro="Many of our products, programmes and services are not yet available. Register your interest and we'll contact you when they launch."
       type="interest"

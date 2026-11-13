@@ -14,7 +14,7 @@ import { Container, StatusBadge } from "@/components/shared";
 
 // Hero photo, e.g. "/images/hero.jpg" in public/. Unset shows a placeholder.
 const HERO_IMAGE: string | undefined = "/images/home/hero.jpg";
-// Custom-generated homepage artwork for the unified Service Center.
+// Custom-generated homepage artwork for The Shop card.
 const SERVICE_IMAGE = "/images/home/service-center.jpg";
 
 const countOf = (...kinds: OfferingKind[]) => CATALOG.filter((o) => kinds.includes(o.kind)).length;
@@ -58,12 +58,12 @@ export default function HomePage() {
         <BusinessExplorer />
       </Container>
 
-      {/* Service Center: dark image card with a link list */}
+      {/* The Shop: dark image card with a link list */}
       <Container className={cn(cardContainer, "mt-8 sm:mt-14")}>
         <div className="relative isolate grid min-h-[28rem] items-center gap-10 overflow-hidden rounded-2xl p-7 pb-14 text-white ring-1 ring-white/10 sm:min-h-[36rem] sm:rounded-3xl sm:p-14 lg:min-h-[42rem] lg:grid-cols-2 lg:gap-20 lg:p-24">
           <CoverImage src={SERVICE_IMAGE} alt="" overlay="from-black/85 via-black/60 to-black/70" variant="corner" />
           <div>
-            <MonoLabel>Unified Service Center</MonoLabel>
+            <MonoLabel>The Shop</MonoLabel>
             <h2 className="mt-4 text-[2.5rem] leading-[1.02] font-light tracking-tight sm:text-6xl lg:text-7xl">
               One place
               <br />
@@ -139,7 +139,7 @@ export default function HomePage() {
             <MonoLink to="/contact" variant="outline-dark">
               Contact us
             </MonoLink>
-            <MonoLink to="/service-center">Service Center</MonoLink>
+            <MonoLink to="/service-center">The Shop</MonoLink>
           </div>
         </Container>
       </section>
