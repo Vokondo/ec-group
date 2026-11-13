@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { CheckIcon, InfoIcon } from "lucide-react";
-import { BUSINESSES, getBusiness, toOffer } from "@/lib/site";
+import { BUSINESSES, getBusiness, toOffer, type Business } from "@/lib/site";
 import { usePageTitle } from "@/lib/use-page-title";
 import { MonoLink } from "@/components/mono-link";
 import { CoverImage } from "@/components/business-image";
@@ -50,59 +50,8 @@ export default function BusinessDetailPage() {
         </div>
       )}
 
-      <section className="bg-card text-card-foreground py-12 sm:py-20">
-        <Container className="grid gap-8 lg:gap-12 lg:grid-cols-3">
-          <div className="space-y-8 sm:space-y-12 lg:col-span-2">
-            <div>
-              <Eyebrow>Why it is being established</Eyebrow>
-              <p className="mt-3 text-xl font-light tracking-tight sm:text-2xl">{business.why}</p>
-            </div>
-            <div>
-              <Eyebrow>What it intends to offer</Eyebrow>
-              <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {business.offers.map(toOffer).map((o, i) => (
-                  // Photo card with a white panel floating over its lower edge.
-                  <li key={o.title} className="group relative isolate aspect-[4/3] overflow-hidden rounded-2xl lg:aspect-square">
-                    <CoverImage src={o.image} alt={o.title} overlay="from-transparent to-transparent" variant="compact" />
-                    <div className="absolute inset-x-2.5 bottom-2.5 rounded-xl bg-white p-3 text-ink shadow-sm">
-                      <span className="grid size-5 place-items-center rounded-full bg-ink text-[10px] font-medium text-white">{i + 1}</span>
-                      <p className="mt-3 text-sm leading-snug font-light">{o.title}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-4 text-xs text-muted-foreground">
-                Proposed offerings are subject to change. Prices, programme details and timelines will be published once
-                confirmed.
-              </p>
-            </div>
-            <div>
-              <Eyebrow>Who it aims to serve</Eyebrow>
-              <p className="mt-3 text-sm text-muted-foreground sm:text-base">{business.audience}</p>
-            </div>
-          </div>
+      {!business.schools && !business.donation && <BusinessStory business={business} />}
 
-          <aside className="h-fit rounded-3xl bg-muted/60 p-6 lg:sticky lg:top-24">
-            <h2 className="font-medium">Available now</h2>
-            <ul className="mt-4 space-y-2 text-sm">
-              {business.available.map((a) => (
-                <li key={a} className="flex gap-2">
-                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-foreground" />
-                  {a}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 flex flex-col gap-2">
-              <MonoLink to={business.cta.to} className="justify-between">
-                {business.cta.label}
-              </MonoLink>
-              <MonoLink to={`/service-center?business=${business.slug}`} variant="outline-light" className="justify-between">
-                View in Service Center
-              </MonoLink>
-            </div>
-          </aside>
-        </Container>
-      </section>
 
       {business.donation && (
         <>
@@ -117,7 +66,7 @@ export default function BusinessDetailPage() {
             <SectionHeading
               eyebrow="Schools"
               title={`${business.schools.length} schools, one purpose`}
-              intro="Each school pairs practical training with a clear path to work or enterprise."
+              intro={business.why}
             />
             <div className="mt-8 grid gap-4 sm:mt-12 lg:grid-cols-3">
               {business.schools.map((school, i) => (
@@ -163,6 +112,8 @@ export default function BusinessDetailPage() {
         </section>
       )}
 
+      <BusinessOverview business={business} />
+
       <section className="border-t py-12 sm:py-20">
         <Container>
           <h2 className="text-xl font-medium sm:text-2xl">More from the group</h2>
@@ -175,4 +126,123 @@ export default function BusinessDetailPage() {
       </section>
     </>
   );
+}
+
+function BusinessOverview({ business }: { business: Business }) {
+  return (
+    <section className="border-t bg-card py-12 text-card-foreground sm:py-20">
+      <Container className="grid gap-8 lg:grid-cols-[2fr_1fr] lg:gap-12">
+        <div>
+          <SectionHeading title={`About ${business.name}`} />
+          <p className="mt-4 max-w-2xl text-lg font-light">{business.why}</p>
+          <p className="mt-3 text-sm text-muted-foreground">{business.audience}</p>
+          <h3 className="mt-8 text-base font-medium">{business.donation ? "Areas of work" : "Scope of the initiative"}</h3>
+          <ul className="mt-3 divide-y border-y">
+            {business.offers.map(toOffer).map((offer) => (
+              <li key={offer.title} className="flex items-center gap-4 py-3 text-sm">
+                {offer.image && (
+                  <div className="relative isolate size-14 shrink-0 overflow-hidden rounded-md">
+                    <CoverImage src={offer.image} alt="" overlay="from-transparent to-transparent" />
+                  </div>
+                )}
+                {offer.title}
+              </li>
+            ))}
+          </ul>
+          {business.status === "proposed" && !business.donation && (
+            <p className="mt-3 text-xs text-muted-foreground">
+              Proposed offerings are subject to change. Details, pricing and timelines will be shared once confirmed.
+            </p>
+          )}
+        </div>
+        <aside className="h-fit rounded-lg border p-6">
+          <h3 className="font-medium">{business.donation ? "How to get involved" : "What you can do now"}</h3>
+          <ul className="mt-3 list-disc space-y-2 pl-4 text-sm text-muted-foreground">
+            {business.available.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <MonoLink to={business.cta.to}>{business.cta.label}</MonoLink>
+            <MonoLink to={`/service-center?business=${business.slug}`} variant="outline-light">
+              View in Service Center
+            </MonoLink>
+          </div>
+        </aside>
+      </Container>
+    </section>
+  );
+}
+
+function BusinessStory({ business }: { business: Business }) {
+  const catalog = `/service-center?business=${business.slug}`;
+
+  switch (business.slug) {
+    case "green-foods":
+      return (
+        <section className="py-12 sm:py-20">
+          <Container className="grid gap-8 lg:grid-cols-2 lg:items-center">
+            <div className="relative isolate aspect-[4/3] overflow-hidden rounded-lg">
+              <CoverImage src="/images/home/green-foods.jpg" alt="Fresh produce and a green smoothie" overlay="from-transparent to-transparent" />
+            </div>
+            <div className="lg:pl-8">
+              <Eyebrow>Food & nutrition</Eyebrow>
+              <h2 className="mt-3 text-3xl font-light tracking-tight sm:text-4xl">Good food for everyday households</h2>
+              <p className="mt-4 text-muted-foreground">{business.why}</p>
+              <p className="mt-4 text-muted-foreground">Green Foods is developing its product range with a focus on sourcing and handling. Retailers and distributors can get in touch about working together.</p>
+              <MonoLink to={business.cta.to} variant="outline-light" className="mt-6">Contact Green Foods</MonoLink>
+            </div>
+          </Container>
+        </section>
+      );
+    case "barbering-shop":
+      return (
+        <section className="py-12 sm:py-20">
+          <Container>
+            <SectionHeading title="The service menu" intro="Explore the planned grooming services and request an appointment through the Service Center." />
+            <dl className="mt-8 divide-y border-y">
+              <div className="grid gap-2 py-5 sm:grid-cols-2"><dt className="text-lg font-medium">Haircuts & styling</dt><dd className="text-muted-foreground">Cuts and styling for regular upkeep or a change of look.</dd></div>
+              <div className="grid gap-2 py-5 sm:grid-cols-2"><dt className="text-lg font-medium">Beard trims & shaves</dt><dd className="text-muted-foreground">Beard shaping, trims and shave services.</dd></div>
+            </dl>
+            <MonoLink to={catalog} variant="outline-light" className="mt-6">Browse grooming services</MonoLink>
+          </Container>
+        </section>
+      );
+    case "bank":
+      return (
+        <section className="py-12 sm:py-20">
+          <Container className="grid gap-8 lg:grid-cols-[2fr_1fr]">
+            <SectionHeading title="The proposal" intro={business.why} />
+            <aside className="rounded-lg border bg-card p-6">
+              <h2 className="font-medium">Follow the proposal</h2>
+              <p className="mt-2 text-sm text-muted-foreground">Individuals, small businesses and potential partners can register to receive updates.</p>
+              <MonoLink to={business.cta.to} variant="outline-light" className="mt-5">Register for updates</MonoLink>
+            </aside>
+          </Container>
+        </section>
+      );
+    case "cosmetics":
+      return (
+        <section className="border-y bg-card py-12 sm:py-20">
+          <Container>
+            <SectionHeading center title="Skincare and everyday care" intro="The proposed range focuses on skincare and personal care. Product details will be shared once the range is confirmed." />
+            <div className="mt-6 flex justify-center">
+              <MonoLink to={business.cta.to} variant="outline-light">Get product updates</MonoLink>
+            </div>
+          </Container>
+        </section>
+      );
+    case "bicycle-run":
+      return (
+        <section className="bg-ink py-12 text-white sm:py-20">
+          <Container className="grid gap-6 lg:grid-cols-2 lg:items-center">
+            <h2 className="text-3xl font-light tracking-tight sm:text-4xl">Find people to ride with</h2>
+            <div>
+              <p className="text-white/75">Bicycle Run brings cyclists, fitness enthusiasts and community groups together around recreational riding. Community rides and events are planned.</p>
+              <MonoLink to={business.cta.to} variant="outline-dark" className="mt-6">Hear about upcoming rides</MonoLink>
+            </div>
+          </Container>
+        </section>
+      );
+    default:
+      return null;
+  }
 }
